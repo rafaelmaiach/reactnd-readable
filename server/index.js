@@ -4,6 +4,7 @@ require('dotenv').config();
 const cfenv = require('cfenv');
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const expressStaticGzip = require('express-static-gzip');
 const bodyParser = require('body-parser');
 const compression = require('compression');
@@ -23,6 +24,7 @@ const publicPath = expressStaticGzip(publicDir);
 const nodeModules = express.static(path.join(__dirname, '../node_modules'));
 
 app.use('/public', publicPath);
+app.use(cors());
 app.use('/node_modules', nodeModules);
 
 app.use(bodyParser.urlencoded({ extended: false }));
