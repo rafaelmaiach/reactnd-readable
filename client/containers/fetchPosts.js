@@ -8,7 +8,7 @@ import {
   deletePost,
 } from 'Utils/api/posts';
 
-const uuid = require('uuid/v4');
+// const uuid = require('uuid/v4');
 
 const fetchAllPosts = () => {
   getAllPosts()
@@ -36,7 +36,7 @@ const fetchEditVoteForPost = () => {
 
 const fetchAddPost = () => {
   const post = {
-    id: uuid(),
+    id: 'id-to-delete', // uuid(),
     timestamp: Date.now(),
     title: 'A new post',
     body: 'A new post body',
@@ -61,7 +61,7 @@ const fetchEditPost = () => {
 };
 
 const fetchDeletePost = () => {
-  deletePost('8xf0y6ziyjabvozdd253nd')
+  deletePost('id-to-delete')
     .then(r => console.log(r))
     .catch(e => console.log(e));
 };

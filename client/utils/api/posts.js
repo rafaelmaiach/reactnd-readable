@@ -74,7 +74,7 @@ const deletePost = (postId) => {
   const api = getApiUrl();
 
   return fetch(`${api}/posts/${postId}`, {
-    method: 'PUT',
+    method: 'DELETE',
     headers: {
       ...headers,
     },
