@@ -10,6 +10,13 @@ import {
   fetchEditPost,
   fetchDeletePost,
 } from './fetchPosts';
+import {
+  fetchCommentDetails,
+  fetchEditVoteForComment,
+  fetchAddComment,
+  fetchEditComment,
+  fetchDeleteComment,
+} from './fetchComments';
 
 const Readable = () => {
   const fetchSim = [
@@ -24,6 +31,12 @@ const Readable = () => {
     { t: 'ADD NEW POST', f: fetchAddPost },
     { t: 'EDIT POST DETAILS', f: fetchEditPost },
     { t: 'DELETE POST', f: fetchDeletePost },
+    /* ----- COMMENTS ----- */
+    { t: 'GET COMMENT DETAILS', f: fetchCommentDetails },
+    { t: 'EDIT COMMENT VOTE', f: fetchEditVoteForComment },
+    { t: 'ADD NEW COMMENT', f: fetchAddComment },
+    { t: 'EDIT COMMENT DETAILS', f: fetchEditComment },
+    { t: 'DELETE COMMENT', f: fetchDeleteComment },
   ];
 
   return (
