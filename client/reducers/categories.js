@@ -1,4 +1,4 @@
-import { RECEIVE_CATEGORIES, CURRENT_CATEGORY } from '../actions/categories';
+import { RECEIVE_CATEGORIES } from '../actions/categories';
 
 export default function categories(state = {}, action) {
   switch (action.type) {
@@ -6,12 +6,6 @@ export default function categories(state = {}, action) {
       return {
         ...state,
         list: action.categories,
-        current: action.categories[0],
-      };
-    case CURRENT_CATEGORY:
-      return {
-        ...state,
-        current: action.category,
       };
     default:
       return state;

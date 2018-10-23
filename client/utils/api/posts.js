@@ -9,6 +9,15 @@ const getAllPosts = () => {
     .then(data => data);
 };
 
+const getPostsByCategory = (category) => {
+  const headers = getHeaders();
+  const api = getApiUrl();
+
+  return fetch(`${api}/${category}/posts`, { headers })
+    .then(res => res.json())
+    .then(data => data);
+};
+
 const getPostDetails = (postId) => {
   const headers = getHeaders();
   const api = getApiUrl();
@@ -83,6 +92,7 @@ const deletePost = (postId) => {
 
 export {
   getAllPosts,
+  getPostsByCategory,
   getPostDetails,
   getPostComments,
   editVoteForPost,

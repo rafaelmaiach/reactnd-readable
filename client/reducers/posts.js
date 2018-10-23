@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS } from '../actions/posts';
+import { RECEIVE_POSTS } from 'Actions/posts';
 
 export default function posts(state = {}, action) {
   switch (action.type) {
@@ -7,10 +7,7 @@ export default function posts(state = {}, action) {
         a[c.id] = c; //eslint-disable-line
         return a;
       }, {});
-      return {
-        ...state,
-        ...allPosts,
-      };
+      return { ...allPosts };
     }
     default:
       return state;
