@@ -16,7 +16,6 @@
   "scripts": {
     "lint": "eslint client",
     "start": "cross-env NODE_ENV=development node server",
-    "start-server": "nodemon server/api"
   },
   "dependencies": {
     "autoprefixer": "9.1.3",
