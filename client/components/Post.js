@@ -14,17 +14,36 @@ class Post extends Component {
       id,
       title,
       author,
+      body,
+      timestamp,
       commentCount,
       voteScore,
     } = this.props;
 
+    const date = new Date(timestamp).toLocaleDateString();
+
     return (
-      <div>
-        <h3>{`Title: ${title}`}</h3>
-        <h4>{`Author: ${author}`}</h4>
-        <h6>{`Comments: ${commentCount}`}</h6>
-        <h6>{`Votes: ${voteScore}`}</h6>
-        <button type="button" onClick={() => this.removePost(id)}>DELETE POST</button>
+      <div className="column is-7 is-offset-2">
+        <div className="card">
+          <div className="card-content">
+            <div className="media">
+              <div className="media-content">
+                <p className="title is-4">{title}</p>
+                <p className="subtitle is-6">{author}</p>
+              </div>
+            </div>
+
+            <div className="content">
+              {body}
+              <br />
+              <time>{date}</time>
+            </div>
+          </div>
+          <footer className="card-footer">
+            <a role="button" className="card-footer-item">Edit</a>
+            <a role="button" className="card-footer-item" onClick={() => this.removePost(id)}>Delete</a>
+          </footer>
+        </div>
       </div>
     );
   }

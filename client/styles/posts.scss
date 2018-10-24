@@ -1,0 +1,13 @@
+svg {
+  cursor: pointer;
+
+  & > path {
+    fill: $blue;
+  }
+
+  &:hover {
+    & > path {
+      fill: darken($blue, 15);
+    }
+  }
+}

@@ -32,7 +32,7 @@ class Categories extends Component {
     return (
       <nav className="navbar is-fixed-top is-link" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <span className="navbar-item">CATEGORIES</span>
+          <span className="navbar-item">READABLE</span>
           <span
             role="button"
             className={`navbar-burger burger ${isMenuOpen}`}
