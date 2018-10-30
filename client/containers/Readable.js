@@ -14,11 +14,9 @@ class Readable extends Component {
 
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <Categories />
-          <Posts />
-        </div>
+      <div className="container is-fluid">
+        <Categories />
+        <Posts />
       </div>
     );
   }
