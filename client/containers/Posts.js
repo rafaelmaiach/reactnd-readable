@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { receivePostsByCategory, handleAddPost } from 'Actions/posts';
-import Post from 'Components/Post';
-import NewPost from 'Components/NewPost';
+import Post from 'Components/posts/Post';
+import NewPost from 'Components/posts/NewPost';
 
 class Posts extends Component {
   state = {
@@ -73,7 +73,8 @@ class Posts extends Component {
             </div>
             <div className="column is-12">
               <div className="columns is-multiline">
-                {isNewPost ? <NewPost /> : postList}
+                {isNewPost && <NewPost />}
+                {postList}
               </div>
             </div>
           </div>
