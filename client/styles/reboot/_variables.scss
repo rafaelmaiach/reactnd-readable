@@ -1,0 +1,34 @@
+
+$gray-600:                  #6c757d !default;
+$gray-900:                  #212529 !default;
+
+$font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:            $font-family-sans-serif !default;
+$font-size-base:              1rem !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            700 !default;
+$font-weight-base:            $font-weight-normal !default;
+
+$line-height-base:            1.5 !default;
+
+$body-color:                  $white !default;
+$body-bg:                     $black !default;
+
+$spacer:                      1rem !default;
+$headings-margin-bottom:      ($spacer / 2) !default;
+$paragraph-margin-bottom:     1rem !default;
+
+$dt-font-weight:              $font-weight-bold !default;
+
+$primary:                     $blue !default;
+
+$link-color:                  $primary !default;
+$link-decoration:             none !default;
+$link-hover-color:            darken($link-color, 15%) !default;
+$link-hover-decoration:       underline !default;
+
+$text-muted:                  $gray-600 !default;
+$table-cell-padding:          .75rem !default;
+$table-caption-color:         $text-muted !default;
+$label-margin-bottom:         .5rem !default;
