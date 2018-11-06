@@ -1,4 +1,9 @@
-import { getPostsByCategory, addPost, deletePost } from 'Utils/api/posts';
+import {
+  getAllPosts,
+  getPostsByCategory,
+  addPost,
+  deletePost,
+} from 'Utils/api/posts';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const ADD_POST = 'ADD_POST';
@@ -8,6 +13,12 @@ export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts,
 });
+
+export const receiveAllPosts = () => dispatch =>
+  getAllPosts()
+    .then((posts) => {
+      dispatch(receivePosts(posts));
+    });
 
 export const receivePostsByCategory = category => dispatch =>
   getPostsByCategory(category)

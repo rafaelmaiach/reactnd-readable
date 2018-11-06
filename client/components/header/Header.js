@@ -2,9 +2,22 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-class Categories extends Component {
+import { receiveAllCategories } from 'Actions/categories';
+
+class Header extends Component {
   state = {
     menuOpen: false,
+    currentTab: '',
+  }
+
+  componentDidMount() {
+    const { dispatch, match } = this.props;
+
+    if (match.params.category) {
+      this.setState(() => ({ currentTab: match.params.category }));
+    }
+
+    dispatch(receiveAllCategories());
   }
 
   toggleMenu = (e) => {
@@ -12,27 +25,35 @@ class Categories extends Component {
     this.setState(prevState => ({ menuOpen: !prevState.menuOpen }));
   }
 
+  changeCurrentTab = tabName => () => this.setState(() => ({ currentTab: tabName }))
+
   render() {
-    const { menuOpen } = this.state;
+    const { menuOpen, currentTab } = this.state;
     const { categories } = this.props;
     const { list } = categories;
 
     const isMenuOpen = menuOpen ? 'is-active' : '';
 
-    const categoriesList = list && list.map(({ name }) => (
-      <Link
-        key={name}
-        className="navbar-item"
-        to={`/${name}`}
-      >
-        {name}
-      </Link>
-    ));
+    const categoriesList = list && list.map(({ name }) => {
+      const isTabActive = currentTab === name ? 'is-active' : '';
+      const changeTab = this.changeCurrentTab(name);
+      return (
+        <Link
+          key={name}
+          className={`navbar-item ${isTabActive}`}
+          to={`/${name}`}
+          onClick={changeTab}
+        >
+          {name}
+        </Link>
+      );
+    });
 
     return (
       <nav className="navbar is-fixed-top is-link" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <span className="navbar-item">READABLE</span>
+          <Link className="navbar-item" to="/" onClick={this.changeCurrentTab('')}> READABLE </Link>
+
           <span
             role="button"
             className={`navbar-burger burger ${isMenuOpen}`}
@@ -63,4 +84,4 @@ const mapStateToProps = ({ categories }) => ({
   categories,
 });
 
-export default connect(mapStateToProps)(Categories);
+export default connect(mapStateToProps)(Header);

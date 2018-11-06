@@ -1,8 +1,14 @@
+import { getAllCategories } from 'Utils/api/categories';
+
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 
-export function receiveCategories(categories) {
-  return {
-    type: RECEIVE_CATEGORIES,
-    categories,
-  };
-}
+export const receiveCategories = categories => ({
+  type: RECEIVE_CATEGORIES,
+  categories,
+});
+
+export const receiveAllCategories = () => dispatch =>
+  getAllCategories()
+    .then((categories) => {
+      dispatch(receiveCategories(categories));
+    });

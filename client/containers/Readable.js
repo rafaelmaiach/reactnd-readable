@@ -1,25 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
-import { handleInitialData } from 'Actions/shared';
-
+import Header from 'Components/header/Header';
 import Posts from './Posts';
-import Categories from './Categories';
 
-class Readable extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(handleInitialData());
-  }
+const Readable = props => (
+  <div className="container is-fluid">
+    <Header {...props} />
+    <Posts {...props} />
+  </div>
+);
 
-  render() {
-    return (
-      <div className="container is-fluid">
-        <Categories />
-        <Posts />
-      </div>
-    );
-  }
-}
-
-export default connect()(Readable);
+export default Readable;

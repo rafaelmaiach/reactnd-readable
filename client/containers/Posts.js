@@ -5,7 +5,7 @@ import uuid from 'uuid/v1';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
-import { receivePostsByCategory, handleAddPost } from 'Actions/posts';
+import { receiveAllPosts, receivePostsByCategory, handleAddPost } from 'Actions/posts';
 import Post from 'Components/posts/Post';
 import NewPost from 'Components/posts/NewPost';
 
@@ -19,24 +19,24 @@ class Posts extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { match } = this.props;
-    if (prevProps.match && match) {
-      const { category: prevCategory } = prevProps.match;
-      const { category: currentCategory } = match;
+    const { params: { category: prevCategory } } = prevProps.match;
+    const { match: { params: { category } } } = this.props;
 
-      if (prevCategory !== currentCategory) {
-        this.getPosts();
-      }
+    if (prevCategory !== category) {
+      this.getPosts();
     }
   }
 
   getPosts = () => {
-    const { match, dispatch } = this.props;
+    const { match: { params }, dispatch } = this.props;
+    const { category } = params;
 
-    if (match) {
-      const { category } = match.params;
+    if (category) {
       dispatch(receivePostsByCategory(category));
+      return;
     }
+
+    dispatch(receiveAllPosts());
   }
 
   createPost = () => {
@@ -60,6 +60,7 @@ class Posts extends Component {
   render() {
     const { isNewPost } = this.state;
     const { posts } = this.props;
+
     const postList = posts.map(post => <Post key={post.id} {...post} />);
 
     const faIcon = isNewPost ? faTimesCircle : faPlusCircle;
