@@ -3,19 +3,25 @@ import React from 'react';
 import CategoriesDropdown from 'Components/categories/Dropdown';
 
 const NewPostField = (props) => {
-  const { domId, domType, label } = props;
+  const {
+    domId,
+    domType,
+    label,
+    handleField,
+    category,
+  } = props;
 
   let domField = null;
 
   switch (domType) {
     case 'input':
-      domField = <input id={domId} className="input" type="text" />;
+      domField = <input id={domId} className="input" type="text" onChange={e => handleField(e.target.value)} />;
       break;
     case 'textarea':
-      domField = <textarea id={domId} className="textarea" maxLength={250} placeholder="Post message (max. 250 characters)" />;
+      domField = <textarea id={domId} className="textarea" maxLength={250} placeholder="Post message (max. 250 characters)" onChange={e => handleField(e.target.value)} />;
       break;
     case 'dropdown':
-      domField = <CategoriesDropdown />;
+      domField = <CategoriesDropdown handleField={handleField} currentCategory={category} />;
       break;
     default:
       break;
