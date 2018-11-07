@@ -27,20 +27,15 @@ class Posts extends Component {
   }
 
   getPosts = () => {
-    const { match: { params }, dispatch } = this.props;
+    const { match: { params }, getPostsByCategory, getAllPosts } = this.props;
     const { category } = params;
 
     if (category) {
-      dispatch(receivePostsByCategory(category));
+      getPostsByCategory(category);
       return;
     }
 
-    dispatch(receiveAllPosts());
-  }
-
-  createPost = (post) => {
-    const { dispatch } = this.props;
-    dispatch(handleAddPost(post));
+    getAllPosts();
   }
 
   toggleNewPost = () => {
@@ -64,7 +59,7 @@ class Posts extends Component {
             </div>
             <div className="column is-12">
               <div className="columns is-multiline">
-                {isNewPost && <NewPost createPost={this.createPost} toggleNewPost={this.toggleNewPost} />}
+                {isNewPost && <NewPost toggleNewPost={this.toggleNewPost} />}
                 {postList}
               </div>
             </div>
@@ -81,4 +76,16 @@ const mapStateToProps = ({ posts }) => ({
   posts: Object.values(posts),
 });
 
-export default connect(mapStateToProps)(Posts);
+const mapDispatchToProps = dispatch => ({
+  getPostsByCategory: (category) => {
+    dispatch(receivePostsByCategory(category));
+  },
+  getAllPosts: () => {
+    dispatch(receiveAllPosts());
+  },
+  addPost: (post) => {
+    dispatch(handleAddPost(post));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
