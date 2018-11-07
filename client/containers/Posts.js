@@ -39,16 +39,7 @@ class Posts extends Component {
     dispatch(receiveAllPosts());
   }
 
-  createPost = () => {
-    const post = {
-      id: uuid(),
-      timestamp: Date.now(),
-      title: 'A new post',
-      body: 'A new post body',
-      author: 'A new post author',
-      category: 'react',
-    };
-
+  createPost = (post) => {
     const { dispatch } = this.props;
     dispatch(handleAddPost(post));
   }
@@ -74,7 +65,7 @@ class Posts extends Component {
             </div>
             <div className="column is-12">
               <div className="columns is-multiline">
-                {isNewPost && <NewPost />}
+                {isNewPost && <NewPost createPost={this.createPost} />}
                 {postList}
               </div>
             </div>
