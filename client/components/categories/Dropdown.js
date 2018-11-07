@@ -7,8 +7,17 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 import DropdownItem from './DropdownItem';
 
-const Dropdown = ({ categories, currentCategory, handleField }) => {
-  const dropdownItems = categories.map(category => <DropdownItem key={category} category={category} handleField={handleField} />);
+const Dropdown = (props) => {
+  const { categories, currentCategory, handleField } = props;
+
+  const dropdownItems = categories.map(category => (
+    <DropdownItem
+      key={category}
+      category={category}
+      handleField={handleField}
+      currentCategory={currentCategory}
+    />
+  ));
 
   const category = capitalize(currentCategory) || 'Select a category...';
 
