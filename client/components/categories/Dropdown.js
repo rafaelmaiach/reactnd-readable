@@ -10,14 +10,17 @@ import DropdownItem from './DropdownItem';
 const Dropdown = (props) => {
   const { categories, currentCategory, handleField } = props;
 
-  const dropdownItems = categories.map(category => (
-    <DropdownItem
-      key={category}
-      category={category}
-      handleField={handleField}
-      currentCategory={currentCategory}
-    />
-  ));
+  const dropdownItems = categories.map((category) => {
+    const isActive = category === currentCategory ? 'is-active' : '';
+    return (
+      <DropdownItem
+        key={category}
+        category={category}
+        handleField={handleField}
+        isActive={isActive}
+      />
+    );
+  });
 
   const category = capitalize(currentCategory) || 'Select a category...';
 
