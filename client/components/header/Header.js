@@ -11,13 +11,13 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, match } = this.props;
+    const { getAllCategories, match } = this.props;
 
     if (match.params.category) {
       this.setState(() => ({ currentTab: match.params.category }));
     }
 
-    dispatch(receiveAllCategories());
+    getAllCategories();
   }
 
   toggleMenu = (e) => {
@@ -84,4 +84,10 @@ const mapStateToProps = ({ categories }) => ({
   categories,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  getAllCategories: () => {
+    dispatch(receiveAllCategories());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
