@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import uuid from 'uuid/v1';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
@@ -65,7 +64,7 @@ class Posts extends Component {
             </div>
             <div className="column is-12">
               <div className="columns is-multiline">
-                {isNewPost && <NewPost createPost={this.createPost} />}
+                {isNewPost && <NewPost createPost={this.createPost} toggleNewPost={this.toggleNewPost} />}
                 {postList}
               </div>
             </div>

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import uuid from 'uuid/v1';
+
+import { handleAddPost } from 'Actions/posts';
 
 import Field from './NewPostField';
 
@@ -9,18 +12,8 @@ class NewPost extends Component {
     author: '',
     message: '',
     category: '',
+    invalidForm: false,
   }
-
-  handleFieldValue = field => value => this.setState(() => ({ [field]: value }));
-
-  // const post = {
-  //   id: uuid(),
-  //   timestamp: Date.now(),
-  //   title: 'A new post',
-  //   body: 'A new post body',
-  //   author: 'A new post author',
-  //   category: 'react',
-  // };
 
   fieldsSetup = [
     {
@@ -49,10 +42,47 @@ class NewPost extends Component {
     },
   ]
 
+  handleFieldValue = field => value => this.setState(() => ({ [field]: value }));
+
+  createPost = () => {
+    const { dispatch, toggleNewPost } = this.props;
+
+    const {
+      title, author, message, category,
+    } = this.state;
+
+    const postIsValid = title.trim() && author.trim() && message.trim() && category.trim();
+
+    if (postIsValid) {
+      const post = {
+        id: uuid(),
+        timestamp: Date.now(),
+        title: title.trim(),
+        body: message.trim(),
+        author: author.trim(),
+        category,
+      };
+
+      dispatch(handleAddPost(post));
+
+      toggleNewPost();
+    } else {
+      this.setState(() => ({ invalidForm: true }));
+    }
+  }
+
   render() {
-    const { category } = this.state;
-    const fields = this.fieldsSetup.map(field => <Field key={field.domId} {...field} handleField={this.handleFieldValue(field.id)} category={category} />);
-    console.log(this.state);
+    const { category, invalidForm } = this.state;
+
+    const fields = this.fieldsSetup.map(field => (
+      <Field
+        key={field.domId}
+        {...field}
+        handleField={this.handleFieldValue(field.id)}
+        category={category}
+      />
+    ));
+
     return (
       <div className="column is-7 is-offset-2">
         <div className="card">
@@ -63,6 +93,12 @@ class NewPost extends Component {
               </div>
             </div>
           </div>
+          {invalidForm && <p className="help is-danger has-text-centered">Form is invalid!</p>}
+          <footer className="card-footer">
+            <a role="button" className="card-footer-item" onClick={this.createPost}>
+              Create
+            </a>
+          </footer>
         </div>
       </div>
     );
