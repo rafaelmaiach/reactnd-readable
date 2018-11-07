@@ -5,8 +5,8 @@ import { handleDeletePost } from 'Actions/posts';
 
 class Post extends Component {
   removePost = (postId) => {
-    const { dispatch } = this.props;
-    dispatch(handleDeletePost(postId));
+    const { deletePost } = this.props;
+    deletePost(postId);
   }
 
   render() {
@@ -49,4 +49,10 @@ class Post extends Component {
   }
 }
 
-export default connect()(Post);
+const mapDispatchToProps = dispatch => ({
+  deletePost: (postId) => {
+    dispatch(handleDeletePost(postId));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(Post);

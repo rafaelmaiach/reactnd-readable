@@ -45,7 +45,7 @@ class NewPost extends Component {
   handleFieldValue = field => value => this.setState(() => ({ [field]: value }));
 
   createPost = () => {
-    const { dispatch, toggleNewPost } = this.props;
+    const { addPost, toggleNewPost } = this.props;
 
     const {
       title, author, message, category,
@@ -63,8 +63,7 @@ class NewPost extends Component {
         category,
       };
 
-      dispatch(handleAddPost(post));
-
+      addPost(post);
       toggleNewPost();
     } else {
       this.setState(() => ({ invalidForm: true }));
@@ -105,4 +104,10 @@ class NewPost extends Component {
   }
 }
 
-export default connect()(NewPost);
+const mapDispatchToProps = dispatch => ({
+  addPost: (post) => {
+    dispatch(handleAddPost(post));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(NewPost);
