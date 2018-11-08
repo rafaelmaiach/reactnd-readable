@@ -1,20 +1,40 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import { isCategoryActive } from 'Utils/helpers';
 
 import { receiveAllCategories } from 'Actions/categories';
 
 class Header extends Component {
+  static propTypes = {
+    categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+    getAllCategories: PropTypes.func.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        category: PropTypes.string,
+      }),
+    }).isRequired,
+  }
+
   state = {
     menuOpen: false,
     currentTab: '',
   }
 
   componentDidMount() {
-    const { getAllCategories, match } = this.props;
+    this.setupCategories();
+  }
 
-    if (match.params.category) {
-      this.setState(() => ({ currentTab: match.params.category }));
+  setupCategories = () => {
+    const {
+      getAllCategories,
+      match: { params: { category } },
+    } = this.props;
+
+    if (category) {
+      this.setState(() => ({ currentTab: category }));
     }
 
     getAllCategories();
@@ -25,29 +45,33 @@ class Header extends Component {
     this.setState(prevState => ({ menuOpen: !prevState.menuOpen }));
   }
 
-  changeCurrentTab = tabName => () => this.setState(() => ({ currentTab: tabName }))
+  changeCurrentTab = tabName => () => this.setState(() => ({ currentTab: tabName }));
+
+  createTab = (category) => {
+    const { currentTab } = this.state;
+
+    const isTabActive = isCategoryActive(category, currentTab);
+    const changeTab = this.changeCurrentTab(category);
+
+    return (
+      <Link
+        key={category}
+        className={`navbar-item ${isTabActive}`}
+        to={`/${category}`}
+        onClick={changeTab}
+      >
+        {category}
+      </Link>
+    );
+  }
 
   render() {
-    const { menuOpen, currentTab } = this.state;
+    const { menuOpen } = this.state;
     const { categories } = this.props;
-    const { list } = categories;
 
-    const isMenuOpen = menuOpen ? 'is-active' : '';
+    const isMenuOpen = menuOpen && 'is-active';
 
-    const categoriesList = list && list.map(({ name }) => {
-      const isTabActive = currentTab === name ? 'is-active' : '';
-      const changeTab = this.changeCurrentTab(name);
-      return (
-        <Link
-          key={name}
-          className={`navbar-item ${isTabActive}`}
-          to={`/${name}`}
-          onClick={changeTab}
-        >
-          {name}
-        </Link>
-      );
-    });
+    const categoriesList = categories.map(this.createTab);
 
     return (
       <nav className="navbar is-fixed-top is-link" role="navigation" aria-label="main navigation">
@@ -81,7 +105,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = ({ categories }) => ({
-  categories,
+  categories: Object.values(categories).map(({ name }) => name),
 });
 
 const mapDispatchToProps = dispatch => ({
