@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { handleDeletePost } from 'Actions/posts';
@@ -6,6 +7,17 @@ import { handleDeletePost } from 'Actions/posts';
 import NewPost from './NewPost';
 
 class Post extends Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    timestamp: PropTypes.number.isRequired,
+    commentCount: PropTypes.number.isRequired,
+    voteScore: PropTypes.number.isRequired,
+    deletePost: PropTypes.func.isRequired,
+  }
+
   state = {
     isEditting: false,
   }
@@ -36,8 +48,6 @@ class Post extends Component {
       message: body,
     };
 
-    const date = new Date(timestamp).toLocaleDateString();
-
     return (
       isEditting
         ? <NewPost cancelEdition={this.togglePostEdition} postInfo={postInfo} />
@@ -55,7 +65,10 @@ class Post extends Component {
                 <div className="content">
                   {body}
                   <br />
-                  <time>{date}</time>
+                  <br />
+                  <p>{`Time: ${timestamp}`}</p>
+                  <p>{`Comments: ${commentCount}`}</p>
+                  <p>{`Vote: ${voteScore}`}</p>
                 </div>
               </div>
               <footer className="card-footer">
