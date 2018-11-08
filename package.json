@@ -71,6 +71,7 @@
     "postcss-flexbugs-fixes": "4.1.0",
     "postcss-loader": "3.0.0",
     "pre-commit": "1.2.2",
+    "prop-types": "15.6.2",
     "pug": "2.0.3",
     "react": "16.6.1",
     "react-dom": "16.6.1",
