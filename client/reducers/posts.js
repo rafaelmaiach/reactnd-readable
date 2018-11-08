@@ -1,4 +1,6 @@
-import { RECEIVE_POSTS, ADD_POST, REMOVE_POST } from 'Actions/posts.actions';
+import {
+  RECEIVE_POSTS, ADD_POST, EDIT_POST, REMOVE_POST,
+} from 'Actions/posts.actions';
 
 const reducePosts = postsList => postsList.reduce((a, c) => {
   a[c.id] = c; //eslint-disable-line
@@ -16,6 +18,15 @@ const posts = (state = {}, action) => {
       return {
         ...state,
         post,
+      };
+    }
+    case EDIT_POST: {
+      const { post } = action;
+      return {
+        ...state,
+        [post.id]: {
+          ...post,
+        },
       };
     }
     case REMOVE_POST: {

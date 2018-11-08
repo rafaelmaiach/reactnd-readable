@@ -9,16 +9,35 @@ const NewPostField = (props) => {
     label,
     handleField,
     category,
+    title,
+    message,
   } = props;
 
   let domField = null;
 
   switch (domType) {
     case 'input':
-      domField = <input id={domId} className="input" type="text" onChange={e => handleField(e.target.value)} />;
+      domField = (
+        <input
+          id={domId}
+          className="input"
+          type="text"
+          defaultValue={title}
+          onChange={e => handleField(e.target.value)}
+        />
+      );
       break;
     case 'textarea':
-      domField = <textarea id={domId} className="textarea" maxLength={250} placeholder="Post message (max. 250 characters)" onChange={e => handleField(e.target.value)} />;
+      domField = (
+        <textarea
+          id={domId}
+          className="textarea"
+          maxLength={250}
+          placeholder="Post message (max. 250 characters)"
+          defaultValue={message}
+          onChange={e => handleField(e.target.value)}
+        />
+      );
       break;
     case 'dropdown':
       domField = <CategoriesDropdown handleField={handleField} currentCategory={category} />;

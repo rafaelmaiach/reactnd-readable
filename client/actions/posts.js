@@ -2,12 +2,14 @@ import {
   getAllPosts,
   getPostsByCategory,
   addPost,
+  editPost,
   deletePost,
 } from 'Utils/api/posts';
 
 import {
   receivePosts,
   createPost,
+  updatePost,
   removePost,
 } from './posts.actions';
 
@@ -29,6 +31,12 @@ const handleAddPost = postInfo => dispatch =>
       dispatch(createPost(post));
     });
 
+const handleEditPost = postInfo => dispatch =>
+  editPost(postInfo.id, postInfo.details)
+    .then((post) => {
+      dispatch(updatePost(post));
+    });
+
 const handleDeletePost = postId => dispatch =>
   deletePost(postId)
     .then((post) => {
@@ -39,5 +47,6 @@ export {
   receiveAllPosts,
   receivePostsByCategory,
   handleAddPost,
+  handleEditPost,
   handleDeletePost,
 };

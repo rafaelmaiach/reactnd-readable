@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
 
-import { handleAddPost } from 'Actions/posts';
+import { handleAddPost, handleEditPost } from 'Actions/posts';
 
 import Field from './NewPostField';
 
@@ -13,6 +13,21 @@ class NewPost extends Component {
     message: '',
     category: '',
     invalidForm: false,
+  }
+
+  componentDidMount() {
+    this.setupInitialState();
+  }
+
+  setupInitialState = () => {
+    const { postInfo } = this.props;
+
+    if (postInfo) {
+      this.setState(() => ({
+        title: postInfo.title,
+        message: postInfo.message,
+      }));
+    }
   }
 
   fieldsSetup = [
@@ -45,16 +60,34 @@ class NewPost extends Component {
   handleFieldValue = field => value => this.setState(() => ({ [field]: value }));
 
   createPost = () => {
-    const { addPost, toggleNewPost } = this.props;
+    const {
+      addPost,
+      updatePost,
+      toggleNewPost,
+      postInfo,
+      cancelEdition,
+    } = this.props;
 
     const {
       title, author, message, category,
     } = this.state;
 
-    const postIsValid = title.trim() && author.trim() && message.trim() && category.trim();
+    let postIsValid = false;
+    let postData = null;
 
-    if (postIsValid) {
-      const post = {
+    if (postInfo) {
+      postIsValid = title.trim() && message.trim();
+      const { id } = postInfo;
+      postData = {
+        id,
+        details: {
+          title: title.trim(),
+          body: message.trim(),
+        },
+      };
+    } else {
+      postIsValid = title.trim() && message.trim() && author.trim() && category.trim();
+      postData = {
         id: uuid(),
         timestamp: Date.now(),
         title: title.trim(),
@@ -62,25 +95,45 @@ class NewPost extends Component {
         author: author.trim(),
         category,
       };
+    }
 
-      addPost(post);
+    if (postIsValid) {
+      if (postInfo) {
+        updatePost(postData);
+        cancelEdition();
+        return;
+      }
+
+      addPost(postData);
       toggleNewPost();
     } else {
       this.setState(() => ({ invalidForm: true }));
     }
   }
 
-  render() {
-    const { category, invalidForm } = this.state;
+  createFields = (postInfo) => {
+    const { category } = this.state;
+    const usedFields = postInfo
+      ? this.fieldsSetup.filter(({ id }) => id === 'title' || id === 'message')
+      : this.fieldsSetup;
 
-    const fields = this.fieldsSetup.map(field => (
+    return usedFields.map(field => (
       <Field
         key={field.domId}
         {...field}
         handleField={this.handleFieldValue(field.id)}
         category={category}
+        {...postInfo}
       />
     ));
+  }
+
+  render() {
+    const { invalidForm } = this.state;
+
+    const { cancelEdition, postInfo } = this.props;
+
+    const fields = this.createFields(postInfo);
 
     return (
       <div className="column is-7 is-offset-2">
@@ -88,15 +141,16 @@ class NewPost extends Component {
           <div className="card-content">
             <div className="media">
               <div className="media-content">
-                {fields}
+                { fields }
               </div>
             </div>
           </div>
           {invalidForm && <p className="help is-danger has-text-centered">Form is invalid!</p>}
           <footer className="card-footer">
             <a role="button" className="card-footer-item" onClick={this.createPost}>
-              Create
+              {postInfo ? 'Save' : 'Create'}
             </a>
+            {postInfo && <a role="button" className="card-footer-item" onClick={cancelEdition}>Cancel</a>}
           </footer>
         </div>
       </div>
@@ -107,6 +161,9 @@ class NewPost extends Component {
 const mapDispatchToProps = dispatch => ({
   addPost: (post) => {
     dispatch(handleAddPost(post));
+  },
+  updatePost: (post) => {
+    dispatch(handleEditPost(post));
   },
 });
 

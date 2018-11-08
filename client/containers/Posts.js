@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
-import { receiveAllPosts, receivePostsByCategory, handleAddPost } from 'Actions/posts';
+import { receiveAllPosts, receivePostsByCategory } from 'Actions/posts';
 import Post from 'Components/posts/Post';
 import NewPost from 'Components/posts/NewPost';
 
@@ -64,8 +64,6 @@ class Posts extends Component {
               </div>
             </div>
           </div>
-          {/* <button type="button" onClick={this.createPost}>ADD POST</button> */}
-
         </div>
       </section>
     );
@@ -82,9 +80,6 @@ const mapDispatchToProps = dispatch => ({
   },
   getAllPosts: () => {
     dispatch(receiveAllPosts());
-  },
-  addPost: (post) => {
-    dispatch(handleAddPost(post));
   },
 });
 
