@@ -57,7 +57,7 @@ Dropdown.propTypes = {
 };
 
 const mapStateToProps = ({ categories }) => ({
-  categories: categories.list.map(({ name }) => name),
+  categories: Object.values(categories).map(({ name }) => name),
 });
 
 export default connect(mapStateToProps)(Dropdown);
