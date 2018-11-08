@@ -1,6 +1,6 @@
-import { RECEIVE_CATEGORIES } from '../actions/categories';
+import { RECEIVE_CATEGORIES } from 'Actions/categories.actions';
 
-export default function categories(state = {}, action) {
+const categories = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CATEGORIES:
       return {
@@ -10,4 +10,6 @@ export default function categories(state = {}, action) {
     default:
       return state;
   }
-}
+};
+
+export default categories;

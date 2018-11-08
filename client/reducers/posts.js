@@ -1,11 +1,11 @@
-import { RECEIVE_POSTS, ADD_POST, REMOVE_POST } from 'Actions/posts';
+import { RECEIVE_POSTS, ADD_POST, REMOVE_POST } from 'Actions/posts.actions';
 
 const reducePosts = postsList => postsList.reduce((a, c) => {
   a[c.id] = c; //eslint-disable-line
   return a;
 }, {});
 
-export default function posts(state = {}, action) {
+const posts = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_POSTS: {
       const allPosts = reducePosts(action.posts);
@@ -28,4 +28,6 @@ export default function posts(state = {}, action) {
     default:
       return state;
   }
-}
+};
+
+export default posts;
