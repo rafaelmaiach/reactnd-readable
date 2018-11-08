@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import CategoriesDropdown from 'Components/categories/Dropdown';
 
@@ -60,6 +61,21 @@ const NewPostField = (props) => {
       </div>
     </div>
   );
+};
+
+NewPostField.propTypes = {
+  domId: PropTypes.string.isRequired,
+  domType: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  handleField: PropTypes.func.isRequired,
+  category: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  message: PropTypes.string,
+};
+
+NewPostField.defaultProps = {
+  title: '',
+  message: '',
 };
 
 export default NewPostField;
