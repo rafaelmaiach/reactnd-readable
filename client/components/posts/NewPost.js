@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
 
@@ -7,6 +8,24 @@ import { handleAddPost, handleEditPost } from 'Actions/posts';
 import Field from './NewPostField';
 
 class NewPost extends Component {
+  static propTypes = {
+    postInfo: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      message: PropTypes.string,
+    }),
+    addPost: PropTypes.func.isRequired,
+    updatePost: PropTypes.func.isRequired,
+    toggleNewPost: PropTypes.func,
+    cancelEdition: PropTypes.func,
+  }
+
+  static defaultProps = {
+    postInfo: null,
+    toggleNewPost: null,
+    cancelEdition: null,
+  }
+
   state = {
     title: '',
     author: '',
