@@ -22,6 +22,8 @@ class NewPost extends Component {
   setupInitialState = () => {
     const { postInfo } = this.props;
 
+    // If postInfo is passed, that's because the NewPost is being rendered by Edit Post method
+    // So it will send the default values for input title and textarea message
     if (postInfo) {
       this.setState(() => ({
         title: postInfo.title,
@@ -30,6 +32,7 @@ class NewPost extends Component {
     }
   }
 
+  // Array of objects to setup the form fields of a new post when creating a post
   fieldsSetup = [
     {
       id: 'title',
@@ -59,60 +62,84 @@ class NewPost extends Component {
 
   handleFieldValue = field => value => this.setState(() => ({ [field]: value }));
 
-  createPost = () => {
+  // Check if all fields are not empty to set the post form as valid
+  validatePost = fields => fields.every(field => field.trim());
+
+  handlePost = () => {
     const {
-      addPost,
-      updatePost,
-      toggleNewPost,
       postInfo,
-      cancelEdition,
     } = this.props;
 
+    if (postInfo) {
+      this.updatePost();
+      return;
+    }
+
+    this.createPost();
+  }
+
+  createPost = () => {
     const {
       title, author, message, category,
     } = this.state;
 
-    let postIsValid = false;
-    let postData = null;
+    const { addPost, toggleNewPost } = this.props;
 
-    if (postInfo) {
-      postIsValid = title.trim() && message.trim();
-      const { id } = postInfo;
-      postData = {
-        id,
-        details: {
-          title: title.trim(),
-          body: message.trim(),
-        },
-      };
-    } else {
-      postIsValid = title.trim() && message.trim() && author.trim() && category.trim();
-      postData = {
-        id: uuid(),
-        timestamp: Date.now(),
-        title: title.trim(),
-        body: message.trim(),
-        author: author.trim(),
-        category,
-      };
-    }
+    const postIsValid = this.validatePost([title, message, author, category]);
+
+    // Create the data for a new post
+    const postData = {
+      id: uuid(),
+      timestamp: Date.now(),
+      title: title.trim(),
+      body: message.trim(),
+      author: author.trim(),
+      category,
+    };
 
     if (postIsValid) {
-      if (postInfo) {
-        updatePost(postData);
-        cancelEdition();
-        return;
-      }
-
       addPost(postData);
       toggleNewPost();
-    } else {
-      this.setState(() => ({ invalidForm: true }));
+      return;
     }
+
+    this.setState(() => ({ invalidForm: true }));
   }
 
-  createFields = (postInfo) => {
+  updatePost = () => {
+    const { title, message } = this.state;
+
+    const {
+      updatePost,
+      postInfo,
+      cancelEdition,
+    } = this.props;
+
+    const postIsValid = this.validatePost([title, message]);
+
+    // Create the data for update a post
+    const postData = {
+      id: postInfo.id,
+      details: {
+        title: title.trim(),
+        body: message.trim(),
+      },
+    };
+
+    if (postIsValid) {
+      updatePost(postData);
+      cancelEdition();
+      return;
+    }
+
+    this.setState(() => ({ invalidForm: true }));
+  }
+
+  createFields = () => {
     const { category } = this.state;
+    const { postInfo } = this.props;
+
+    // Filter the fields to be created
     const usedFields = postInfo
       ? this.fieldsSetup.filter(({ id }) => id === 'title' || id === 'message')
       : this.fieldsSetup;
@@ -133,7 +160,7 @@ class NewPost extends Component {
 
     const { cancelEdition, postInfo } = this.props;
 
-    const fields = this.createFields(postInfo);
+    const fields = this.createFields();
 
     return (
       <div className="column is-7 is-offset-2">
@@ -147,7 +174,7 @@ class NewPost extends Component {
           </div>
           {invalidForm && <p className="help is-danger has-text-centered">Form is invalid!</p>}
           <footer className="card-footer">
-            <a role="button" className="card-footer-item" onClick={this.createPost}>
+            <a role="button" className="card-footer-item" onClick={this.handlePost}>
               {postInfo ? 'Save' : 'Create'}
             </a>
             {postInfo && <a role="button" className="card-footer-item" onClick={cancelEdition}>Cancel</a>}
