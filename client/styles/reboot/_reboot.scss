@@ -36,6 +36,10 @@ body {
   width: 100%;
 }
 
+#root {
+  background-color: $black;
+}
+
 [tabindex="-1"]:focus {
   outline: 0 !important;
 }
