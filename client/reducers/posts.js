@@ -13,13 +13,7 @@ const posts = (state = {}, action) => {
       const allPosts = reducePosts(action.posts);
       return { ...allPosts };
     }
-    case ADD_POST: {
-      const { post } = action;
-      return {
-        ...state,
-        post,
-      };
-    }
+    case ADD_POST:
     case EDIT_POST: {
       const { post } = action;
       return {
