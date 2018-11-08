@@ -2,14 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { capitalize } from 'Utils/helpers';
+import { capitalize, isCategoryActive } from 'Utils/helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 import DropdownItem from './DropdownItem';
-
-// Check if the category is the current one and add "is-active" class to highlight it
-const isCategoryActive = (category, currentCategory) => category === currentCategory ? 'is-active' : '';
 
 // Create the dropdown item for new post
 const createDropdownItem = (category, currentCategory, handleField) => {
