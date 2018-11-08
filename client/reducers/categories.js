@@ -5,7 +5,7 @@ const categories = (state = {}, action) => {
     case RECEIVE_CATEGORIES:
       return {
         ...state,
-        list: action.categories,
+        ...action.categories,
       };
     default:
       return state;
