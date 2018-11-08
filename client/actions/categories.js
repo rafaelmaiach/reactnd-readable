@@ -1,14 +1,12 @@
 import { getAllCategories } from 'Utils/api/categories';
+import { receiveCategories } from './categories.actions';
 
-export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
-
-export const receiveCategories = categories => ({
-  type: RECEIVE_CATEGORIES,
-  categories,
-});
-
-export const receiveAllCategories = () => dispatch =>
+const receiveAllCategories = () => dispatch =>
   getAllCategories()
     .then((categories) => {
       dispatch(receiveCategories(categories));
     });
+
+export {
+  receiveAllCategories,
+};
