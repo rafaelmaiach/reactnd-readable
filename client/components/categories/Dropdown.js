@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { capitalize } from 'Utils/helpers';
@@ -7,21 +8,30 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 import DropdownItem from './DropdownItem';
 
+// Check if the category is the current one and add "is-active" class to highlight it
+const isCategoryActive = (category, currentCategory) => category === currentCategory ? 'is-active' : '';
+
+// Create the dropdown item for new post
+const createDropdownItem = (category, currentCategory, handleField) => {
+  const isActive = isCategoryActive(category, currentCategory);
+
+  return (
+    <DropdownItem
+      key={category}
+      category={category}
+      handleField={handleField}
+      isActive={isActive}
+    />
+  );
+};
+
+// Dropdown component for categories. It shows all categories options for create a new post and allow you to select one
 const Dropdown = (props) => {
   const { categories, currentCategory, handleField } = props;
 
-  const dropdownItems = categories.map((category) => {
-    const isActive = category === currentCategory ? 'is-active' : '';
-    return (
-      <DropdownItem
-        key={category}
-        category={category}
-        handleField={handleField}
-        isActive={isActive}
-      />
-    );
-  });
+  const dropdownItems = categories.map(category => createDropdownItem(category, currentCategory, handleField));
 
+  // If a category is selected, change the dropdown text to use the selected one
   const category = capitalize(currentCategory) || 'Select a category...';
 
   return (
@@ -41,6 +51,12 @@ const Dropdown = (props) => {
       </div>
     </div>
   );
+};
+
+Dropdown.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currentCategory: PropTypes.string.isRequired,
+  handleField: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ categories }) => ({
