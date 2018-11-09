@@ -1,0 +1,38 @@
+.form-input,
+.form-dropdown > div {
+  border: none;
+  border-bottom: 1px solid $blue;
+  border-radius: 0;
+  padding-left: 0;
+}
+
+.form-dropdown {
+  margin-top: 1rem;
+}
+
+.form-submit-button {
+  margin-top: 1rem;
+}
+
+.ant-select-selection__rendered {
+  margin-left: 0;
+}
+
+.ant-row {
+  &.ant-form-item {
+    display: flex;
+    justify-content: center;
+    margin: 0 -5rem;
+  }
+}
+
+.ant-select-dropdown-menu-item {
+  color: $black;
+}
+
+.ant-select-dropdown-menu-item-active,
+.ant-select-dropdown-menu-item-selected,
+.ant-select-dropdown-menu-item:hover {
+  background-color: $blue;
+  color: $white;
+}
