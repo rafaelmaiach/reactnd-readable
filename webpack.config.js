@@ -1,7 +1,11 @@
 /* eslint-disable global-require */
 const autoprefixer = require('autoprefixer');
 const path = require('path');
+const fs = require('fs');
 const merge = require('webpack-merge');
+
+const lessToJs = require('less-vars-to-js');
+const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, 'client', 'ant-theme-vars.less'), 'utf8'));
 
 const defaultConfig = {
   module: {
@@ -49,6 +53,20 @@ const defaultConfig = {
                 quality: '65-90',
                 speed: 4,
               },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+              modifyVars: themeVariables,
             },
           },
         ],

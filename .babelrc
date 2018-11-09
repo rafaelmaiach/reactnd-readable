@@ -12,6 +12,7 @@
   "plugins": [
     "react-hot-loader/babel",
     "syntax-dynamic-import",
+    ["import", {"libraryName": "antd", "style": true} ],
     "transform-class-properties"
   ],
   "env": {
