@@ -1,5 +1,5 @@
 import {
-  RECEIVE_POSTS, ADD_POST, EDIT_POST, REMOVE_POST,
+  RECEIVE_POSTS, ADD_POST, EDIT_POST, REMOVE_POST, VOTE_POST,
 } from 'Actions/posts.actions';
 
 const reducePosts = postsList => postsList.reduce((a, c) => {
@@ -14,7 +14,8 @@ const posts = (state = {}, action) => {
       return { ...allPosts };
     }
     case ADD_POST:
-    case EDIT_POST: {
+    case EDIT_POST:
+    case VOTE_POST: {
       const { post } = action;
       return {
         ...state,

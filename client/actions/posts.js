@@ -4,6 +4,7 @@ import {
   addPost,
   editPost,
   deletePost,
+  editVoteForPost,
 } from 'Utils/api/posts';
 
 import {
@@ -11,6 +12,7 @@ import {
   createPost,
   updatePost,
   removePost,
+  updateVote,
 } from './posts.actions';
 
 const receiveAllPosts = () => dispatch =>
@@ -43,10 +45,17 @@ const handleDeletePost = postId => dispatch =>
       dispatch(removePost(post));
     });
 
+const handleVote = (postId, option) => dispatch =>
+  editVoteForPost(postId, option)
+    .then((post) => {
+      dispatch(updateVote(post));
+    });
+
 export {
   receiveAllPosts,
   receivePostsByCategory,
   handleAddPost,
   handleEditPost,
   handleDeletePost,
+  handleVote,
 };

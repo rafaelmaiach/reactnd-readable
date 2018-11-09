@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { handleDeletePost } from 'Actions/posts';
 
 import NewPost from './NewPost';
+import Vote from './Vote';
 
 class Post extends Component {
   static propTypes = {
@@ -68,7 +69,7 @@ class Post extends Component {
                   <br />
                   <p>{`Time: ${timestamp}`}</p>
                   <p>{`Comments: ${commentCount}`}</p>
-                  <p>{`Vote: ${voteScore}`}</p>
+                  <Vote postId={id} score={voteScore} />
                 </div>
               </div>
               <footer className="card-footer">

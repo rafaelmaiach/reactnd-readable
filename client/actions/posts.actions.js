@@ -2,6 +2,7 @@ const RECEIVE_POSTS = 'RECEIVE_POSTS';
 const ADD_POST = 'ADD_POST';
 const EDIT_POST = 'EDIT_POST';
 const REMOVE_POST = 'REMOVE_POST';
+const VOTE_POST = 'VOTE_POST';
 
 const receivePosts = posts => ({
   type: RECEIVE_POSTS,
@@ -23,13 +24,20 @@ const removePost = post => ({
   post,
 });
 
+const updateVote = post => ({
+  type: VOTE_POST,
+  post,
+});
+
 export {
   RECEIVE_POSTS,
   ADD_POST,
   EDIT_POST,
   REMOVE_POST,
+  VOTE_POST,
   receivePosts,
   createPost,
   updatePost,
   removePost,
+  updateVote,
 };
