@@ -1,7 +1,8 @@
 import React from 'react';
 import { Input, Select } from 'antd';
 
-import FormField from 'Components/posts/FormField';
+import FormField from 'Components/form/FormField';
+import { capitalize } from './common.helpers';
 
 const getFieldRules = () => ({
   common: {
@@ -46,7 +47,11 @@ const createField = (params, fieldDecorator) => {
       field.component = decorator(<Input.TextArea autosize={{ minRows: 3, maxRows: 7 }} className="form-input" />);
       break;
     case 'dropdown':
-      field.component = decorator(<Select className="form-dropdown">{options}</Select>);
+      const dropdownOptions = options.map(({ name }) => ( // eslint-disable-line
+        <Select.Option key={name} value={name}>{capitalize(name)}</Select.Option>
+      ));
+
+      field.component = decorator(<Select className="form-dropdown">{dropdownOptions}</Select>);
       break;
     default:
       break;

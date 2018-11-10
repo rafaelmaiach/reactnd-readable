@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
 
 import { handleAddPost, handleEditPost } from 'Actions/posts';
-import FormCreate from './FormCreate';
-import FormEdition from './FormEdition';
+import Form from 'Components/form/Form';
 
 class NewPost extends Component {
-  createPost = (data) => {
+  createNewPost = (data) => {
     const {
       title, author, message, category,
     } = data;
@@ -28,18 +27,18 @@ class NewPost extends Component {
     toggleNewPost();
   }
 
-  updatePost = (data) => {
+  updateExistingPost = (data) => {
     const { title, message } = data;
 
     const {
+      postInfo: { id },
       updatePost,
-      postInfo,
       cancelEdition,
     } = this.props;
 
     // Create the data for update a post
     const postData = {
-      id: postInfo.id,
+      id,
       details: {
         title,
         body: message,
@@ -57,10 +56,12 @@ class NewPost extends Component {
       <div className={`column ${size}`}>
         <div className="card">
           <div className="card-content">
-            {isEdition
-              ? <FormEdition {...this.props} updatePost={this.updatePost} />
-              : <FormCreate {...this.props} createPost={this.createPost} />
-            }
+            <Form
+              {...this.props}
+              isEdition={isEdition}
+              createPost={this.createNewPost}
+              updatePost={this.updateExistingPost}
+            />
           </div>
         </div>
       </div>
