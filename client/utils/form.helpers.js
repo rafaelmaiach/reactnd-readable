@@ -60,10 +60,10 @@ const createField = (params, fieldDecorator) => {
   return <FormField key={id} {...field} />;
 };
 
-const getDecorators = (getFieldDecorator) => {
+const getCreateField = (getFieldDecorator) => {
   const fieldDecorator = wrapperFieldDecorator(getFieldDecorator);
 
-  return { createField: params => createField(params, fieldDecorator) };
+  return params => createField(params, fieldDecorator);
 };
 
-export { getDecorators };
+export { getCreateField };
