@@ -7,6 +7,10 @@ import { isCategoryActive } from 'Utils/common.helpers';
 
 import { receiveAllCategories } from 'Actions/categories';
 
+/**
+ * @class Header
+ * @description Header component to list all categories and allow navigation between them
+ */
 class Header extends Component {
   static propTypes = {
     categories: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -27,6 +31,10 @@ class Header extends Component {
     this.setupCategories();
   }
 
+  /**
+   * @method Header#setupCategories
+   * @description Get all application's categories and set the current tab if a category is selected
+   */
   setupCategories = () => {
     const {
       getAllCategories,
@@ -34,31 +42,44 @@ class Header extends Component {
     } = this.props;
 
     if (category) {
-      this.setState(() => ({ currentTab: category }));
+      this.changeCurrentTab(category);
     }
 
     getAllCategories();
   }
 
+  /**
+   * @method Header#toggleMenu
+   * @description Open and close menu on mobile
+   */
   toggleMenu = (e) => {
     e.preventDefault();
     this.setState(prevState => ({ menuOpen: !prevState.menuOpen }));
   }
 
-  changeCurrentTab = tabName => () => this.setState(() => ({ currentTab: tabName }));
+  /**
+   * @method Header#changeCurrentTab
+   * @param {string} tabName - Get the tab name
+   * @description Change the current tab
+   */
+  changeCurrentTab = tabName => this.setState(() => ({ currentTab: tabName }));
 
+  /**
+   * @method Header#createTab
+   * @param {string} category - category name to be created
+   * @description Create the tab component
+   */
   createTab = (category) => {
     const { currentTab } = this.state;
 
     const isTabActive = isCategoryActive(category, currentTab);
-    const changeTab = this.changeCurrentTab(category);
 
     return (
       <Link
         key={category}
         className={`navbar-item ${isTabActive}`}
         to={`/${category}`}
-        onClick={changeTab}
+        onClick={() => this.changeCurrentTab(category)}
       >
         {category}
       </Link>
@@ -76,7 +97,7 @@ class Header extends Component {
     return (
       <nav className="navbar is-fixed-top is-link" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <Link className="navbar-item" to="/" onClick={this.changeCurrentTab('')}> READABLE </Link>
+          <Link className="navbar-item" to="/" onClick={() => this.changeCurrentTab('')}> READABLE </Link>
 
           <span
             role="button"
