@@ -8,27 +8,28 @@ const getFieldRules = () => ({
   common: {
     required: true,
     message: 'Required',
-  },
-  extra: {
-    transform: value => value.trim(),
+    whitespace: true,
   },
 });
 
-const createRules = (fieldId) => {
-  const { common, extra } = getFieldRules();
-  const rules = fieldId === 'category' ? common : { ...common, ...extra };
+const createRules = () => {
+  const { common } = getFieldRules();
 
-  return rules;
+  return common;
 };
 
-const generateFieldDecorator = (fieldId, getFieldDecorator) => {
-  const rules = createRules(fieldId);
+const generateFieldDecorator = (fieldId, getFieldDecorator, postInfo) => {
+  const rules = createRules();
   const options = { rules: [rules] };
+
+  if (postInfo) {
+    options.initialValue = postInfo[fieldId];
+  }
 
   return getFieldDecorator(fieldId, options);
 };
 
-const wrapperFieldDecorator = getFieldDecorator => label => generateFieldDecorator(label, getFieldDecorator);
+const wrapperFieldDecorator = (getFieldDecorator, postInfo) => label => generateFieldDecorator(label, getFieldDecorator, postInfo);
 
 const createField = (params, fieldDecorator) => {
   const {
@@ -60,8 +61,8 @@ const createField = (params, fieldDecorator) => {
   return <FormField key={id} {...field} />;
 };
 
-const getCreateField = (getFieldDecorator) => {
-  const fieldDecorator = wrapperFieldDecorator(getFieldDecorator);
+const getCreateField = (getFieldDecorator, postInfo = null) => {
+  const fieldDecorator = wrapperFieldDecorator(getFieldDecorator, postInfo);
 
   return params => createField(params, fieldDecorator);
 };

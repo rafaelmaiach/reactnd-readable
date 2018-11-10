@@ -20,7 +20,7 @@ class Post extends Component {
   }
 
   state = {
-    isEditting: false,
+    isEdition: false,
   }
 
   removePost = () => {
@@ -28,7 +28,7 @@ class Post extends Component {
     deletePost(id);
   }
 
-  togglePostEdition = () => this.setState(({ isEditting }) => ({ isEditting: !isEditting }));
+  togglePostEdition = () => this.setState(({ isEdition }) => ({ isEdition: !isEdition }));
 
   render() {
     const {
@@ -41,7 +41,7 @@ class Post extends Component {
       voteScore,
     } = this.props;
 
-    const { isEditting } = this.state;
+    const { isEdition } = this.state;
 
     const postInfo = {
       id,
@@ -50,8 +50,8 @@ class Post extends Component {
     };
 
     return (
-      isEditting
-        ? <NewPost isEdition cancelEdition={this.togglePostEdition} postInfo={postInfo} />
+      isEdition
+        ? <NewPost isEdition={isEdition} cancelEdition={this.togglePostEdition} postInfo={postInfo} />
         : (
           <div className="column is-6">
             <div className="card">

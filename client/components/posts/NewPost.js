@@ -71,7 +71,6 @@ const NewPost = (props) => {
         <div className="card-content">
           <Form
             {...props}
-            isEdition={isEdition}
             createPost={createNewPost}
             updatePost={updateExistingPost}
           />

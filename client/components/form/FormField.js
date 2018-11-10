@@ -9,7 +9,7 @@ import { Form } from 'antd';
 const FormField = ({ label, component }) => (
   <div key={label} className="column is-10">
     <span className="title is-size-6">{label}</span>
-    <Form.Item>
+    <Form.Item hasFeedback={label !== 'Category'}>
       {component}
     </Form.Item>
   </div>

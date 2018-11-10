@@ -37,7 +37,9 @@ class PostForm extends Component {
     super(props);
 
     const {
-      form: { validateFields, getFieldDecorator, setFieldsValue },
+      form: {
+        validateFields, getFieldDecorator, setFieldsValue,
+      },
       isEdition,
       postInfo,
     } = props;
@@ -48,33 +50,6 @@ class PostForm extends Component {
     this.setFieldsValue = setFieldsValue;
     this.isEdition = isEdition;
     this.postInfo = postInfo;
-  }
-
-  componentDidMount() {
-    this.setupInitialValues();
-  }
-
-  /**
-   * @method PostForm#setupInitialValues
-   * @description Set the initial values for form.
-   */
-  setupInitialValues = () => {
-    const values = {
-      title: '',
-      message: '',
-    };
-
-    // If the Form was created by an edition post, set the initial values to post information
-    if (this.isEdition) {
-      const { title, message } = this.postInfo;
-      values.title = title;
-      values.message = message;
-    } else {
-      // If it's a new post, set the initial value for author, because doesn't have this for edition
-      values.author = '';
-    }
-
-    this.setFieldsValue(values);
   }
 
   /**
@@ -105,7 +80,8 @@ class PostForm extends Component {
    * @description Create only the needed fields for the form (new or edition).
    */
   createFields = () => {
-    const createField = getCreateField(this.getFieldDecorator);
+    const { postInfo } = this.props;
+    const createField = getCreateField(this.getFieldDecorator, postInfo);
 
     let fieldsData = null;
 
