@@ -11,6 +11,16 @@ import Form from 'Components/form/Form';
  * @description Create a HOC to handle create and update functions and render a new form for new post or editing post
  */
 const NewPost = (props) => {
+  const {
+    addPost,
+    toggleNewPost,
+    postInfo,
+    updatePost,
+    cancelEdition,
+  } = props;
+
+  const closeForm = cancelEdition || toggleNewPost;
+
   /**
    * @function createNewPost
    * @param {object} data - Form data
@@ -19,8 +29,6 @@ const NewPost = (props) => {
     const {
       title, author, message, category,
     } = data;
-
-    const { addPost, toggleNewPost } = props;
 
     // Create the data for a new post
     const postData = {
@@ -33,7 +41,7 @@ const NewPost = (props) => {
     };
 
     addPost(postData);
-    toggleNewPost(); // Close the form
+    closeForm();
   };
 
   /**
@@ -43,15 +51,9 @@ const NewPost = (props) => {
   const updateExistingPost = (data) => {
     const { title, message } = data;
 
-    const {
-      postInfo: { id },
-      updatePost,
-      cancelEdition,
-    } = props;
-
     // Create the data for update a post
     const postData = {
-      id,
+      id: postInfo.id,
       details: {
         title,
         body: message,
@@ -59,20 +61,18 @@ const NewPost = (props) => {
     };
 
     updatePost(postData);
-    cancelEdition(); // Close the form
+    closeForm();
   };
 
-  const { isEdition } = props;
-  const size = isEdition ? 'is-6' : 'is-7';
-
   return (
-    <div className={`column ${size}`}>
+    <div className="column">
       <div className="card">
         <div className="card-content">
           <Form
             {...props}
             createPost={createNewPost}
             updatePost={updateExistingPost}
+            closeForm={closeForm}
           />
         </div>
       </div>
