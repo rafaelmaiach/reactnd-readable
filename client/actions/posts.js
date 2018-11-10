@@ -33,8 +33,8 @@ const receivePostsByCategory = category => dispatch =>
 
 const receiveDetails = postId => dispatch =>
   getPostDetails(postId)
-    .then((post) => {
-      dispatch(receivePostDetails(post));
+    .then((details) => {
+      dispatch(receivePostDetails(details));
     });
 
 const receiveComments = postId => dispatch =>

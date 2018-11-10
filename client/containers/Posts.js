@@ -80,6 +80,14 @@ class Posts extends Component {
     const { isNewPost } = this.state;
     const { posts } = this.props;
 
+    if (!posts) {
+      return (
+        <div className="container is-fluid">
+          <Header {...this.props} />
+        </div>
+      );
+    }
+
     const postList = this.createPosts(posts);
 
     const faIcon = isNewPost ? faTimesCircle : faPlusCircle;
@@ -112,9 +120,17 @@ class Posts extends Component {
   }
 }
 
-const mapStateToProps = ({ posts }) => ({
-  posts: Object.values(posts),
-});
+const mapStateToProps = ({ posts }) => {
+  if (posts.error) {
+    return {
+      posts: null,
+    };
+  }
+
+  return ({
+    posts: Object.values(posts),
+  });
+};
 
 const mapDispatchToProps = dispatch => ({
   getPostsByCategory: (category) => {

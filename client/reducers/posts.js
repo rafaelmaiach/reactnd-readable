@@ -1,5 +1,5 @@
 import {
-  RECEIVE_POSTS, ADD_POST, EDIT_POST, REMOVE_POST, VOTE_POST,
+  RECEIVE_POSTS, RECEIVE_POST_DETAILS, ADD_POST, EDIT_POST, REMOVE_POST, VOTE_POST,
 } from 'Actions/posts.creator';
 
 const reducePosts = postsList => postsList.reduce((a, c) => {
@@ -12,6 +12,21 @@ const posts = (state = {}, action) => {
     case RECEIVE_POSTS: {
       const allPosts = reducePosts(action.posts);
       return { ...allPosts };
+    }
+    case RECEIVE_POST_DETAILS: {
+      const { details } = action;
+
+      if (details.error) {
+        return {
+          error: 'Error receiving post details',
+        };
+      }
+
+      return {
+        [details.id]: {
+          ...details,
+        },
+      };
     }
     case ADD_POST:
     case EDIT_POST:

@@ -16,6 +16,7 @@ const Post = (props) => {
 
   const {
     id,
+    category,
     title,
     author,
     body,
@@ -57,7 +58,7 @@ const Post = (props) => {
             <div className="card-content">
               <div className="media">
                 <div className="media-content">
-                  <Link to={`/category/${id}`}>
+                  <Link to={`/${category}/${id}`}>
                     <p className="title is-4">{title}</p>
                   </Link>
                   <p className="subtitle is-6">{author}</p>
@@ -87,6 +88,7 @@ const Post = (props) => {
 
 Post.propTypes = {
   id: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,

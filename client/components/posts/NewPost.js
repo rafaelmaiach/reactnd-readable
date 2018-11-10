@@ -17,6 +17,7 @@ const NewPost = (props) => {
     postInfo,
     updatePost,
     cancelEdition,
+    isEdition,
   } = props;
 
   const closeForm = cancelEdition || toggleNewPost;
@@ -65,7 +66,7 @@ const NewPost = (props) => {
   };
 
   return (
-    <div className="column">
+    <div className={`column ${isEdition && 'is-6'}`}>
       <div className="card">
         <div className="card-content">
           <Form

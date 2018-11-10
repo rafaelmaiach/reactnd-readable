@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { receiveDetails } from 'Actions/posts';
 
 import Header from 'Components/header/Header';
+import Post from 'Components/posts/Post';
 
 class Details extends Component {
   componentDidMount() {
@@ -16,21 +17,39 @@ class Details extends Component {
   }
 
   render() {
+    const { post } = this.props;
+
     return (
       <div className="container is-fluid">
         <Header {...this.props} />
-        <section className="section">
-          Oi
-        </section>
+        {
+          post && (
+            <section className="section">
+              <div className="columns is-centered">
+                <Post {...post} />
+              </div>
+            </section>
+          )
+        }
       </div>
 
     );
   }
 }
 
-const mapStateToProps = ({ details }) => ({
-  details,
-});
+const mapStateToProps = ({ posts }, props) => {
+  const { match: { params: { id } } } = props;
+
+  if (posts.error) {
+    return {
+      post: null,
+    };
+  }
+
+  return {
+    post: posts[id],
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   getPostDetails: (postId) => {
