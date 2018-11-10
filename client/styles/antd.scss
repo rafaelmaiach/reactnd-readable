@@ -1,0 +1,57 @@
+.ant-row {
+  &.ant-form-item {
+    margin: 0;
+
+    & .ant-form-item-control-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 0;
+
+      & .ant-form-item-control {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.ant-message-notice {
+  padding: 2rem;
+
+  .ant-message-notice-content {
+    padding: 0;
+
+    .ant-message-custom-content {
+      .anticon {
+        display: none;
+      }
+    }
+  }
+}
+
+.ant-input,
+.ant-select-selection-selected-value {
+  color: $black;
+}
+
+.ant-select-selection__rendered {
+  margin-left: 0;
+}
+
+.ant-select-dropdown-menu-item {
+  color: $black;
+}
+
+.ant-select-dropdown-menu-item-active,
+.ant-select-dropdown-menu-item-selected,
+.ant-select-dropdown-menu-item:hover {
+  background-color: $blue;
+  color: $white;
+}
+
+.anticon-close-circle > svg > path {
+  fill: $red;
+}
+
+.anticon-check-circle > svg > path {
+  fill: $green;
+}

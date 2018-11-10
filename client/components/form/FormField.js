@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'antd';
 
@@ -20,9 +20,4 @@ FormField.propTypes = {
   component: PropTypes.node.isRequired,
 };
 
-// Define an areEqual function to the new React.memo to improve performance on Ant Design form field that was rendering
-// all the fields when one change.
-// With areEqual function, only the edited field will be re-rendered
-const areEqual = (prevProps, nextProps) => prevProps.component.props.value === nextProps.component.props.value;
-
-export default memo(FormField, areEqual);
+export default FormField;

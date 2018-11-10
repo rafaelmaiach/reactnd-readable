@@ -80,7 +80,7 @@ const PostForm = (props) => {
       <div className="column is-10 form-buttons-container">
         <div className="columns">
           <div className="column">
-            <Button className="button is-primary form-submit-button" type="primary" htmlType="submit">
+            <Button className="button is-success form-submit-button" type="primary" htmlType="submit">
               {isEdition ? 'Save' : 'Create'}
             </Button>
           </div>
