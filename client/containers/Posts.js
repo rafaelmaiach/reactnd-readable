@@ -84,10 +84,10 @@ class Posts extends Component {
           <div className="columns is-multiline is-centered">
             <div className="column is-12">
               <div className="columns is-multiline is-centered">
-                <div className="column is-12">
+                <div className="column is-12 has-text-centered">
                   <FontAwesomeIcon icon={faIcon} size="4x" onClick={this.toggleNewPost} />
                 </div>
-                <div className="column is-12">
+                <div className="column is-6">
                   {isNewPost && <NewPost toggleNewPost={this.toggleNewPost} />}
                 </div>
               </div>
