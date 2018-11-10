@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { capitalize } from 'Utils/helpers';
+import { capitalize } from 'Utils/common.helpers';
 
 const DropdownItem = ({ category, handleField, isActive }) => (
   <a href="#" className={`dropdown-item ${isActive}`} onClick={() => handleField(category)}>

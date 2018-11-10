@@ -81,12 +81,12 @@ class Posts extends Component {
     return (
       <section className="section">
         <div className="container is-fluid">
-          <div className="columns is-multiline">
-            <div className="column is-1 is-offset-5">
+          <div className="columns is-multiline is-centered">
+            <div className="column has-text-centered">
               <FontAwesomeIcon icon={faIcon} size="4x" onClick={this.toggleNewPost} />
             </div>
             <div className="column is-12">
-              <div className="columns is-multiline">
+              <div className="columns is-multiline is-centered">
                 {isNewPost && <NewPost toggleNewPost={this.toggleNewPost} />}
                 {postList}
               </div>

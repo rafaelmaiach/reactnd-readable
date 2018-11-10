@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { isCategoryActive } from 'Utils/helpers';
+import { isCategoryActive } from 'Utils/common.helpers';
 
 import { receiveAllCategories } from 'Actions/categories';
 

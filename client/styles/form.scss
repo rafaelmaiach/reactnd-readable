@@ -14,16 +14,29 @@
   margin-top: 1rem;
 }
 
-.ant-select-selection__rendered {
-  margin-left: 0;
-}
-
 .ant-row {
   &.ant-form-item {
-    display: flex;
-    justify-content: center;
-    margin: 0 -5rem;
+    margin: 0;
+
+    & .ant-form-item-control-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 0;
+
+      & .ant-form-item-control {
+        width: 100%;
+      }
+    }
   }
+}
+
+.ant-input,
+.ant-select-selection-selected-value {
+  color: $black;
+}
+
+.ant-select-selection__rendered {
+  margin-left: 0;
 }
 
 .ant-select-dropdown-menu-item {

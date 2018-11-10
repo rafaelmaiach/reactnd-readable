@@ -51,9 +51,9 @@ class Post extends Component {
 
     return (
       isEditting
-        ? <NewPost cancelEdition={this.togglePostEdition} postInfo={postInfo} />
+        ? <NewPost isEdition cancelEdition={this.togglePostEdition} postInfo={postInfo} />
         : (
-          <div className="column is-7 is-offset-2">
+          <div className="column is-6">
             <div className="card">
               <div className="card-content">
                 <div className="media">
