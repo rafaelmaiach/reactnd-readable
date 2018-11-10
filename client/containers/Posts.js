@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { receiveAllPosts, receivePostsByCategory } from 'Actions/posts';
+
+import Header from 'Components/header/Header';
 import Post from 'Components/posts/Post';
 import NewPost from 'Components/posts/NewPost';
 
@@ -79,8 +81,9 @@ class Posts extends Component {
     const faIcon = isNewPost ? faTimesCircle : faPlusCircle;
 
     return (
-      <section className="section">
-        <div className="container is-fluid">
+      <div className="container is-fluid">
+        <Header {...this.props} />
+        <section className="section">
           <div className="columns is-multiline is-centered">
             <div className="column is-12">
               <div className="columns is-multiline is-centered">
@@ -98,8 +101,9 @@ class Posts extends Component {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
+
     );
   }
 }
