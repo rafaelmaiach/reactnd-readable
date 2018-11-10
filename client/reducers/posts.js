@@ -1,6 +1,6 @@
 import {
   RECEIVE_POSTS, ADD_POST, EDIT_POST, REMOVE_POST, VOTE_POST,
-} from 'Actions/posts.actions';
+} from 'Actions/posts.creator';
 
 const reducePosts = postsList => postsList.reduce((a, c) => {
   a[c.id] = c; //eslint-disable-line

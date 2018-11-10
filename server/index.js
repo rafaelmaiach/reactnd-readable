@@ -62,6 +62,7 @@ if (!isInProduction) {
 }
 
 app.get('/:page?', (_, res) => res.render('index'));
+app.get('/:page/:subpage?', (_, res) => res.render('index'));
 
 app.listen(env.port, () => {
   console.log(`Server starting on: ${env.port}`);

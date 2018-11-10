@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
-import Readable from 'Containers/Readable';
+import Posts from 'Containers/Posts';
+import Details from 'Containers/Details';
 
 import './index.scss';
 
@@ -20,8 +21,9 @@ import './index.scss';
 const Application = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Readable} />
-      <Route path="/:category" component={Readable} />
+      <Route exact path="/" component={Posts} />
+      <Route exact path="/:category" component={Posts} />
+      <Route path="/:category/:id" component={Details} />
       <Redirect from="*" to="/" />
     </Switch>
   </BrowserRouter>

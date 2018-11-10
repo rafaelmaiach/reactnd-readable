@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -37,14 +38,14 @@ const Post = (props) => {
     message.success(
       <span className="notification is-success">
         {`${title} delete successful!`}
-      </span>, 500
+      </span>
     );
   };
 
   const onCancel = () => message.error(
     <span className="notification is-danger">
       {`${title} delete canceled!`}
-    </span>, 500
+    </span>
   );
 
   return (
@@ -56,7 +57,9 @@ const Post = (props) => {
             <div className="card-content">
               <div className="media">
                 <div className="media-content">
-                  <p className="title is-4">{title}</p>
+                  <Link to={`/category/${id}`}>
+                    <p className="title is-4">{title}</p>
+                  </Link>
                   <p className="subtitle is-6">{author}</p>
                 </div>
               </div>

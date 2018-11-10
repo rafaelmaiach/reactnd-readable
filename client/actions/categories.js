@@ -1,5 +1,5 @@
 import { getAllCategories } from 'Utils/api/categories';
-import { receiveCategories } from './categories.actions';
+import { receiveCategories } from './categories.creator';
 
 const receiveAllCategories = () => dispatch =>
   getAllCategories()

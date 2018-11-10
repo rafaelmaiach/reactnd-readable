@@ -1,4 +1,4 @@
-import { RECEIVE_CATEGORIES } from 'Actions/categories.actions';
+import { RECEIVE_CATEGORIES } from 'Actions/categories.creator';
 
 const categories = (state = {}, action) => {
   switch (action.type) {

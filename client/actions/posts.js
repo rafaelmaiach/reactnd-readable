@@ -1,5 +1,7 @@
 import {
   getAllPosts,
+  getPostDetails,
+  getPostComments,
   getPostsByCategory,
   addPost,
   editPost,
@@ -9,11 +11,13 @@ import {
 
 import {
   receivePosts,
+  receivePostDetails,
+  receivePostComments,
   createPost,
   updatePost,
   removePost,
   updateVote,
-} from './posts.actions';
+} from './posts.creator';
 
 const receiveAllPosts = () => dispatch =>
   getAllPosts()
@@ -25,6 +29,18 @@ const receivePostsByCategory = category => dispatch =>
   getPostsByCategory(category)
     .then((posts) => {
       dispatch(receivePosts(posts));
+    });
+
+const receiveDetails = postId => dispatch =>
+  getPostDetails(postId)
+    .then((post) => {
+      dispatch(receivePostDetails(post));
+    });
+
+const receiveComments = postId => dispatch =>
+  getPostComments(postId)
+    .then((comments) => {
+      dispatch(receivePostComments(comments));
     });
 
 const handleAddPost = postInfo => dispatch =>
@@ -54,6 +70,8 @@ const handleVote = (postId, option) => dispatch =>
 export {
   receiveAllPosts,
   receivePostsByCategory,
+  receiveDetails,
+  receiveComments,
   handleAddPost,
   handleEditPost,
   handleDeletePost,

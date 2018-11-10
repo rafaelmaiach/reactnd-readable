@@ -23,12 +23,16 @@ class Posts extends Component {
       timestamp: PropTypes.number,
       title: PropTypes.string,
       voteScore: PropTypes.number,
-    })).isRequired,
+    })),
     match: PropTypes.shape({
       params: PropTypes.shape({
         category: PropTypes.string,
       }),
     }).isRequired,
+  }
+
+  static defaultProps = {
+    posts: null,
   }
 
   state = {
