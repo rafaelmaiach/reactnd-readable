@@ -1,6 +1,7 @@
 import React from 'react';
+import { Input, Select } from 'antd';
 
-import { Form, Input, Select } from 'antd';
+import FormField from 'Components/posts/FormField';
 
 const getFieldRules = () => ({
   common: {
@@ -40,26 +41,19 @@ const createField = (params, fieldDecorator) => {
   switch (type) {
     case 'input':
       field.component = decorator(<Input className="form-input" />);
-      return field;
+      break;
     case 'textarea':
       field.component = decorator(<Input.TextArea autosize={{ minRows: 3, maxRows: 7 }} className="form-input" />);
-      return field;
+      break;
     case 'dropdown':
       field.component = decorator(<Select className="form-dropdown">{options}</Select>);
-      return field;
+      break;
     default:
-      return null;
+      break;
   }
-};
 
-const createFieldsElements = fields => fields.map(({ label, component }) => (
-  <div key={label} className="column is-10">
-    <span className="title is-size-6">{label}</span>
-    <Form.Item>
-      {component}
-    </Form.Item>
-  </div>
-));
+  return <FormField key={id} {...field} />;
+};
 
 const getDecorators = (getFieldDecorator) => {
   const fieldDecorator = wrapperFieldDecorator(getFieldDecorator);
@@ -67,7 +61,4 @@ const getDecorators = (getFieldDecorator) => {
   return { createField: params => createField(params, fieldDecorator) };
 };
 
-export {
-  getDecorators,
-  createFieldsElements,
-};
+export { getDecorators };

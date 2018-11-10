@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Form, Button, Input } from 'antd';
+import { Form, Button } from 'antd';
 
-import { getDecorators, createFieldsElements } from 'Utils/posts.helpers';
+import { getDecorators } from 'Utils/posts.helpers';
 
 class FormEdition extends Component {
   constructor(props) {
@@ -40,36 +40,39 @@ class FormEdition extends Component {
     });
   }
 
-  createFields = (decorators) => {
-    const { createInput, createTextarea } = decorators;
+  createFields = () => {
+    const decorators = getDecorators(this.getFieldDecorator);
+    const { createField } = decorators;
 
-    const Title = createInput('title');
-    const Message = createTextarea('message');
+    const fieldsData = [
+      { id: 'title', label: 'Title', type: 'input' },
+      { id: 'message', label: 'Message', type: 'textarea' },
+    ];
 
-    return createFieldsElements([Title, Message]);
+    return fieldsData.map(createField);
   }
 
   render() {
     const { cancelEdition } = this.props;
 
-    const decorators = getDecorators(this.getFieldDecorator);
-
-    const fields = this.createFields(decorators);
+    const fields = this.createFields();
 
     return (
       <Form onSubmit={this.handleSubmit} className="columns is-multiline is-centered">
         {fields}
 
-        <div className="columns">
-          <div className="column">
-            <Button className="button is-primary form-submit-button" type="primary" htmlType="submit">
-              Create
-            </Button>
-          </div>
-          <div className="column">
-            <Button className="button is-danger form-submit-button" type="primary" onClick={cancelEdition}>
-              Cancel
-            </Button>
+        <div className="column is-10 form-buttons-container">
+          <div className="columns">
+            <div className="column">
+              <Button className="button is-primary form-submit-button" type="primary" htmlType="submit">
+                Save
+              </Button>
+            </div>
+            <div className="column">
+              <Button className="button is-danger form-submit-button" type="primary" onClick={cancelEdition}>
+                Cancel
+              </Button>
+            </div>
           </div>
         </div>
       </Form>

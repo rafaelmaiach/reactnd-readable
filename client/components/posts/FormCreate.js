@@ -7,7 +7,8 @@ import {
 } from 'antd';
 
 import { capitalize } from 'Utils/common.helpers';
-import { getDecorators, createFieldsElements } from 'Utils/posts.helpers';
+import { getDecorators } from 'Utils/posts.helpers';
+import FormField from './FormField';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -54,29 +55,36 @@ class FormCreate extends Component {
     });
   }
 
-  createFields = (decorators) => {
-    const { createInput, createTextarea, createDropdown } = decorators;
+  createFields = () => {
+    const decorators = getDecorators(this.getFieldDecorator);
+    const { createField } = decorators;
 
-    const Title = createInput('title');
-    const Author = createInput('author');
-    const Message = createTextarea('message');
-    const Category = createDropdown('category', this.selectOptions);
+    const fieldsData = [
+      { id: 'title', label: 'Title', type: 'input' },
+      { id: 'author', label: 'Author', type: 'input' },
+      { id: 'message', label: 'Message', type: 'textarea' },
+      {
+        id: 'category', label: 'Category', type: 'dropdown', options: this.selectOptions,
+      },
+    ];
 
-    return createFieldsElements([Title, Author, Message, Category]);
+    return fieldsData.map(createField);
   }
 
   render() {
-    const decorators = getDecorators(this.getFieldDecorator);
-
-    const fields = this.createFields(decorators);
+    const fields = this.createFields();
 
     return (
       <Form onSubmit={this.handleSubmit} className="columns is-multiline is-centered">
         {fields}
-        <div className="column is-10 has-text-centered">
-          <Button className="button is-primary form-submit-button" type="primary" htmlType="submit">
-            Create
-          </Button>
+        <div className="column is-10 form-buttons-container">
+          <div className="columns">
+            <div className="column">
+              <Button className="button is-primary form-submit-button" type="primary" htmlType="submit">
+                Create
+              </Button>
+            </div>
+          </div>
         </div>
       </Form>
     );
