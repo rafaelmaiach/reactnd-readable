@@ -6,19 +6,24 @@ import { Form, Button } from 'antd';
 
 import { getCreateField } from 'Utils/form.helpers';
 
+/**
+ * @constructor PostForm
+ * @param {object} props - PostForm properties
+ * @description Form component for posts
+ */
 const PostForm = (props) => {
   const {
     form: { validateFields, getFieldDecorator },
     isEdition,
     postInfo,
-    cancelEdition,
+    closeForm,
     createPost,
     updatePost,
     categories,
   } = props;
 
   /**
-   * @method PostForm#handleSubmit
+   * @function handleSubmit
    * @description Submit the form information to create or edit a post
    */
   const handleSubmit = (e) => {
@@ -39,7 +44,7 @@ const PostForm = (props) => {
   };
 
   /**
-   * @method PostForm#createFields
+   * @function createFields
    * @description Create only the needed fields for the form (new or edition).
    */
   const createFields = () => {
@@ -79,14 +84,11 @@ const PostForm = (props) => {
               {isEdition ? 'Save' : 'Create'}
             </Button>
           </div>
-          {
-            isEdition && (
-              <div className="column">
-                <Button className="button is-danger form-submit-button" type="primary" onClick={cancelEdition}>
-                    Cancel
-                </Button>
-              </div>)
-          }
+          <div className="column">
+            <Button className="button is-danger form-submit-button" type="primary" onClick={closeForm}>
+              Cancel
+            </Button>
+          </div>
         </div>
       </div>
     </Form>
@@ -110,13 +112,12 @@ PostForm.propTypes = {
   isEdition: PropTypes.bool,
   createPost: PropTypes.func.isRequired,
   updatePost: PropTypes.func.isRequired,
-  cancelEdition: PropTypes.func,
+  closeForm: PropTypes.func.isRequired,
 };
 
 PostForm.defaultProps = {
   isEdition: false,
   postInfo: null,
-  cancelEdition: null,
 };
 
 const mapStateToProps = ({ categories }) => ({
