@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Form, Input, Select } from 'antd';
-import { capitalize } from './common.helpers';
 
 const getFieldRules = () => ({
   common: {
@@ -27,31 +26,30 @@ const generateFieldDecorator = (fieldId, getFieldDecorator) => {
   return getFieldDecorator(fieldId, options);
 };
 
-const createInput = (label, getFieldDecorator) => {
-  const fieldDecorator = () => generateFieldDecorator(label, getFieldDecorator);
+const wrapperFieldDecorator = getFieldDecorator => label => generateFieldDecorator(label, getFieldDecorator);
 
-  return {
-    label: capitalize(label),
-    component: fieldDecorator()(<Input className="form-input" />),
-  };
-};
+const createField = (params, fieldDecorator) => {
+  const {
+    id, label, type, options = null,
+  } = params;
 
-const createTextarea = (label, getFieldDecorator) => {
-  const fieldDecorator = () => generateFieldDecorator(label, getFieldDecorator);
+  const field = { label, component: null };
 
-  return {
-    label: capitalize(label),
-    component: fieldDecorator()(<Input.TextArea autosize={{ minRows: 3, maxRows: 7 }} className="form-input" />),
-  };
-};
+  const decorator = fieldDecorator(id);
 
-const createDropdown = (label, options, getFieldDecorator) => {
-  const fieldDecorator = () => generateFieldDecorator(label, getFieldDecorator);
-
-  return {
-    label: capitalize(label),
-    component: fieldDecorator()(<Select className="form-dropdown">{options}</Select>),
-  };
+  switch (type) {
+    case 'input':
+      field.component = decorator(<Input className="form-input" />);
+      return field;
+    case 'textarea':
+      field.component = decorator(<Input.TextArea autosize={{ minRows: 3, maxRows: 7 }} className="form-input" />);
+      return field;
+    case 'dropdown':
+      field.component = decorator(<Select className="form-dropdown">{options}</Select>);
+      return field;
+    default:
+      return null;
+  }
 };
 
 const createFieldsElements = fields => fields.map(({ label, component }) => (
@@ -63,15 +61,11 @@ const createFieldsElements = fields => fields.map(({ label, component }) => (
   </div>
 ));
 
-const getDecorators = getFieldDecorator => ({
-  createInput: label => createInput(label, getFieldDecorator),
-  createTextarea: label => createTextarea(label, getFieldDecorator),
-  createDropdown: (label, options) => createDropdown(label, options, getFieldDecorator),
-  // titleDecorator: () => generateFieldDecorator('title', getFieldDecorator),
-  // authorDecorator: () => generateFieldDecorator('author', getFieldDecorator),
-  // messageDecorator: () => generateFieldDecorator('message', getFieldDecorator),
-  // categoryDecorator: () => generateFieldDecorator('category', getFieldDecorator),
-});
+const getDecorators = (getFieldDecorator) => {
+  const fieldDecorator = wrapperFieldDecorator(getFieldDecorator);
+
+  return { createField: params => createField(params, fieldDecorator) };
+};
 
 export {
   getDecorators,
