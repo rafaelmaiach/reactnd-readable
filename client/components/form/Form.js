@@ -81,7 +81,7 @@ const PostForm = (props) => {
         <button className="button form-cancel-button" type="button" onClick={closeForm}>
           Cancel
         </button>
-        <button className="button form-submit-button" type="submit">
+        <button className="button is-link" type="submit">
           {isEdition ? 'Save' : 'Create'}
         </button>
       </div>
