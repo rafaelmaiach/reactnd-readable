@@ -6,7 +6,7 @@
     margin-left: -1.5rem !important;
 
     .navbar-item {
-      padding-top: 1.5rem;
+      padding: 1.5rem 1.1rem 0.3rem 1.1rem;
       font-weight: 300;
     }
 
@@ -24,15 +24,14 @@
       margin-left: -0.5rem;
 
       .navbar-item {
-        padding-top: 1.5rem;
-        padding-bottom: 0.3rem !important;
-        border-bottom: 4px solid transparent;
+        border-left: 4px solid transparent;
         font-weight: 300;
+        min-width: 5.7rem;
 
         &:hover,
         &.is-active {
           font-weight: 500;
-          border-bottom-color: $blue;
+          border-left-color: $blue;
         }
       }
     }
@@ -41,7 +40,18 @@
 
 @media screen and (max-width: 1023px) {
   .navbar-menu {
+    display: block;
     padding: 0;
+    overflow: hidden !important;
+    max-height: 0 !important;
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+
+    &.is-active {
+      padding: 0.5rem 0;
+      max-height: 500px !important;
+    }
 
     .navbar-start {
       padding-left: 2rem;
@@ -67,6 +77,19 @@
 
       .navbar-start {
         margin: 0;
+
+        .navbar-item {
+          justify-content: center;
+          padding: 1.5rem 1.1rem 0.3rem 1.1rem;
+          border-left: none;
+          border-bottom: 4px solid transparent;
+
+          &:hover,
+          &.is-active {
+            font-weight: 500;
+            border-bottom-color: $blue;
+          }
+        }
       }
     }
   }

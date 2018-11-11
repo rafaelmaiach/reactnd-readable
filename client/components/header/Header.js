@@ -127,7 +127,7 @@ class Header extends Component {
           </div>
         </div>
 
-        <div id="navbarCategories" className="navbar-menu">
+        <div className={`navbar-menu ${isMenuOpen}`}>
           <div className="navbar-start" />
         </div>
       </nav>
