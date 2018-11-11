@@ -101,7 +101,13 @@ class Post extends Component {
                           </p>
                         </div>
                         <div className="card-header-icon">
-                          <Options toggleEdition={this.toggleEdition} onConfirm={this.onConfirm} onCancel={this.onCancel} />
+                          <Options
+                            id={id}
+                            category={category}
+                            toggleEdition={this.toggleEdition}
+                            onConfirm={this.onConfirm}
+                            onCancel={this.onCancel}
+                          />
                         </div>
                       </header>
                       <p className="post-description is-size-6">{body}</p>

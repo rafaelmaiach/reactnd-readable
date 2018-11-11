@@ -1,10 +1,30 @@
 import React from 'react';
 
 import {
-  Popconfirm, Dropdown, Menu, Icon,
+  Popconfirm, Dropdown, Menu, Icon, message,
 } from 'antd';
 
-const Options = ({ onConfirm, onCancel, toggleEdition }) => {
+import { copyToClipboard } from 'Utils/common.helpers';
+
+const Options = (props) => {
+  const {
+    id, category, onConfirm, onCancel, toggleEdition,
+  } = props;
+
+
+  const handleCopyToClipboard = () => {
+    const { origin } = window.location;
+    const url = `${origin}/${category}/${id}`;
+
+    copyToClipboard(url);
+
+    message.success(
+      <span className="notification is-success">
+        Link to post copied to clipboard
+      </span>
+    );
+  };
+
   const menu = (
     <Menu>
       <Menu.Item key="0">
@@ -15,17 +35,17 @@ const Options = ({ onConfirm, onCancel, toggleEdition }) => {
       </Menu.Item>
       <Menu.Item key="1">
         <Popconfirm title="Are you sure delete this post?" onConfirm={onConfirm} onCancel={onCancel} okText="Yes" cancelText="No">
-          <p className="post-options-item">
+          <a className="post-options-item">
             <Icon type="delete" />
             <span> Delete</span>
-          </p>
+          </a>
         </Popconfirm>
       </Menu.Item>
       <Menu.Item key="3">
-        <p className="post-options-item">
+        <a className="post-options-item" onClick={handleCopyToClipboard}>
           <Icon type="share-alt" />
           <span> Share</span>
-        </p>
+        </a>
       </Menu.Item>
     </Menu>
   );
