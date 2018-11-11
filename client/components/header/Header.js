@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { isCategoryActive } from 'Utils/common.helpers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
+
+import { capitalize, isCategoryActive } from 'Utils/common.helpers';
 
 import { receiveAllCategories } from 'Actions/categories';
 
@@ -81,7 +84,7 @@ class Header extends Component {
         to={`/${category}`}
         onClick={() => this.changeCurrentTab(category)}
       >
-        {category}
+        {capitalize(category)}
       </Link>
     );
   }
@@ -95,9 +98,12 @@ class Header extends Component {
     const categoriesList = categories.map(this.createTab);
 
     return (
-      <nav className="navbar is-fixed-top is-link" role="navigation" aria-label="main navigation">
+      <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <Link className="navbar-item" to="/" onClick={() => this.changeCurrentTab('')}> READABLE </Link>
+          <Link className="navbar-item" to="/" onClick={() => this.changeCurrentTab('')}>
+            <FontAwesomeIcon icon={faBook} size="2x" />
+            READABLE
+          </Link>
 
           <span
             role="button"
@@ -115,10 +121,14 @@ class Header extends Component {
           </span>
         </div>
 
-        <div id="navbarCategories" className={`navbar-menu is-info ${isMenuOpen}`}>
+        <div id="navbarCategories" className={`navbar-menu ${isMenuOpen}`}>
           <div className="navbar-start">
             {categoriesList}
           </div>
+        </div>
+
+        <div id="navbarCategories" className="navbar-menu">
+          <div className="navbar-start" />
         </div>
       </nav>
     );
