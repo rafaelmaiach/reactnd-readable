@@ -1,0 +1,39 @@
+.form-input,
+.form-dropdown > div {
+  border: none;
+  border-bottom: 1px solid $blue;
+  border-radius: 0;
+  padding-left: 0;
+}
+
+.form-dropdown {
+  margin-top: 1rem;
+}
+
+.form-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+
+  .form-cancel-button {
+    margin-right: 1rem;
+
+    &:hover {
+      background-color: $white;
+      color: $blue;
+      border: 1px solid $blue;
+    }
+  }
+
+  .form-submit-button {
+    background-color: $blue;
+    color: $white;
+
+    &:hover {
+      background-color: $dark-blue;
+    }
+  }
+}
+
+.form-field-label {
+  color: $black;
+}

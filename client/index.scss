@@ -9,7 +9,10 @@
 // HEADER
 @import './components/header/Header.scss';
 
+// POSTS - initial page
 @import './containers/Posts.scss';
 
-@import './styles/form.scss';
+// FORM
+@import './components/form/Form.scss';
+
 @import './styles/antd.scss';

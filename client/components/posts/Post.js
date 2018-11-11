@@ -71,7 +71,7 @@ class Post extends Component {
 
     return (
       isEdition
-        ? <NewPost isEdition={isEdition} cancelEdition={this.toggleEdition} postInfo={postInfo} />
+        ? <NewPost isEdition={isEdition} closeForm={this.toggleEdition} postInfo={postInfo} />
         : (
           <div className="column is-6">
             <div className="card">

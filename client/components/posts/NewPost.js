@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
 
+import { Modal } from 'antd';
+
 import { handleAddPost, handleEditPost } from 'Actions/posts';
 import Form from 'Components/form/Form';
 
@@ -13,14 +15,15 @@ import Form from 'Components/form/Form';
 const NewPost = (props) => {
   const {
     addPost,
-    toggleNewPost,
     postInfo,
     updatePost,
     cancelEdition,
     isEdition,
+    isPostFormOpen,
+    closeForm,
   } = props;
 
-  const closeForm = cancelEdition || toggleNewPost;
+  const closePostForm = cancelEdition || closeForm;
 
   /**
    * @function createNewPost
@@ -42,7 +45,7 @@ const NewPost = (props) => {
     };
 
     addPost(postData);
-    closeForm();
+    closePostForm();
   };
 
   /**
@@ -62,22 +65,42 @@ const NewPost = (props) => {
     };
 
     updatePost(postData);
-    closeForm();
+    closePostForm();
   };
 
+  const FormComponent = (
+    <Form
+      {...props}
+      createPost={createNewPost}
+      updatePost={updateExistingPost}
+      closeForm={closePostForm}
+    />
+  );
+
   return (
-    <div className={`column ${isEdition && 'is-6'}`}>
-      <div className="card">
-        <div className="card-content">
-          <Form
-            {...props}
-            createPost={createNewPost}
-            updatePost={updateExistingPost}
-            closeForm={closeForm}
-          />
+    isEdition
+      ? (
+        <div className="column is-6">
+          <div className="card">
+            <div className="card-content">
+              {FormComponent}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )
+      : (
+        <Modal
+          title="NEW POST"
+          visible={isPostFormOpen}
+          footer={null}
+          closable={false}
+          onCancel={closePostForm}
+          destroyOnClose
+          bodyStyle={{ backgroundColor: '#f1f2f3' }}
+        >
+          {FormComponent}
+        </Modal>
+      )
   );
 };
 

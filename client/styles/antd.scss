@@ -31,6 +31,7 @@
 .ant-input,
 .ant-select-selection-selected-value {
   color: $black;
+  background-color: $white;
 }
 
 .ant-select-selection__rendered {
@@ -54,4 +55,14 @@
 
 .anticon-check-circle > svg > path {
   fill: $green;
+}
+
+.ant-select-arrow-icon > svg > path {
+  fill: $blue;
+}
+
+// MODAL
+.ant-modal-header {
+  background-color: $white;
+  border-bottom: 1px solid lighten($black, 70);
 }

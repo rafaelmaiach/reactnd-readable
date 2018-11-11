@@ -36,7 +36,7 @@ class Posts extends Component {
   }
 
   state = {
-    isNewPost: false,
+    isPostFormOpen: false,
   }
 
   componentDidMount() {
@@ -63,21 +63,25 @@ class Posts extends Component {
     getAllPosts();
   }
 
+  openPost = () => this.setState(() => ({ isPostFormOpen: true }));
+
+  closeForm = () => this.setState(() => ({ isPostFormOpen: false }));
+
   toggleNewPost = () => {
-    this.setState(prevState => ({ isNewPost: !prevState.isNewPost }));
+    this.setState(prevState => ({ isPostFormOpen: !prevState.isPostFormOpen }));
   }
 
   createPosts = (posts) => {
     const { match: { params: { category } } } = this.props;
 
     return posts
-    // Filter the categories to show only those that match with category or show all if category isn't selected
+      // Filter the categories to show only those that match with category or show all if category isn't selected
       .filter(post => category ? post.category === category : true)
       .map(post => <Post key={post.id} {...post} />);
   }
 
   render() {
-    const { isNewPost } = this.state;
+    const { isPostFormOpen } = this.state;
     const { posts } = this.props;
 
     if (!posts) {
@@ -90,7 +94,7 @@ class Posts extends Component {
 
     const postList = this.createPosts(posts);
 
-    const faIcon = isNewPost ? faTimesCircle : faPlusCircle;
+    const faIcon = isPostFormOpen ? faTimesCircle : faPlusCircle;
 
     return (
       <Fragment>
@@ -108,10 +112,10 @@ class Posts extends Component {
               <div className="column is-12">
                 <div className="columns is-multiline is-centered">
                   <div className="column is-12 has-text-centered">
-                    <FontAwesomeIcon icon={faIcon} size="4x" onClick={this.toggleNewPost} />
+                    <FontAwesomeIcon icon={faIcon} size="4x" onClick={this.openPost} />
                   </div>
                   <div className="column is-6">
-                    {isNewPost && <NewPost toggleNewPost={this.toggleNewPost} />}
+                    {<NewPost isPostFormOpen={isPostFormOpen} closeForm={this.closeForm} />}
                   </div>
                 </div>
               </div>

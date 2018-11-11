@@ -75,21 +75,15 @@ const PostForm = (props) => {
   const fields = createFields();
 
   return (
-    <Form onSubmit={handleSubmit} className="columns is-multiline is-centered">
+    <Form onSubmit={handleSubmit} className="columns is-multiline is-centered" autoComplete="off">
       {fields}
       <div className="column is-10 form-buttons-container">
-        <div className="columns">
-          <div className="column">
-            <Button className="button is-success form-submit-button" type="primary" htmlType="submit">
-              {isEdition ? 'Save' : 'Create'}
-            </Button>
-          </div>
-          <div className="column">
-            <Button className="button is-danger form-submit-button" type="primary" onClick={closeForm}>
+        <Button className="button form-cancel-button" type="primary" onClick={closeForm}>
               Cancel
-            </Button>
-          </div>
-        </div>
+        </Button>
+        <Button className="button form-submit-button" type="primary" htmlType="submit">
+          {isEdition ? 'Save' : 'Create'}
+        </Button>
       </div>
     </Form>
   );
