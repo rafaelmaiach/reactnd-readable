@@ -1,13 +1,30 @@
-svg {
-  cursor: pointer;
+.posts-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 25vh;
+  background-image:
+    linear-gradient(rgba(6, 173, 219, 0.8), rgba(6, 173, 219, 0.8)),
+    url('/public/images/posts-image.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 
-  & > path {
-    fill: $blue;
+  & > span {
+    color: $white;
+    font-weight: 300;
   }
+}
 
-  &:hover {
-    & > path {
-      fill: darken($blue, 15);
-    }
+@media only screen and (min-width: 768px) {
+  .posts-image {
+    height: 35vh;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .posts-image {
+    height: 40vh;
   }
 }

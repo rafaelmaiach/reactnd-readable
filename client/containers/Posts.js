@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -93,29 +93,34 @@ class Posts extends Component {
     const faIcon = isNewPost ? faTimesCircle : faPlusCircle;
 
     return (
-      <div className="container is-fluid">
+      <Fragment>
         <Header {...this.props} />
-        <section className="section">
-          <div className="columns is-multiline is-centered">
-            <div className="column is-12">
-              <div className="columns is-multiline is-centered">
-                <div className="column is-12 has-text-centered">
-                  <FontAwesomeIcon icon={faIcon} size="4x" onClick={this.toggleNewPost} />
+        <div className="posts-image">
+          <span className="title is-size-4-mobile is-size-1">UDACITY - READABLE</span>
+          <span className="title is-size-7-mobile is-size-4">A nanodegree project</span>
+        </div>
+        <div className="container is-fluid">
+          <section className="section">
+            <div className="columns is-multiline is-centered">
+              <div className="column is-12">
+                <div className="columns is-multiline is-centered">
+                  <div className="column is-12 has-text-centered">
+                    <FontAwesomeIcon icon={faIcon} size="4x" onClick={this.toggleNewPost} />
+                  </div>
+                  <div className="column is-6">
+                    {isNewPost && <NewPost toggleNewPost={this.toggleNewPost} />}
+                  </div>
                 </div>
-                <div className="column is-6">
-                  {isNewPost && <NewPost toggleNewPost={this.toggleNewPost} />}
+              </div>
+              <div className="column is-12">
+                <div className="columns is-multiline is-centered">
+                  {postList}
                 </div>
               </div>
             </div>
-            <div className="column is-12">
-              <div className="columns is-multiline is-centered">
-                {postList}
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
+          </section>
+        </div>
+      </Fragment>
     );
   }
 }
