@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { receiveAllPosts, receivePostsByCategory } from 'Actions/posts';
 
 import Header from 'Components/header/Header';
-import Post from 'Components/posts/Post';
-import NewPost from 'Components/posts/NewPost';
+import Post from 'Components/post/Post';
+import NewPost from 'Components/post/NewPost';
 import ControlButtons from 'Components/posts/ControlButtons';
 
 class Posts extends Component {

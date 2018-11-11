@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { receiveDetails } from 'Actions/posts';
 
 import Header from 'Components/header/Header';
-import Post from 'Components/posts/Post';
+import Post from 'Components/post/Post';
 
 class Details extends Component {
   componentDidMount() {

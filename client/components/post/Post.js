@@ -7,8 +7,12 @@ import { Popconfirm, message } from 'antd';
 
 import { handleDeletePost } from 'Actions/posts';
 
+import { capitalize } from 'Utils/common.helpers';
+
 import NewPost from './NewPost';
-import Vote from './Vote';
+import VoteScore from './VoteScore';
+import CommentScore from './CommentScore';
+import Options from './Options';
 
 class Post extends Component {
   static propTypes = {
@@ -69,37 +73,46 @@ class Post extends Component {
       message: body,
     };
 
+    const date = new Date(timestamp).toLocaleDateString();
+
     return (
       isEdition
         ? <NewPost isEdition={isEdition} closeForm={this.toggleEdition} postInfo={postInfo} />
         : (
           <div className="column is-7">
-            <div className="card">
-              <div className="card-content">
-                <div className="media">
-                  <div className="media-content">
-                    <Link to={`/${category}/${id}`}>
-                      <p className="title is-4">{title}</p>
-                    </Link>
-                    <p className="subtitle is-6">{author}</p>
+            <div className="box">
+              <article className="media">
+                <div className="media-content">
+                  <div className="content">
+                    <div className="media-content">
+                      <header className="card-header">
+                        <div className="post-header">
+                          <Link to={`/${category}/${id}`}>
+                            <p className="is-size-4 has-text-link">{title}</p>
+                          </Link>
+                          <p className="subtitle is-size-7">
+                            <span>Posted by: </span>
+                            <b>{author}</b>
+                            <span>{` at ${date}`}</span>
+                            <span> on </span>
+                            <Link to={`/${category}`}>
+                              <span className="is-link">{capitalize(category)}</span>
+                            </Link>
+                          </p>
+                        </div>
+                        <div className="card-header-icon">
+                          <Options toggleEdition={this.toggleEdition} onConfirm={this.onConfirm} onCancel={this.onCancel} />
+                        </div>
+                      </header>
+                      <p className="post-description is-size-6">{body}</p>
+                    </div>
                   </div>
+                  <nav className="level is-mobile">
+                    <VoteScore postId={id} score={voteScore} />
+                    <CommentScore score={commentCount} />
+                  </nav>
                 </div>
-
-                <div className="content">
-                  {body}
-                  <br />
-                  <br />
-                  <p>{`Time: ${timestamp}`}</p>
-                  <p>{`Comments: ${commentCount}`}</p>
-                  <Vote postId={id} score={voteScore} />
-                </div>
-              </div>
-              <footer className="card-footer">
-                <a role="button" className="card-footer-item" onClick={this.toggleEdition}>Edit</a>
-                <Popconfirm title="Are you sure delete this post?" onConfirm={this.onConfirm} onCancel={this.onCancel} okText="Yes" cancelText="No">
-                  <a role="button" className="card-footer-item">Delete</a>
-                </Popconfirm>
-              </footer>
+              </article>
             </div>
           </div>
         )

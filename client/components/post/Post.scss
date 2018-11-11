@@ -1,0 +1,33 @@
+.card-header {
+  justify-content: space-between;
+
+  .post-header {
+    padding-top: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.card-header-icon {
+  padding-top: 0;
+  align-items: flex-start;
+}
+
+.post-options-item {
+  display: flex;
+  align-items: center;
+
+  & > span {
+    padding-left: 0.5rem;
+  }
+}
+
+.post-description {
+  padding-top: 1rem;
+}
+
+.vote-container {
+  display: flex;
+  flex-direction: column;
+}

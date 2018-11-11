@@ -80,7 +80,7 @@ const NewPost = (props) => {
   return (
     isEdition
       ? (
-        <div className="column is-6">
+        <div className="column is-7">
           <div className="card">
             <div className="card-content">
               {FormComponent}
