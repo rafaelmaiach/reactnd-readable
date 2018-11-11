@@ -8,14 +8,14 @@
     margin-left: -1.5rem !important;
 
     .navbar-item {
-      padding: 1.5rem 1.1rem 0.3rem 1.1rem;
+      padding: 1rem 1rem 0.3rem 1rem;
       font-weight: 300;
     }
 
     svg {
       padding-right: 0.5rem;
 
-      &:hover > path {
+      path {
         fill: $blue;
       }
     }
@@ -26,7 +26,7 @@
       margin-left: -0.5rem;
 
       .navbar-item {
-        border-left: 4px solid transparent;
+        border-left: 5px solid transparent;
         font-weight: 300;
         min-width: 5.7rem;
 
@@ -82,9 +82,9 @@
 
         .navbar-item {
           justify-content: center;
-          padding: 1.5rem 1.1rem 0.3rem 1.1rem;
+          padding: 1rem 1rem 0.3rem 1rem;
           border-left: none;
-          border-bottom: 4px solid transparent;
+          border-bottom: 5px solid transparent;
 
           &:hover,
           &.is-active {
