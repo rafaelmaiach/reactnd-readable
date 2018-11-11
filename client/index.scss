@@ -1,5 +1,6 @@
 @import './styles/common/colors';
 @import './styles/reboot/reboot.scss';
+@import './styles/common/scrollbar';
 
 @import './styles/common/bulma-vars.scss';
 @import 'bulma/bulma.sass';
@@ -8,6 +9,7 @@
 // HEADER
 @import './components/header/Header.scss';
 
-@import './styles/posts.scss';
+@import './containers/Posts.scss';
+
 @import './styles/form.scss';
 @import './styles/antd.scss';

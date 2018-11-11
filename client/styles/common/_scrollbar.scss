@@ -1,0 +1,25 @@
+::-webkit-scrollbar {
+  width: 3px;
+  background-color: #f1f2f3;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 3px;
+}
+
+::-webkit-scrollbar-track{
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $blue;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $dark-blue;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: $dark-blue;
+}
