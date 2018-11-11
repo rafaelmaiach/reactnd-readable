@@ -7,9 +7,7 @@ import { receiveAllPosts, receivePostsByCategory } from 'Actions/posts';
 import Header from 'Components/header/Header';
 import Post from 'Components/posts/Post';
 import NewPost from 'Components/posts/NewPost';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import ControlButtons from 'Components/posts/ControlButtons';
 
 class Posts extends Component {
   static propTypes = {
@@ -94,11 +92,10 @@ class Posts extends Component {
 
     const postList = this.createPosts(posts);
 
-    const faIcon = isPostFormOpen ? faTimesCircle : faPlusCircle;
-
     return (
       <Fragment>
         <Header {...this.props} />
+        <NewPost isPostFormOpen={isPostFormOpen} closeForm={this.closeForm} />
         <div className="posts-image">
           <img src="/public/images/posts-image.jpg" alt="" />
           <div className="overlay-image">
@@ -106,27 +103,18 @@ class Posts extends Component {
             <span className="title is-size-7-mobile is-size-4">A nanodegree project</span>
           </div>
         </div>
-        <div className="container is-fluid">
-          <section className="section">
+        <section className="section">
+          <div className="container is-fluid">
             <div className="columns is-multiline is-centered">
-              <div className="column is-12">
-                <div className="columns is-multiline is-centered">
-                  <div className="column is-12 has-text-centered">
-                    <FontAwesomeIcon icon={faIcon} size="4x" onClick={this.openPost} />
-                  </div>
-                  <div className="column is-6">
-                    {<NewPost isPostFormOpen={isPostFormOpen} closeForm={this.closeForm} />}
-                  </div>
-                </div>
-              </div>
+              <ControlButtons onClick={this.openPost} />
               <div className="column is-12">
                 <div className="columns is-multiline is-centered">
                   {postList}
                 </div>
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </Fragment>
     );
   }

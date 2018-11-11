@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Form, Button } from 'antd';
+import { Form } from 'antd';
 
 import { getCreateField } from 'Utils/form.helpers';
 
@@ -78,12 +78,12 @@ const PostForm = (props) => {
     <Form onSubmit={handleSubmit} className="columns is-multiline is-centered" autoComplete="off">
       {fields}
       <div className="column is-10 form-buttons-container">
-        <Button className="button form-cancel-button" type="primary" onClick={closeForm}>
-              Cancel
-        </Button>
-        <Button className="button form-submit-button" type="primary" htmlType="submit">
+        <button className="button form-cancel-button" type="button" onClick={closeForm}>
+          Cancel
+        </button>
+        <button className="button form-submit-button" type="submit">
           {isEdition ? 'Save' : 'Create'}
-        </Button>
+        </button>
       </div>
     </Form>
   );
