@@ -65,5 +65,5 @@ app.get('/:page?', (_, res) => res.render('index'));
 app.get('/:page/:subpage?', (_, res) => res.render('index'));
 
 app.listen(env.port, () => {
-  console.log(`Server starting on: ${env.port}`);
+  console.log(`Client server starting on: ${env.port}, Ctrl+C to stop`);
 });
