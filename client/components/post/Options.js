@@ -34,18 +34,18 @@ const Options = (props) => {
         </a>
       </Menu.Item>
       <Menu.Item key="1">
-        <Popconfirm title="Are you sure delete this post?" onConfirm={onConfirm} onCancel={onCancel} okText="Yes" cancelText="No">
+        <a className="post-options-item" onClick={handleCopyToClipboard}>
+          <Icon type="share-alt" />
+          <span> Share</span>
+        </a>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <Popconfirm title="Are you sure delete this post?" onConfirm={onConfirm} okText="Yes" cancelText="No">
           <a className="post-options-item">
             <Icon type="delete" />
             <span> Delete</span>
           </a>
         </Popconfirm>
-      </Menu.Item>
-      <Menu.Item key="3">
-        <a className="post-options-item" onClick={handleCopyToClipboard}>
-          <Icon type="share-alt" />
-          <span> Share</span>
-        </a>
       </Menu.Item>
     </Menu>
   );

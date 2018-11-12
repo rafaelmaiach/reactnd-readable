@@ -19,10 +19,10 @@ import {
   updateVote,
 } from './posts.creator';
 
-const receiveAllPosts = () => dispatch =>
+const receiveAllPosts = sortBy => dispatch =>
   getAllPosts()
     .then((posts) => {
-      dispatch(receivePosts(posts));
+      dispatch(receivePosts(posts, sortBy));
     });
 
 const receivePostsByCategory = category => dispatch =>

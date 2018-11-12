@@ -10,7 +10,7 @@ const categoriesValuesSelector = createSelector(
 
 const categoriesNameSelector = createSelector(
   categoriesValuesSelector,
-  items => items.map(({ name }) => capitalize(name))
+  items => items.map(({ name, path }) => ({ name: capitalize(name), path }))
 );
 
 export {

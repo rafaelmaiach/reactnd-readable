@@ -6,9 +6,10 @@ const EDIT_POST = 'EDIT_POST';
 const REMOVE_POST = 'REMOVE_POST';
 const VOTE_POST = 'VOTE_POST';
 
-const receivePosts = posts => ({
+const receivePosts = (posts, sortBy) => ({
   type: RECEIVE_POSTS,
   posts,
+  sortBy,
 });
 
 const receivePostDetails = details => ({

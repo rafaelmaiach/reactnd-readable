@@ -45,15 +45,6 @@ class Post extends Component {
     );
   };
 
-  onCancel = () => {
-    const { title } = this.props;
-    message.error(
-      <span className="notification is-danger">
-        {`${title} delete canceled!`}
-      </span>
-    );
-  };
-
   render() {
     const { isEdition } = this.state;
     const {
@@ -108,7 +99,6 @@ class Post extends Component {
                             category={category}
                             toggleEdition={this.toggleEdition}
                             onConfirm={this.onConfirm}
-                            onCancel={this.onCancel}
                           />
                         </div>
                       </header>

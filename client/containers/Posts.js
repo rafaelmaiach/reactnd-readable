@@ -37,6 +37,10 @@ class Posts extends Component {
 
   state = {
     isPostFormOpen: false,
+    sortBy: {
+      type: 'timestamp',
+      order: 'decrescent',
+    },
   }
 
   componentDidMount() {
@@ -53,14 +57,19 @@ class Posts extends Component {
   }
 
   getPosts = () => {
-    const { match: { params: { category } }, getPostsByCategory, getAllPosts } = this.props;
+    const { sortBy } = this.state;
+    const {
+      match: { params: { category } },
+      getPostsByCategory,
+      getAllPosts,
+    } = this.props;
 
     if (category) {
       getPostsByCategory(category);
       return;
     }
 
-    getAllPosts();
+    getAllPosts(sortBy);
   }
 
   openPost = () => this.setState(() => ({ isPostFormOpen: true }));
@@ -130,8 +139,8 @@ const mapDispatchToProps = dispatch => ({
   getPostsByCategory: (category) => {
     dispatch(receivePostsByCategory(category));
   },
-  getAllPosts: () => {
-    dispatch(receiveAllPosts());
+  getAllPosts: (sortBy) => {
+    dispatch(receiveAllPosts(sortBy));
   },
 });
 

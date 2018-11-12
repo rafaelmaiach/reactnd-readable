@@ -18,7 +18,10 @@ import { categoriesNameSelector } from 'Selectors/categories'; // eslint-disable
  */
 class Header extends Component {
   static propTypes = {
-    categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+    categories: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      path: PropTypes.string,
+    })).isRequired,
     getAllCategories: PropTypes.func.isRequired,
     match: PropTypes.shape({
       params: PropTypes.shape({
@@ -77,16 +80,16 @@ class Header extends Component {
   createTab = (category) => {
     const { currentTab } = this.state;
 
-    const isTabActive = isCategoryActive(category, currentTab);
+    const isTabActive = isCategoryActive(category.path, currentTab);
 
     return (
       <Link
-        key={category}
+        key={category.path}
         className={`navbar-item ${isTabActive}`}
-        to={`/${category}`}
-        onClick={() => this.changeCurrentTab(category)}
+        to={`/${category.path}`}
+        onClick={() => this.changeCurrentTab(category.path)}
       >
-        {category}
+        {category.name}
       </Link>
     );
   }

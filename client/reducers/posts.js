@@ -10,8 +10,12 @@ const reducePosts = postsList => postsList.reduce((a, c) => {
 const posts = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_POSTS: {
-      const allPosts = reducePosts(action.posts);
-      return { ...allPosts };
+      const { posts: postsData, sortBy } = action;
+      const allPosts = reducePosts(postsData);
+      return {
+        data: { ...allPosts },
+        sortBy,
+      };
     }
     case RECEIVE_POST_DETAILS: {
       const { details } = action;
@@ -34,17 +38,19 @@ const posts = (state = {}, action) => {
       const { post } = action;
       return {
         ...state,
-        [post.id]: {
-          ...post,
+        data: {
+          ...state.data,
+          [post.id]: {
+            ...post,
+          },
         },
       };
     }
     case REMOVE_POST: {
-      const { id } = action.post;
-      const newState = reducePosts(Object.values(state).filter(post => post.id !== id));
-      return {
-        ...newState,
-      };
+      const newState = { ...state };
+      delete newState.data[action.post.id];
+
+      return { ...newState };
     }
     default:
       return state;
