@@ -6,7 +6,7 @@ import { Form } from 'antd';
 
 import { getCreateField } from 'Utils/form.helpers';
 
-import { categoriesValuesSelector } from '../../selectors/categories';
+import { categoriesValuesSelector } from 'Selectors/categories'; // eslint-disable-line
 
 /**
  * @constructor PostForm

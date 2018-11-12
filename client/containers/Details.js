@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { receiveDetails } from 'Actions/posts';
 
+import { postSelector } from 'Selectors/posts'; // eslint-disable-line
+
 import Header from 'Components/header/Header';
 import Post from 'Components/post/Post';
 
@@ -37,17 +39,11 @@ class Details extends Component {
   }
 }
 
-const mapStateToProps = ({ posts }, props) => {
+const mapStateToProps = (state, props) => {
   const { match: { params: { id } } } = props;
 
-  if (posts.error) {
-    return {
-      post: null,
-    };
-  }
-
   return {
-    post: posts[id],
+    post: postSelector(state, id),
   };
 };
 

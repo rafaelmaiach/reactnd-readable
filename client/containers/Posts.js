@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { receiveAllPosts, receivePostsByCategory } from 'Actions/posts';
 
+import { postsValuesSelector } from 'Selectors/posts'; // eslint-disable-line
+
 import Header from 'Components/header/Header';
 import Post from 'Components/post/Post';
 import NewPost from 'Components/post/NewPost';
@@ -120,17 +122,9 @@ class Posts extends Component {
   }
 }
 
-const mapStateToProps = ({ posts }) => {
-  if (posts.error) {
-    return {
-      posts: null,
-    };
-  }
-
-  return ({
-    posts: Object.values(posts),
-  });
-};
+const mapStateToProps = state => ({
+  posts: postsValuesSelector(state),
+});
 
 const mapDispatchToProps = dispatch => ({
   getPostsByCategory: (category) => {

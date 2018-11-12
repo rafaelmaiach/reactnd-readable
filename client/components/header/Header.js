@@ -10,7 +10,7 @@ import { isCategoryActive } from 'Utils/common.helpers';
 
 import { receiveAllCategories } from 'Actions/categories';
 
-import { categoriesNameSelector } from '../../selectors/categories';
+import { categoriesNameSelector } from 'Selectors/categories'; // eslint-disable-line
 
 /**
  * @class Header

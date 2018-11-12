@@ -111,9 +111,9 @@ const defaultConfig = {
       Actions: path.resolve(__dirname, 'client', 'actions'),
       Reducers: path.resolve(__dirname, 'client', 'reducers'),
       Middlewares: path.resolve(__dirname, 'client', 'middleware'),
-      Selectors: path.resolve(__dirname, 'client', 'selectors'),
       Styles: path.resolve(__dirname, 'client', 'styles'),
       Utils: path.resolve(__dirname, 'client', 'utils'),
+      Selectors: path.resolve(__dirname, 'client', 'selectors'),
     },
   },
 };
