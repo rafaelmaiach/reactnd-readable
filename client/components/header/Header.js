@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 
-import { capitalize, isCategoryActive } from 'Utils/common.helpers';
+import { isCategoryActive } from 'Utils/common.helpers';
 
 import { receiveAllCategories } from 'Actions/categories';
+
+import { categoriesNameSelector } from '../../selectors/categories';
 
 /**
  * @class Header
@@ -84,7 +86,7 @@ class Header extends Component {
         to={`/${category}`}
         onClick={() => this.changeCurrentTab(category)}
       >
-        {capitalize(category)}
+        {category}
       </Link>
     );
   }
@@ -135,8 +137,8 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = ({ categories }) => ({
-  categories: Object.values(categories).map(({ name }) => name),
+const mapStateToProps = state => ({
+  categories: categoriesNameSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({

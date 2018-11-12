@@ -29,7 +29,8 @@ const generateFieldDecorator = (fieldId, getFieldDecorator, postInfo) => {
   return getFieldDecorator(fieldId, options);
 };
 
-const wrapperFieldDecorator = (getFieldDecorator, postInfo) => label => generateFieldDecorator(label, getFieldDecorator, postInfo);
+const wrapperFieldDecorator = (getFieldDecorator, postInfo) =>
+  label => generateFieldDecorator(label, getFieldDecorator, postInfo);
 
 const createField = (params, fieldDecorator) => {
   const {

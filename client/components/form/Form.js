@@ -6,6 +6,8 @@ import { Form } from 'antd';
 
 import { getCreateField } from 'Utils/form.helpers';
 
+import { categoriesValuesSelector } from '../../selectors/categories';
+
 /**
  * @constructor PostForm
  * @param {object} props - PostForm properties
@@ -114,8 +116,8 @@ PostForm.defaultProps = {
   postInfo: null,
 };
 
-const mapStateToProps = ({ categories }) => ({
-  categories: Object.values(categories),
+const mapStateToProps = state => ({
+  categories: categoriesValuesSelector(state),
 });
 
 const connectedPostForm = connect(mapStateToProps)(PostForm);
