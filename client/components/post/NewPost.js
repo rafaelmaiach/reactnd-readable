@@ -96,7 +96,6 @@ const NewPost = (props) => {
           closable={false}
           onCancel={closePostForm}
           destroyOnClose
-          bodyStyle={{ backgroundColor: '#f1f2f3' }}
         >
           {FormComponent}
         </Modal>
