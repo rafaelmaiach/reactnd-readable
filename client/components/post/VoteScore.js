@@ -22,7 +22,7 @@ const Vote = (props) => {
         {score}
       </span>
       <a onClick={() => setDownVote(postId)} className="level-item has-text-centered" aria-label="vote count">
-        <Icon type="caret-up" style={{ color: '#ff3860' }} />
+        <Icon type="caret-down" style={{ color: '#ff3860' }} />
       </a>
 
     </div>

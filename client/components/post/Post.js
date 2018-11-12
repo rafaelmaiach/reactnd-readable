@@ -88,7 +88,9 @@ class Post extends Component {
                       <header className="card-header">
                         <div className="post-header">
                           <Link to={`/${category}/${id}`}>
-                            <p className="is-size-4 has-text-link">{title}</p>
+                            <p className="is-size-5-mobile is-size-4 has-text-link">
+                              {title}
+                            </p>
                           </Link>
                           <p className="subtitle is-size-7">
                             <span>Posted by: </span>
@@ -100,7 +102,7 @@ class Post extends Component {
                             </Link>
                           </p>
                         </div>
-                        <div className="card-header-icon">
+                        <div className="card-header-icon is-paddingless">
                           <Options
                             id={id}
                             category={category}
