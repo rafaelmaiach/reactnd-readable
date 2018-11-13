@@ -1,0 +1,26 @@
+.ant-dropdown-menu-submenu-title {
+  display: flex;
+  align-items: center;
+
+  .ant-dropdown-menu-submenu-arrow {
+    display: flex;
+  }
+}
+
+.post-options-item {
+  display: flex !important;
+  align-items: center;
+
+  & > span {
+    padding-left: 0.5rem;
+  }
+}
+
+.post-share-item {
+  color: $black;
+  padding-left: 0.5rem;
+}
+
+.ant-message {
+  font-size: 1rem;
+}

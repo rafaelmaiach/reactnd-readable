@@ -6,21 +6,17 @@
     flex-direction: column;
     align-items: flex-start;
     padding-bottom: 0.5rem;
+
+    .post-title:hover,
+    .post-category:hover {
+      color: darken($blue, 10) !important;
+    }
   }
 }
 
 .card-header-icon {
   padding-top: 0;
   align-items: flex-start;
-}
-
-.post-options-item {
-  display: flex;
-  align-items: center;
-
-  & > span {
-    padding-left: 0.5rem;
-  }
 }
 
 .post-description {

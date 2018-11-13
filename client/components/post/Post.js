@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
-import { Popconfirm, message } from 'antd';
-
-import { handleDeletePost } from 'Actions/posts';
-
-import { capitalize } from 'Utils/common.helpers';
 
 import NewPost from './NewPost';
-import VoteScore from './VoteScore';
-import CommentScore from './CommentScore';
-import Options from './Options';
+import PostHeader from './PostHeader';
+import PostVote from './PostVote';
+import PostComments from './PostComments';
 
 class Post extends Component {
   static propTypes = {
@@ -24,7 +16,6 @@ class Post extends Component {
     timestamp: PropTypes.number.isRequired,
     commentCount: PropTypes.number.isRequired,
     voteScore: PropTypes.number.isRequired,
-    deletePost: PropTypes.func.isRequired,
   };
 
   state = {
@@ -32,18 +23,6 @@ class Post extends Component {
   }
 
   toggleEdition = () => this.setState(({ isEdition }) => ({ isEdition: !isEdition }));
-
-  onConfirm = () => {
-    const { id, title, deletePost } = this.props;
-
-    deletePost(id);
-
-    message.success(
-      <span className="notification is-success">
-        {`${title} delete successful!`}
-      </span>
-    );
-  };
 
   render() {
     const { isEdition } = this.state;
@@ -64,8 +43,6 @@ class Post extends Component {
       message: body,
     };
 
-    const date = new Date(timestamp).toLocaleDateString();
-
     return (
       isEdition
         ? <NewPost isEdition={isEdition} closeForm={this.toggleEdition} postInfo={postInfo} />
@@ -76,38 +53,19 @@ class Post extends Component {
                 <div className="media-content">
                   <div className="content">
                     <div className="media-content">
-                      <header className="card-header">
-                        <div className="post-header">
-                          <Link to={`/${category}/${id}`}>
-                            <p className="is-size-5-mobile is-size-4 has-text-link">
-                              {title}
-                            </p>
-                          </Link>
-                          <p className="subtitle is-size-7">
-                            <span>Posted by: </span>
-                            <b>{author}</b>
-                            <span>{` at ${date}`}</span>
-                            <span> on </span>
-                            <Link to={`/${category}`}>
-                              <span className="is-link">{capitalize(category)}</span>
-                            </Link>
-                          </p>
-                        </div>
-                        <div className="card-header-icon is-paddingless">
-                          <Options
-                            id={id}
-                            category={category}
-                            toggleEdition={this.toggleEdition}
-                            onConfirm={this.onConfirm}
-                          />
-                        </div>
-                      </header>
-                      <p className="post-description is-size-6">{body}</p>
+                      <PostHeader
+                        {...this.props}
+                        toggleEdition={this.toggleEdition}
+                        onConfirm={this.onConfirm}
+                      />
+                      <p className="post-description is-size-6">
+                        {body}
+                      </p>
                     </div>
                   </div>
                   <nav className="level is-mobile">
-                    <VoteScore postId={id} score={voteScore} />
-                    <CommentScore score={commentCount} />
+                    <PostVote postId={id} score={voteScore} />
+                    <PostComments score={commentCount} />
                   </nav>
                 </div>
               </article>
@@ -118,10 +76,4 @@ class Post extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  deletePost: (postId) => {
-    dispatch(handleDeletePost(postId));
-  },
-});
-
-export default connect(null, mapDispatchToProps)(Post);
+export default Post;

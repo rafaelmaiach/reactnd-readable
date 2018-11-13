@@ -5,7 +5,7 @@ import { Icon } from 'antd';
 
 import { handleVote } from 'Actions/posts';
 
-const Vote = (props) => {
+const PostVote = (props) => {
   const {
     postId,
     score,
@@ -39,4 +39,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(Vote);
+export default connect(null, mapDispatchToProps)(PostVote);
