@@ -10,6 +10,7 @@
 .post-options-item {
   display: flex !important;
   align-items: center;
+  color: $black !important;
 
   & > span {
     padding-left: 0.5rem;
@@ -17,7 +18,7 @@
 }
 
 .post-share-item {
-  color: $black;
+  color: $black !important;
   padding-left: 0.5rem;
 }
 
