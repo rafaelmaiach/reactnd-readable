@@ -8,7 +8,7 @@
     margin-left: -1.5rem !important;
 
     .navbar-item {
-      padding: 1rem 1rem 0.3rem 1rem;
+      padding: 1.3rem 1rem 0.3rem 1rem;
       font-weight: 300;
     }
 
@@ -41,22 +41,36 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .navbar-menu {
-    display: block;
-    padding: 0;
-    overflow: hidden !important;
-    max-height: 0 !important;
-    -webkit-transition: all 0.5s linear;
-    -moz-transition: all 0.5s linear;
-    transition: all 0.5s linear;
+  .navbar {
+    .navbar-brand {
+      align-items: center;
+      padding-left: 2rem;
+      font-size: 1.3rem;
+      margin-left: -1.5rem !important;
 
-    &.is-active {
-      padding: 0.5rem 0;
-      max-height: 500px !important;
+      .navbar-item {
+        padding: 0 1rem;
+        font-weight: 300;
+      }
     }
 
-    .navbar-start {
-      padding-left: 2rem;
+    .navbar-menu {
+      display: block;
+      padding: 0;
+      overflow: hidden !important;
+      max-height: 0 !important;
+      -webkit-transition: all 0.5s linear;
+      -moz-transition: all 0.5s linear;
+      transition: all 0.5s linear;
+
+      &.is-active {
+        padding: 0.5rem 0;
+        max-height: 500px !important;
+      }
+
+      .navbar-start {
+        padding-left: 2rem;
+      }
     }
   }
 }
