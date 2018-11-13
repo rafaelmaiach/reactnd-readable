@@ -11,7 +11,7 @@ const ControlButtons = (props) => {
           <div className="columns is-flex">
             <div className="column is-6">Filter buttons</div>
             <div className="column is-6">
-              <a role="button" className="button is-link is-pulled-right" onClick={onClick}>New Post</a>
+              <a role="button" className="button is-link is-pulled-right is-size-7-mobile is-size-6" onClick={onClick}>New Post</a>
             </div>
           </div>
         </div>

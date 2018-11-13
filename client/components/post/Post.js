@@ -48,7 +48,7 @@ class Post extends Component {
         ? <NewPost isEdition={isEdition} closeForm={this.toggleEdition} postInfo={postInfo} />
         : (
           <div className="column is-7">
-            <div className="box">
+            <div className="box post-box">
               <article className="media">
                 <div className="media-content">
                   <div className="content">
@@ -58,11 +58,12 @@ class Post extends Component {
                         toggleEdition={this.toggleEdition}
                         onConfirm={this.onConfirm}
                       />
-                      <p className="post-description is-size-6">
+                      <p className="post-description is-size-7-mobile is-size-6">
                         {body}
                       </p>
                     </div>
                   </div>
+                  <br />
                   <nav className="level is-mobile">
                     <PostVote postId={id} score={voteScore} />
                     <PostComments score={commentCount} />

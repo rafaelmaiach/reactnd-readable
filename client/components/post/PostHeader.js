@@ -16,11 +16,11 @@ const PostHeader = (props) => {
     <header className="card-header">
       <div className="post-header">
         <Link to={`/${category}/${id}`}>
-          <p className="is-size-5-mobile is-size-4 has-text-link post-title">
+          <p className="is-size-6-mobile is-size-4 has-text-link post-title">
             {title}
           </p>
         </Link>
-        <p className="subtitle is-size-7">
+        <p className="subtitle is-size-7 post-subtitle">
           <span>Posted by: </span>
           <b>{author}</b>
           <span>{` at ${date}`}</span>

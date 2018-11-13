@@ -1,4 +1,5 @@
 .card-header {
+  overflow: hidden;
   justify-content: space-between;
 
   .post-header {
@@ -6,6 +7,10 @@
     flex-direction: column;
     align-items: flex-start;
     padding-bottom: 0.5rem;
+
+    .post-title {
+      padding-bottom: 0.1rem;
+    }
 
     .post-title:hover,
     .post-category:hover {
@@ -17,6 +22,14 @@
 .card-header-icon {
   padding-top: 0;
   align-items: flex-start;
+
+  .ant-dropdown-trigger {
+    transform: rotateZ(90deg);
+
+    &:hover {
+      color: $dark-blue;
+    }
+  }
 }
 
 .post-description {
@@ -26,4 +39,22 @@
 .vote-container {
   display: flex;
   flex-direction: column;
+}
+
+@media only screen and (max-width: 767px) {
+  .post-box {
+    padding: 0.75rem;
+
+    .post-title {
+      line-height: 1.2;
+    }
+
+    .post-subtitle {
+      font-size: 0.65rem !important
+    }
+  }
+
+  .anticon-ellipsis {
+    font-size: 1.5rem !important;
+  }
 }

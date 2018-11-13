@@ -18,7 +18,7 @@ const PostVote = (props) => {
       <a onClick={() => setUpVote(postId)} className="level-item has-text-centered" aria-label="vote count">
         <Icon type="caret-up" style={{ color: '#16c26b' }} />
       </a>
-      <span className="level-item has-text-centered is-size-6" aria-label="vote count">
+      <span className="level-item has-text-centered is-size-7" aria-label="vote count">
         {score}
       </span>
       <a onClick={() => setDownVote(postId)} className="level-item has-text-centered" aria-label="vote count">
