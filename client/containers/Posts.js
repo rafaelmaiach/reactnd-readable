@@ -10,6 +10,8 @@ import Header from 'Components/header/Header';
 import Post from 'Components/post/Post';
 import NewPost from 'Components/post/NewPost';
 import ControlButtons from 'Components/posts/ControlButtons';
+import PostsImage from 'Components/posts/PostsImage';
+import PostNotFound from 'Components/posts/PostNotFound';
 
 class Posts extends Component {
   static propTypes = {
@@ -99,27 +101,15 @@ class Posts extends Component {
     const { isPostFormOpen, sortBy } = this.state;
     const { posts } = this.props;
 
-    if (!posts) {
-      return (
-        <div className="container is-fluid">
-          <Header {...this.props} />
-        </div>
-      );
-    }
+    const invalidPosts = (!posts || posts.length === 0);
 
-    const postList = this.createPosts(posts);
+    const postList = invalidPosts ? <PostNotFound /> : this.createPosts(posts);
 
     return (
       <Fragment>
         <Header {...this.props} />
+        <PostsImage />
         <NewPost isPostFormOpen={isPostFormOpen} closeForm={this.closeForm} />
-        <div className="posts-image">
-          <img src="/public/images/posts-image.jpg" alt="" />
-          <div className="overlay-image">
-            <span className="title is-size-4-mobile is-size-1">UDACITY - READABLE</span>
-            <span className="title is-size-7-mobile is-size-4">A nanodegree project</span>
-          </div>
-        </div>
         <section className="section">
           <div className="container is-fluid">
             <div className="columns is-multiline is-centered">

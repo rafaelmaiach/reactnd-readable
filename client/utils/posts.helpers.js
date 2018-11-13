@@ -15,8 +15,6 @@ const sortPosts = ({ type, order }) => (data) => {
       result = data.sort(sortBy(type));
       break;
   }
-
-  console.log('result', result);
   return result;
 };
 

@@ -8,6 +8,7 @@ import { postSelector } from 'Selectors/posts'; // eslint-disable-line
 
 import Header from 'Components/header/Header';
 import Post from 'Components/post/Post';
+import PostNotFound from 'Components/posts/PostNotFound';
 
 class Details extends Component {
   componentDidMount() {
@@ -25,13 +26,13 @@ class Details extends Component {
       <div className="container is-fluid">
         <Header {...this.props} />
         {
-          post && (
+          post ? (
             <section className="section">
               <div className="columns is-centered">
                 <Post isPostDetailsPage {...post} />
               </div>
             </section>
-          )
+          ) : <PostNotFound isDetailsPage />
         }
       </div>
 
