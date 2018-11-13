@@ -1,5 +1,7 @@
 .navbar {
-  box-shadow: 0px -5px 20px 5px $black;
+  -webkit-box-shadow: 0 3px 10px -1px rgba($black, 0.85);
+  -moz-box-shadow: 0 3px 10px -1px rgba($black, 0.85);
+  box-shadow: 0 3px 10px -1px rgba($black, 0.85);
 
   .navbar-brand {
     align-items: center;
