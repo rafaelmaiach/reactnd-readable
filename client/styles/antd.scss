@@ -34,8 +34,10 @@
   background-color: $white;
 }
 
-.ant-select-selection__rendered {
-  margin-left: 0;
+.ant-form-item {
+  .ant-select-selection__rendered {
+    margin-left: 0;
+  }
 }
 
 .ant-select-dropdown-menu-item {

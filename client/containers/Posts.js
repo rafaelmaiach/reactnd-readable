@@ -47,11 +47,17 @@ class Posts extends Component {
     this.getPosts();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const { params: { category: prevCategory } } = prevProps.match;
-    const { match: { params: { category } } } = this.props;
+    const { sortBy: prevSortBy } = prevState;
 
-    if (prevCategory !== category) {
+    const { match: { params: { category } } } = this.props;
+    const { sortBy } = this.state;
+
+    const categoriesChanged = prevCategory !== category;
+    const sortChanged = prevSortBy !== sortBy;
+
+    if ((categoriesChanged) || (sortChanged)) {
       this.getPosts();
     }
   }
@@ -72,14 +78,6 @@ class Posts extends Component {
     getAllPosts(sortBy);
   }
 
-  openPost = () => this.setState(() => ({ isPostFormOpen: true }));
-
-  closeForm = () => this.setState(() => ({ isPostFormOpen: false }));
-
-  toggleNewPost = () => {
-    this.setState(prevState => ({ isPostFormOpen: !prevState.isPostFormOpen }));
-  }
-
   createPosts = (posts) => {
     const { match: { params: { category } } } = this.props;
 
@@ -89,8 +87,16 @@ class Posts extends Component {
       .map(post => <Post key={post.id} {...post} />);
   }
 
+  openPost = () => this.setState(() => ({ isPostFormOpen: true }));
+
+  closeForm = () => this.setState(() => ({ isPostFormOpen: false }));
+
+  toggleNewPost = () => this.setState(prevState => ({ isPostFormOpen: !prevState.isPostFormOpen }));
+
+  handleSort = sortBy => this.setState(() => ({ sortBy }));
+
   render() {
-    const { isPostFormOpen } = this.state;
+    const { isPostFormOpen, sortBy } = this.state;
     const { posts } = this.props;
 
     if (!posts) {
@@ -117,7 +123,11 @@ class Posts extends Component {
         <section className="section">
           <div className="container is-fluid">
             <div className="columns is-multiline is-centered">
-              <ControlButtons onClick={this.openPost} />
+              <ControlButtons
+                sortBy={sortBy}
+                handleSort={this.handleSort}
+                onClick={this.openPost}
+              />
               <div className="column is-12">
                 <div className="columns is-multiline is-centered">
                   {postList}
