@@ -35,7 +35,6 @@ const ControlButtons = (props) => {
                   <Option value="timestamp">Date</Option>
                   <Option value="title">Title</Option>
                   <Option value="author">Author</Option>
-                  <Option value="category">Category</Option>
                   <Option value="voteScore">Votes</Option>
                   <Option value="commentCount">Comments</Option>
                 </Select>
