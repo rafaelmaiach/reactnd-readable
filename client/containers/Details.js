@@ -28,7 +28,7 @@ class Details extends Component {
           post && (
             <section className="section">
               <div className="columns is-centered">
-                <Post {...post} />
+                <Post isPostDetailsPage {...post} />
               </div>
             </section>
           )

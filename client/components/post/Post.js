@@ -28,13 +28,11 @@ class Post extends Component {
     const { isEdition } = this.state;
     const {
       id,
-      category,
       title,
-      author,
       body,
-      timestamp,
       commentCount,
       voteScore,
+      isPostDetailsPage,
     } = this.props;
 
     const postInfo = {
@@ -42,6 +40,17 @@ class Post extends Component {
       title,
       message: body,
     };
+
+    let description = body;
+
+    if (!isPostDetailsPage) {
+      const maxBodyWords = 25;
+      const validBodyWords = body.split(' ').filter(word => word);
+      const bodyHasMoreWords = validBodyWords.length > maxBodyWords;
+      const reduceBodySize = bodyHasMoreWords ? validBodyWords.splice(0, 25) : validBodyWords;
+      const bodyString = reduceBodySize.join(' ').trim();
+      description = bodyHasMoreWords ? `${bodyString}...` : bodyString;
+    }
 
     return (
       isEdition
@@ -59,7 +68,7 @@ class Post extends Component {
                         onConfirm={this.onConfirm}
                       />
                       <p className="post-description is-size-7-mobile is-size-6">
-                        {body}
+                        {description}
                       </p>
                     </div>
                   </div>
