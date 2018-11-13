@@ -25,10 +25,10 @@ const receiveAllPosts = sortBy => dispatch =>
       dispatch(receivePosts(posts, sortBy));
     });
 
-const receivePostsByCategory = category => dispatch =>
+const receivePostsByCategory = (category, sortBy) => dispatch =>
   getPostsByCategory(category)
     .then((posts) => {
-      dispatch(receivePosts(posts));
+      dispatch(receivePosts(posts, sortBy));
     });
 
 const receiveDetails = postId => dispatch =>

@@ -71,7 +71,7 @@ class Posts extends Component {
     } = this.props;
 
     if (category) {
-      getPostsByCategory(category);
+      getPostsByCategory(category, sortBy);
       return;
     }
 
@@ -146,8 +146,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getPostsByCategory: (category) => {
-    dispatch(receivePostsByCategory(category));
+  getPostsByCategory: (category, sortBy) => {
+    dispatch(receivePostsByCategory(category, sortBy));
   },
   getAllPosts: (sortBy) => {
     dispatch(receiveAllPosts(sortBy));
