@@ -1,6 +1,9 @@
 .posts-image {
   position: relative;
   height: 25vh;
+  background-image: url("/public/images/posts-image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 
   & > img {
     position: absolute;
@@ -36,6 +39,6 @@
 
 @media only screen and (min-width: 1024px) {
   .posts-image {
-    height: 40vh;
+    height: 45vh;
   }
 }
