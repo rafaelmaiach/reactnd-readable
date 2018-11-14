@@ -9,9 +9,44 @@
   .control-filters--buttons {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    margin-right: 1rem;
 
     .ant-select {
       font-size: 0.75rem;
+
+      &:first-child {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .control-filters--layout {
+      display: flex;
+      align-items: center;
+
+      &-button {
+        font-size: 1.5rem;
+
+        & > svg > path {
+          fill: $black;
+        }
+
+        &-active {
+          font-size: 1.5rem;
+
+          &:first-child {
+            margin-right: 1rem;
+          }
+        }
+
+        &:first-child {
+          margin-right: 1rem;
+        }
+
+        &-active > svg > path {
+          fill: $blue;
+        }
+      }
     }
   }
 }
@@ -35,11 +70,14 @@
     .control-filters--buttons {
       display: flex;
       flex-direction: row;
+      align-items: flex-end;
 
       .ant-select {
         font-size: 0.9rem;
+        margin-right: 1rem;
+
         &:first-child {
-          margin-right: 1rem;
+          margin-bottom: 0;
         }
       }
     }

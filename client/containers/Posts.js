@@ -43,6 +43,7 @@ class Posts extends Component {
       type: 'timestamp',
       order: 'decrescent',
     },
+    isBoxLayout: false,
   }
 
   componentDidMount() {
@@ -81,12 +82,13 @@ class Posts extends Component {
   }
 
   createPosts = (posts) => {
+    const { isBoxLayout } = this.state;
     const { match: { params: { category } } } = this.props;
 
     return posts
       // Filter the categories to show only those that match with category or show all if category isn't selected
       .filter(post => category ? post.category === category : true)
-      .map(post => <Post key={post.id} {...post} />);
+      .map(post => <Post isBoxLayout={isBoxLayout} key={post.id} {...post} />);
   }
 
   openPost = () => this.setState(() => ({ isPostFormOpen: true }));
@@ -97,13 +99,19 @@ class Posts extends Component {
 
   handleSort = sortBy => this.setState(() => ({ sortBy }));
 
+  setBoxLayout = () => this.setState(() => ({ isBoxLayout: true }));
+
+  setNormalLayout = () => this.setState(() => ({ isBoxLayout: false }));
+
   render() {
-    const { isPostFormOpen, sortBy } = this.state;
+    const { isPostFormOpen, sortBy, isBoxLayout } = this.state;
     const { posts } = this.props;
 
     const invalidPosts = (!posts || posts.length === 0);
 
     const postList = invalidPosts ? <PostNotFound /> : this.createPosts(posts);
+
+    const postsLayout = isBoxLayout ? 'posts-box-layout' : '';
 
     return (
       <Fragment>
@@ -116,10 +124,13 @@ class Posts extends Component {
               <ControlButtons
                 sortBy={sortBy}
                 handleSort={this.handleSort}
+                setBoxLayout={this.setBoxLayout}
+                setNormalLayout={this.setNormalLayout}
                 onClick={this.openPost}
+                isBoxLayout={isBoxLayout}
               />
               <div className="column is-12">
-                <div className="columns is-multiline is-centered">
+                <div className={`columns is-multiline is-centered ${postsLayout}`}>
                   {postList}
                 </div>
               </div>

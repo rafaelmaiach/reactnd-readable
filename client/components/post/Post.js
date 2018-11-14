@@ -16,7 +16,12 @@ class Post extends Component {
     timestamp: PropTypes.number.isRequired,
     commentCount: PropTypes.number.isRequired,
     voteScore: PropTypes.number.isRequired,
+    isBoxLayout: PropTypes.bool,
   };
+
+  static defaultProps = {
+    isBoxLayout: false,
+  }
 
   state = {
     isEdition: false,
@@ -33,6 +38,7 @@ class Post extends Component {
       commentCount,
       voteScore,
       isPostDetailsPage,
+      isBoxLayout,
     } = this.props;
 
     const postInfo = {
@@ -54,9 +60,16 @@ class Post extends Component {
 
     return (
       isEdition
-        ? <NewPost isEdition={isEdition} closeForm={this.toggleEdition} postInfo={postInfo} />
+        ? (
+          <NewPost
+            isBoxLayout={isBoxLayout}
+            isEdition={isEdition}
+            closeForm={this.toggleEdition}
+            postInfo={postInfo}
+          />
+        )
         : (
-          <div className="column is-7">
+          <div className={`column ${isBoxLayout ? 'is-4' : 'is-8'}`}>
             <div className="box post-box">
               <article className="media">
                 <div className="media-content">

@@ -21,6 +21,7 @@ const NewPost = (props) => {
     isEdition,
     isPostFormOpen,
     closeForm,
+    isBoxLayout,
   } = props;
 
   const closePostForm = cancelEdition || closeForm;
@@ -80,7 +81,7 @@ const NewPost = (props) => {
   return (
     isEdition
       ? (
-        <div className="column is-7">
+        <div className={`column ${isBoxLayout ? 'is-4' : 'is-8'}`}>
           <div className="card">
             <div className="card-content">
               {FormComponent}
