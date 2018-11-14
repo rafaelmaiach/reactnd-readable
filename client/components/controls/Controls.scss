@@ -1,0 +1,51 @@
+.controls-container {
+  top: 5.5rem;
+  position: -webkit-sticky;
+  position: sticky;
+  background: $white;
+  z-index: 1;
+  border-bottom: 1px solid rgba($black,0.1);
+  margin-top: -2rem;
+  margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .control-new-post {
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    &-button {
+      border-radius: 100%;
+      width: 60px;
+      height: 60px;
+      font-size: 0;
+
+      &::after {
+        content: "+";
+        font-size: 2rem;
+        text-align: center;
+        position: absolute;
+        top: 2px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .controls-container {
+    margin-top: -1rem;
+  }
+
+  .control-new-post {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    &-button {
+      font-size: 0.89rem !important;
+    }
+  }
+}

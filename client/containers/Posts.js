@@ -9,7 +9,7 @@ import { postsValuesSelector } from 'Selectors/posts'; // eslint-disable-line
 import Header from 'Components/header/Header';
 import Post from 'Components/post/Post';
 import NewPost from 'Components/post/NewPost';
-import ControlButtons from 'Components/controls/ControlButtons';
+import Controls from 'Components/controls/Controls';
 import PostsImage from 'Components/posts/PostsImage';
 import PostNotFound from 'Components/posts/PostNotFound';
 
@@ -121,7 +121,7 @@ class Posts extends Component {
         <section className="section">
           <div className="container is-fluid">
             <div className="columns is-multiline is-centered">
-              <ControlButtons
+              <Controls
                 sortBy={sortBy}
                 handleSort={this.handleSort}
                 setBoxLayout={this.setBoxLayout}

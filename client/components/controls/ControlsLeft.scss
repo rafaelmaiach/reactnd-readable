@@ -52,15 +52,6 @@
   }
 }
 
-.control-new-post {
-  display: flex;
-  justify-content: flex-start;
-
-  &-button {
-    font-size: 0.89rem !important;
-  }
-}
-
 @media only screen and (min-width: 768px) {
   .control-filters__container {
     .control-filters--label {
@@ -82,16 +73,6 @@
           margin-bottom: 0;
         }
       }
-    }
-  }
-
-  .control-new-post {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-
-    &-button {
-      font-size: 0.89rem !important;
     }
   }
 }
