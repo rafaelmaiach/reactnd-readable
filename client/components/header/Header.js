@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { faDesktop } from '@fortawesome/free-solid-svg-icons';
 
 import { isCategoryActive } from 'Utils/common.helpers';
 
@@ -106,7 +106,7 @@ class Header extends Component {
       <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link className="navbar-item" to="/" onClick={() => this.changeCurrentTab('')}>
-            <FontAwesomeIcon icon={faBook} size="2x" />
+            <FontAwesomeIcon icon={faDesktop} size="2x" />
             READABLE
           </Link>
 
