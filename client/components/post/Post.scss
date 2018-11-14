@@ -1,9 +1,8 @@
 .post-box {
-  border-top: 3px solid transparent;
-  transition: border 0.3s linear;
+  transition: box-shadow 0.3s linear;
 
   &:hover {
-    border-top: 3px solid $blue;
+    box-shadow: 0 2px 3px rgba(6, 173, 219, 0.7), 0 0 0 1px rgba(6, 173, 219, 0.7);
   }
 
   .media-content {
