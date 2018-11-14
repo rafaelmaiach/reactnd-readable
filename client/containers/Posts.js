@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { receiveAllPosts, receivePostsByCategory } from 'Actions/posts';
+import { setAppLayout } from 'Actions/layout.creator';
 
 import { postsValuesSelector } from 'Selectors/posts'; // eslint-disable-line
 
@@ -43,11 +44,12 @@ class Posts extends Component {
       type: 'timestamp',
       order: 'decrescent',
     },
-    isBoxLayout: false,
   }
 
   componentDidMount() {
+    const { handleAppLayout } = this.props;
     this.getPosts();
+    handleAppLayout('normal');
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -60,7 +62,7 @@ class Posts extends Component {
     const categoriesChanged = prevCategory !== category;
     const sortChanged = prevSortBy !== sortBy;
 
-    if ((categoriesChanged) || (sortChanged)) {
+    if (categoriesChanged || sortChanged) {
       this.getPosts();
     }
   }
@@ -82,8 +84,7 @@ class Posts extends Component {
   }
 
   createPosts = (posts) => {
-    const { isBoxLayout } = this.state;
-    const { match: { params: { category } } } = this.props;
+    const { match: { params: { category } }, isBoxLayout } = this.props;
 
     return posts
       // Filter the categories to show only those that match with category or show all if category isn't selected
@@ -99,13 +100,9 @@ class Posts extends Component {
 
   handleSort = sortBy => this.setState(() => ({ sortBy }));
 
-  setBoxLayout = () => this.setState(() => ({ isBoxLayout: true }));
-
-  setNormalLayout = () => this.setState(() => ({ isBoxLayout: false }));
-
   render() {
-    const { isPostFormOpen, sortBy, isBoxLayout } = this.state;
-    const { posts } = this.props;
+    const { isPostFormOpen, sortBy } = this.state;
+    const { posts, isBoxLayout } = this.props;
 
     const invalidPosts = (!posts || posts.length === 0);
 
@@ -124,10 +121,7 @@ class Posts extends Component {
               <Controls
                 sortBy={sortBy}
                 handleSort={this.handleSort}
-                setBoxLayout={this.setBoxLayout}
-                setNormalLayout={this.setNormalLayout}
                 onClick={this.openPost}
-                isBoxLayout={isBoxLayout}
               />
               <div className="column is-12">
                 <div className={`columns is-multiline is-centered ${postsLayout}`}>
@@ -144,6 +138,7 @@ class Posts extends Component {
 
 const mapStateToProps = state => ({
   posts: postsValuesSelector(state),
+  isBoxLayout: state.layout,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -152,6 +147,9 @@ const mapDispatchToProps = dispatch => ({
   },
   getAllPosts: (sortBy) => {
     dispatch(receiveAllPosts(sortBy));
+  },
+  handleAppLayout: (layout) => {
+    dispatch(setAppLayout(layout));
   },
 });
 

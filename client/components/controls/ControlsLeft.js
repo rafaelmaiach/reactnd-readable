@@ -1,14 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faThLarge } from '@fortawesome/free-solid-svg-icons';
+
+import { setAppLayout } from 'Actions/layout.creator';
 
 import { Select } from 'antd';
 const { Option } = Select;
 
 const ControlsLeft = (props) => {
   const {
-    sortBy, handleSort, setBoxLayout, setNormalLayout, isBoxLayout,
+    sortBy, handleSort, isBoxLayout, handleAppLayout,
   } = props;
 
   const filterByType = (type) => {
@@ -52,10 +55,10 @@ const ControlsLeft = (props) => {
         <div className="column is-4-mobile is-4 control-filters__container">
           <span className="control-filters--label">Layout:</span>
           <div className="control-filters--layout">
-            <a onClick={setNormalLayout} className={`control-filters--layout-button${normalLayout}`}>
+            <a onClick={() => handleAppLayout('normal')} className={`control-filters--layout-button${normalLayout}`}>
               <FontAwesomeIcon icon={faBars} />
             </a>
-            <a onClick={setBoxLayout} className={`control-filters--layout-button${boxLayout}`}>
+            <a onClick={() => handleAppLayout('box')} className={`control-filters--layout-button${boxLayout}`}>
               <FontAwesomeIcon icon={faThLarge} />
             </a>
           </div>
@@ -65,4 +68,14 @@ const ControlsLeft = (props) => {
   );
 };
 
-export default ControlsLeft;
+const mapStateToProps = state => ({
+  isBoxLayout: state.layout,
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleAppLayout: (layout) => {
+    dispatch(setAppLayout(layout));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ControlsLeft);
