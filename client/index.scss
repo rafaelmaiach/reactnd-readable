@@ -5,8 +5,6 @@
 @import './styles/common/bulma-vars.scss';
 @import 'bulma/bulma.sass';
 
-@import './styles/antd.scss';
-
 // LAYOUT
 @import './styles/common/layout.scss';
 
@@ -29,3 +27,5 @@
 
 // FOOTER
 @import './components/footer/Footer.scss';
+
+@import './styles/antd.scss';
