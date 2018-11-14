@@ -11,11 +11,13 @@
 // POSTS - initial page
 @import './containers/Posts.scss';
 @import './components/posts/PostsImage.scss';
-@import './components/posts/ControlButtons.scss';
 
 // POST - individual
 @import './components/post/Post.scss';
 @import './components/post/options/Options.scss';
+
+// CONTROLS
+@import './components/controls/ControlButtons.scss';
 
 // FORM
 @import './components/form/Form.scss';

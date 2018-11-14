@@ -9,7 +9,7 @@ import { postsValuesSelector } from 'Selectors/posts'; // eslint-disable-line
 import Header from 'Components/header/Header';
 import Post from 'Components/post/Post';
 import NewPost from 'Components/post/NewPost';
-import ControlButtons from 'Components/posts/ControlButtons';
+import ControlButtons from 'Components/controls/ControlButtons';
 import PostsImage from 'Components/posts/PostsImage';
 import PostNotFound from 'Components/posts/PostNotFound';
 
