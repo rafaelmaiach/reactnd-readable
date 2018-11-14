@@ -8,7 +8,7 @@ import {
 import { hot } from 'react-hot-loader';
 
 import AppWrapper from 'Containers/AppWrapper';
-import Details from 'Containers/Details';
+import PostsDetails from 'Containers/PostsDetails';
 
 import './index.scss';
 
@@ -23,7 +23,7 @@ const Application = () => (
     <Switch>
       <Route exact path="/" component={AppWrapper} />
       <Route exact path="/:category" component={AppWrapper} />
-      <Route path="/:category/:id" component={Details} />
+      <Route path="/:category/:id" component={PostsDetails} />
       <Redirect from="*" to="/" />
     </Switch>
   </BrowserRouter>

@@ -25,7 +25,7 @@ $primary:                     $blue !default;
 
 $link-color:                  $primary !default;
 $link-decoration:             none !default;
-$link-hover-color:            darken($link-color, 15%) !default;
+$link-hover-color:            $dark-blue !default;
 $link-hover-decoration:       underline !default;
 
 $text-muted:                  $gray-600 !default;
