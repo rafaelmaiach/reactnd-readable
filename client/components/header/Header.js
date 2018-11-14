@@ -107,7 +107,7 @@ class Header extends Component {
         <div className="navbar-brand">
           <Link className="navbar-item" to="/" onClick={() => this.changeCurrentTab('')}>
             <FontAwesomeIcon icon={faDesktop} size="2x" />
-            READABLE
+            OMAIA
           </Link>
 
           <span
