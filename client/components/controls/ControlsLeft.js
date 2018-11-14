@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faThLarge } from '@fortawesome/free-solid-svg-icons';
 
 import { setAppLayout } from 'Actions/layout.creator';
+import { getLayoutValue } from 'Selectors/layout';
 
 import { Select } from 'antd';
 const { Option } = Select;
@@ -69,7 +70,7 @@ const ControlsLeft = (props) => {
 };
 
 const mapStateToProps = state => ({
-  isBoxLayout: state.layout,
+  isBoxLayout: getLayoutValue(state),
 });
 
 const mapDispatchToProps = dispatch => ({

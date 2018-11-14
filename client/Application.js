@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
-import Posts from 'Containers/Posts';
+import AppWrapper from 'Containers/AppWrapper';
 import Details from 'Containers/Details';
 
 import './index.scss';
@@ -21,8 +21,8 @@ import './index.scss';
 const Application = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Posts} />
-      <Route exact path="/:category" component={Posts} />
+      <Route exact path="/" component={AppWrapper} />
+      <Route exact path="/:category" component={AppWrapper} />
       <Route path="/:category/:id" component={Details} />
       <Redirect from="*" to="/" />
     </Switch>

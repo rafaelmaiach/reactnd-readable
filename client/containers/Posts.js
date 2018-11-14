@@ -1,17 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import { postsValuesSelector } from 'Selectors/posts';
+import { getLayoutValue } from 'Selectors/layout';
 
 import { receiveAllPosts, receivePostsByCategory } from 'Actions/posts';
 import { setAppLayout } from 'Actions/layout.creator';
 
-import { postsValuesSelector } from 'Selectors/posts'; // eslint-disable-line
-
-import Header from 'Components/header/Header';
-import Post from 'Components/post/Post';
-import NewPost from 'Components/post/NewPost';
 import Controls from 'Components/controls/Controls';
-import PostsImage from 'Components/posts/PostsImage';
+
+import Post from 'Components/post/Post';
 import PostNotFound from 'Components/posts/PostNotFound';
 
 class Posts extends Component {
@@ -32,14 +31,15 @@ class Posts extends Component {
         category: PropTypes.string,
       }),
     }).isRequired,
+    isBoxLayout: PropTypes.bool,
   }
 
   static defaultProps = {
     posts: null,
+    isBoxLayout: false,
   }
 
   state = {
-    isPostFormOpen: false,
     sortBy: {
       type: 'timestamp',
       order: 'decrescent',
@@ -92,17 +92,11 @@ class Posts extends Component {
       .map(post => <Post isBoxLayout={isBoxLayout} key={post.id} {...post} />);
   }
 
-  openPost = () => this.setState(() => ({ isPostFormOpen: true }));
-
-  closeForm = () => this.setState(() => ({ isPostFormOpen: false }));
-
-  toggleNewPost = () => this.setState(prevState => ({ isPostFormOpen: !prevState.isPostFormOpen }));
-
   handleSort = sortBy => this.setState(() => ({ sortBy }));
 
   render() {
-    const { isPostFormOpen, sortBy } = this.state;
-    const { posts, isBoxLayout } = this.props;
+    const { sortBy } = this.state;
+    const { posts, isBoxLayout, openPost } = this.props;
 
     const invalidPosts = (!posts || posts.length === 0);
 
@@ -111,34 +105,29 @@ class Posts extends Component {
     const postsLayout = isBoxLayout ? 'posts-box-layout' : '';
 
     return (
-      <Fragment>
-        <Header {...this.props} />
-        <PostsImage />
-        <NewPost isPostFormOpen={isPostFormOpen} closeForm={this.closeForm} />
-        <section className="section">
-          <div className="container is-fluid">
-            <div className="columns is-multiline is-centered">
-              <Controls
-                sortBy={sortBy}
-                handleSort={this.handleSort}
-                onClick={this.openPost}
-              />
-              <div className="column is-12">
-                <div className={`columns is-multiline is-centered ${postsLayout}`}>
-                  {postList}
-                </div>
+      <section className="section">
+        <div className="container is-fluid">
+          <div className="columns is-multiline is-centered">
+            <Controls
+              sortBy={sortBy}
+              handleSort={this.handleSort}
+              onClick={openPost}
+            />
+            <div className="column is-12">
+              <div className={`columns is-multiline is-centered ${postsLayout}`}>
+                {postList}
               </div>
             </div>
           </div>
-        </section>
-      </Fragment>
+        </div>
+      </section>
     );
   }
 }
 
 const mapStateToProps = state => ({
   posts: postsValuesSelector(state),
-  isBoxLayout: state.layout,
+  isBoxLayout: getLayoutValue(state),
 });
 
 const mapDispatchToProps = dispatch => ({

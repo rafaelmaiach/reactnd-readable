@@ -6,11 +6,15 @@ const layout = (state = {}, action) => {
   switch (action.type) {
     case CHANGE_APP_LAYOUT: {
       if (action.layout === 'normal') {
-        return false;
+        return {
+          value: false,
+        };
       }
 
       if (action.layout === 'box') {
-        return true;
+        return {
+          value: true,
+        };
       }
 
       return state;

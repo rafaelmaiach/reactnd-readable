@@ -5,11 +5,13 @@
 @import './styles/common/bulma-vars.scss';
 @import 'bulma/bulma.sass';
 
+// LAYOUT
+@import './styles/common/layout.scss';
+
 // HEADER
 @import './components/header/Header.scss';
 
 // POSTS - initial page
-@import './containers/Posts.scss';
 @import './components/posts/PostsImage.scss';
 
 // POST - individual
