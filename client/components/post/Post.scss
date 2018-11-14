@@ -1,39 +1,50 @@
-.card-header {
-  overflow: hidden;
-  justify-content: space-between;
+.post-box {
+  border-top: 3px solid transparent;
+  transition: border 0.3s linear;
 
-  .post-header {
-    padding-top: 0;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-bottom: 0.5rem;
+  &:hover {
+    border-top: 3px solid $blue;
+  }
 
-    .post-title {
-      padding-bottom: 0.1rem;
+  .media-content {
+    .card-header {
+      overflow: hidden;
+      justify-content: space-between;
+
+      .post-header {
+        padding-top: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 0.5rem;
+
+        .post-title {
+          padding-bottom: 0.1rem;
+        }
+
+        .post-title:hover,
+        .post-category:hover {
+          color: darken($blue, 10) !important;
+        }
+      }
+
+      .card-header-icon {
+        padding-top: 0;
+        align-items: flex-start;
+
+        .ant-dropdown-trigger {
+          transform: rotateZ(90deg);
+
+          &:hover {
+            color: $dark-blue;
+          }
+        }
+      }
     }
 
-    .post-title:hover,
-    .post-category:hover {
-      color: darken($blue, 10) !important;
+    .post-description {
+      padding-top: 1rem;
     }
   }
-}
-
-.card-header-icon {
-  padding-top: 0;
-  align-items: flex-start;
-
-  .ant-dropdown-trigger {
-    transform: rotateZ(90deg);
-
-    &:hover {
-      color: $dark-blue;
-    }
-  }
-}
-
-.post-description {
-  padding-top: 1rem;
 }
 
 .vote-container {
