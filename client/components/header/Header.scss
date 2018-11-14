@@ -6,7 +6,7 @@
   .navbar-brand {
     align-items: center;
     padding-left: 2rem;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     margin-left: -1.5rem !important;
 
     .navbar-item {
@@ -45,14 +45,8 @@
 @media screen and (max-width: 1023px) {
   .navbar {
     .navbar-brand {
-      align-items: center;
-      padding-left: 2rem;
-      font-size: 1.3rem;
-      margin-left: -1.5rem !important;
-
       .navbar-item {
         padding: 0 1rem;
-        font-weight: 300;
       }
     }
 
