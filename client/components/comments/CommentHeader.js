@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Icon } from 'antd';
 
-import Options from 'Components/post/options/Options';
+import Options from './options/Options';
 
 const CommentHeader = (props) => {
   const { author, timestamp } = props;

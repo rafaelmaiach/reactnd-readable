@@ -1,3 +1,8 @@
+const normalizeObjectById = postsList => postsList.reduce((a, c) => {
+  a[c.id] = c; //eslint-disable-line
+  return a;
+}, {});
+
 // Make the first letter of string uppercase
 const capitalize = string => `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 
@@ -18,6 +23,7 @@ const copyToClipboard = (str) => {
 };
 
 export {
+  normalizeObjectById,
   capitalize,
   isCategoryActive,
   copyToClipboard,

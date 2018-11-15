@@ -2,16 +2,13 @@ import {
   RECEIVE_POSTS, RECEIVE_POST_DETAILS, ADD_POST, EDIT_POST, REMOVE_POST, VOTE_POST,
 } from 'Actions/posts.creator';
 
-const reducePosts = postsList => postsList.reduce((a, c) => {
-  a[c.id] = c; //eslint-disable-line
-  return a;
-}, {});
+import { normalizeObjectById } from 'Utils/common.helpers';
 
 const posts = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_POSTS: {
       const { posts: postsData, sortBy } = action;
-      const allPosts = reducePosts(postsData);
+      const allPosts = normalizeObjectById(postsData);
       return {
         data: { ...allPosts },
         sortBy,
