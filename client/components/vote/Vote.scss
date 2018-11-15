@@ -1,0 +1,19 @@
+.anticon-caret-up {
+  & > svg > path {
+    fill: $green;
+  }
+
+  &:hover > svg > path {
+    fill: $dark-green;
+  }
+}
+
+.anticon-caret-down {
+  & > svg > path {
+    fill: $red;
+  }
+
+  &:hover > svg > path {
+    fill: $dark-red;
+  }
+}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // import NewPost from 'Components/post/NewPost';
-// import PostVote from 'Components/post/PostVote';
+// import Vote from 'Components/vote/Vote';
 import CommentHeader from './CommentHeader';
 
 class Comment extends Component {
@@ -58,7 +58,7 @@ class Comment extends Component {
               </div>
               <br />
               <nav className="level is-mobile">
-                {/* <PostVote postId={id} score={voteScore} /> */}
+                {/* <Vote postId={id} score={voteScore} /> */}
               </nav>
             </div>
           </article>

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
+import { handleVote } from 'Actions/posts';
+
+import Vote from 'Components/vote/Vote';
 import NewPost from './NewPost';
 import PostHeader from './PostHeader';
-import PostVote from './PostVote';
 import PostComments from './PostComments';
 
 class Post extends Component {
@@ -55,6 +58,8 @@ class Post extends Component {
       voteScore,
       isPostDetailsPage,
       isBoxLayout,
+      setUpVote,
+      setDownVote,
     } = this.props;
 
     const postInfo = {
@@ -96,7 +101,12 @@ class Post extends Component {
                   </div>
                   <br />
                   <nav className="level is-mobile">
-                    <PostVote postId={id} score={voteScore} />
+                    <Vote
+                      id={id}
+                      score={voteScore}
+                      setUpVote={setUpVote}
+                      setDownVote={setDownVote}
+                    />
                     {!isPostDetailsPage && <PostComments score={commentCount} />}
                   </nav>
                 </div>
@@ -108,4 +118,13 @@ class Post extends Component {
   }
 }
 
-export default Post;
+const mapDispatchToProps = dispatch => ({
+  setUpVote: (id) => {
+    dispatch(handleVote(id, { option: 'upVote' }));
+  },
+  setDownVote: (id) => {
+    dispatch(handleVote(id, { option: 'downVote' }));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(Post);
