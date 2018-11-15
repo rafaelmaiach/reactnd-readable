@@ -97,7 +97,7 @@ class Post extends Component {
                   <br />
                   <nav className="level is-mobile">
                     <PostVote postId={id} score={voteScore} />
-                    <PostComments score={commentCount} />
+                    {!isPostDetailsPage && <PostComments score={commentCount} />}
                   </nav>
                 </div>
               </article>
