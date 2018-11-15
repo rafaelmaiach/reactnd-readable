@@ -29,6 +29,22 @@ class Post extends Component {
 
   toggleEdition = () => this.setState(({ isEdition }) => ({ isEdition: !isEdition }));
 
+  getDescription = () => {
+    const { body, isPostDetailsPage } = this.props;
+
+    if (isPostDetailsPage) {
+      return body;
+    }
+
+
+    const maxBodyWords = 25;
+    const validBodyWords = body.split(' ').filter(word => word);
+    const bodyHasMoreWords = validBodyWords.length > maxBodyWords;
+    const reduceBodySize = bodyHasMoreWords ? validBodyWords.splice(0, 25) : validBodyWords;
+    const bodyString = reduceBodySize.join(' ').trim();
+    return bodyHasMoreWords ? `${bodyString}...` : bodyString;
+  }
+
   render() {
     const { isEdition } = this.state;
     const {
@@ -47,16 +63,9 @@ class Post extends Component {
       message: body,
     };
 
-    let description = body;
+    const description = this.getDescription();
 
-    if (!isPostDetailsPage) {
-      const maxBodyWords = 25;
-      const validBodyWords = body.split(' ').filter(word => word);
-      const bodyHasMoreWords = validBodyWords.length > maxBodyWords;
-      const reduceBodySize = bodyHasMoreWords ? validBodyWords.splice(0, 25) : validBodyWords;
-      const bodyString = reduceBodySize.join(' ').trim();
-      description = bodyHasMoreWords ? `${bodyString}...` : bodyString;
-    }
+    const postStyle = isPostDetailsPage ? '' : 'post-box--border';
 
     return (
       isEdition
@@ -70,7 +79,7 @@ class Post extends Component {
         )
         : (
           <div className={`column ${isBoxLayout ? 'is-4' : 'is-8'}`}>
-            <div className="box post-box">
+            <div className={`box post-box ${postStyle}`}>
               <article className="media">
                 <div className="media-content">
                   <div className="content">

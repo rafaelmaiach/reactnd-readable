@@ -1,8 +1,10 @@
 .post-box {
   transition: box-shadow 0.3s linear;
 
-  &:hover {
-    box-shadow: 0 2px 3px rgba(6, 173, 219, 0.7), 0 0 0 1px rgba(6, 173, 219, 0.7);
+  &--border {
+    &:hover {
+      box-shadow: 0 2px 3px rgba(6, 173, 219, 0.7), 0 0 0 1px rgba(6, 173, 219, 0.7);
+    }
   }
 
   .media-content {
