@@ -18,9 +18,9 @@ const createMenuItem = (params) => {
 
   if (customLabel) {
     return (
-      <span className="post-options-item">
+      <span className="card-options-item">
         <Icon {...iconOptions} />
-        <a className="post-share-item" href={customLabel} target="_blank" rel="noopener noreferrer">
+        <a className="card-share-item" href={customLabel} target="_blank" rel="noopener noreferrer">
           {label}
         </a>
       </span>
@@ -28,7 +28,7 @@ const createMenuItem = (params) => {
   }
 
   return (
-    <a className="post-options-item" onClick={onClick}>
+    <a className="card-options-item" onClick={onClick}>
       <Icon {...iconOptions} />
       <span>{` ${label}`}</span>
     </a>
