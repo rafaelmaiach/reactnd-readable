@@ -50,8 +50,6 @@ class CommentsContainer extends Component {
   render() {
     const { comments, commentsCount } = this.props;
 
-    console.log('COMMENTS', comments);
-
     const postComments = comments.map(this.createComment);
 
     const commentsContainerTitle = this.getCommentsTitle(commentsCount);
