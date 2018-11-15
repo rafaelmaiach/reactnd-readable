@@ -34,6 +34,17 @@ class CommentsContainer extends Component {
     getPostComments(postId);
   }
 
+  getCommentsTitle = (count) => {
+    switch (count) {
+      case 0:
+        return 'No comments';
+      case 1:
+        return '1 comment';
+      default:
+        return `${count} comments`;
+    }
+  }
+
   createComment = commentDetails => <Comment key={commentDetails.id} {...commentDetails} />
 
   render() {
@@ -41,11 +52,13 @@ class CommentsContainer extends Component {
 
     const postComments = comments.map(this.createComment);
 
+    const commentsContainerTitle = this.getCommentsTitle(commentsCount);
+
     return (
       <div className="columns is-multiline is-centered comments__container">
         <div className="column is-12-mobile is-8 comments__header">
           <p className="title is-size-6-mobile is-size-6 comments__header--text">
-            {`${commentsCount} comment${commentsCount > 1 ? 's' : ''}`}
+            {commentsContainerTitle}
           </p>
         </div>
         {postComments}
