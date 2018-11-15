@@ -1,27 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import { Form } from 'antd';
 
 import { getCreateField } from 'Utils/form.helpers';
 
-import { categoriesValuesSelector } from 'Selectors/categories'; // eslint-disable-line
-
 /**
- * @constructor PostForm
- * @param {object} props - PostForm properties
+ * @constructor Formulary
+ * @param {object} props - Formulary properties
  * @description Form component for posts
  */
-const PostForm = (props) => {
+const Formulary = (props) => {
   const {
     form: { validateFields, getFieldDecorator },
     isEdition,
-    postInfo,
-    closeForm,
-    createPost,
-    updatePost,
-    categories,
+    info,
+    close,
+    create,
+    update,
+    fieldsNeeded,
   } = props;
 
   /**
@@ -35,12 +32,12 @@ const PostForm = (props) => {
     // Call update or create post dispatch based on is edition or new post only if doesn't happened any error
     validateFields((err, data) => {
       if (!err && isEdition) {
-        updatePost(data);
+        update(data);
         return;
       }
 
       if (!err) {
-        createPost(data);
+        create(data);
       }
     });
   };
@@ -50,28 +47,9 @@ const PostForm = (props) => {
    * @description Create only the needed fields for the form (new or edition).
    */
   const createFields = () => {
-    const createField = getCreateField(getFieldDecorator, postInfo);
+    const createField = getCreateField(getFieldDecorator, info);
 
-    let fieldsData = null;
-
-    // Edition form has less fields than new post form
-    if (isEdition) {
-      fieldsData = [
-        { id: 'title', label: 'Title', type: 'input' },
-        { id: 'message', label: 'Message', type: 'textarea' },
-      ];
-    } else {
-      fieldsData = [
-        { id: 'title', label: 'Title', type: 'input' },
-        { id: 'author', label: 'Author', type: 'input' },
-        { id: 'message', label: 'Message', type: 'textarea' },
-        {
-          id: 'category', label: 'Category', type: 'dropdown', options: categories,
-        },
-      ];
-    }
-
-    return fieldsData.map(createField);
+    return fieldsNeeded.map(createField);
   };
 
   const fields = createFields();
@@ -80,7 +58,7 @@ const PostForm = (props) => {
     <Form onSubmit={handleSubmit} className="columns is-multiline is-centered" autoComplete="off">
       {fields}
       <div className="column is-10 form-buttons-container">
-        <button className="button form-cancel-button" type="button" onClick={closeForm}>
+        <button className="button form-cancel-button" type="button" onClick={close}>
           Cancel
         </button>
         <button className="button is-link" type="submit">
@@ -91,36 +69,28 @@ const PostForm = (props) => {
   );
 };
 
-PostForm.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-    path: PropTypes.string,
-  })).isRequired,
+Formulary.propTypes = {
   form: PropTypes.shape({
     validateFields: PropTypes.func,
     getFieldDecorator: PropTypes.func,
     setFieldsValue: PropTypes.func,
   }).isRequired,
-  postInfo: PropTypes.shape({
+  info: PropTypes.shape({
     title: PropTypes.string,
     message: PropTypes.string,
   }),
   isEdition: PropTypes.bool,
-  createPost: PropTypes.func.isRequired,
-  updatePost: PropTypes.func.isRequired,
-  closeForm: PropTypes.func.isRequired,
+  create: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  fieldsNeeded: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-PostForm.defaultProps = {
+Formulary.defaultProps = {
   isEdition: false,
-  postInfo: null,
+  info: null,
 };
 
-const mapStateToProps = state => ({
-  categories: categoriesValuesSelector(state),
-});
+const WrappedFormulary = Form.create({})(Formulary);
 
-const connectedPostForm = connect(mapStateToProps)(PostForm);
-const WrappedPostForm = Form.create({})(connectedPostForm);
-
-export default WrappedPostForm;
+export default WrappedFormulary;

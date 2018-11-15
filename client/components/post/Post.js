@@ -62,7 +62,7 @@ class Post extends Component {
       setDownVote,
     } = this.props;
 
-    const postInfo = {
+    const info = {
       id,
       title,
       message: body,
@@ -79,7 +79,7 @@ class Post extends Component {
             isBoxLayout={isBoxLayout}
             isEdition={isEdition}
             closeForm={this.toggleEdition}
-            postInfo={postInfo}
+            info={info}
           />
         )
         : (

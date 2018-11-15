@@ -1,11 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
 
 import { Modal } from 'antd';
 
 import { handleAddPost, handleEditPost } from 'Actions/posts';
+
+import { categoriesValuesSelector } from 'Selectors/categories';
+
 import Form from 'Components/form/Form';
+import FormFieldData from 'Components/form/FormFieldData';
 
 /**
  * @constructor NewPost
@@ -14,8 +19,9 @@ import Form from 'Components/form/Form';
  */
 const NewPost = (props) => {
   const {
+    categories,
     addPost,
-    postInfo,
+    info,
     updatePost,
     cancelEdition,
     isEdition,
@@ -58,7 +64,7 @@ const NewPost = (props) => {
 
     // Create the data for update a post
     const postData = {
-      id: postInfo.id,
+      id: info.id,
       details: {
         title,
         body: message,
@@ -69,12 +75,40 @@ const NewPost = (props) => {
     closePostForm();
   };
 
+  const getFieldsNeeded = () => {
+    const {
+      title, message, author, category,
+    } = FormFieldData;
+
+    let fieldsData = null;
+
+    // Edition form has less fields than new post form
+    if (isEdition) {
+      fieldsData = [
+        title,
+        message,
+      ];
+    } else {
+      fieldsData = [
+        title,
+        author,
+        message,
+        { ...category, options: categories },
+      ];
+    }
+
+    return fieldsData;
+  };
+
+  const fieldsNeeded = getFieldsNeeded();
+
   const FormComponent = (
     <Form
       {...props}
-      createPost={createNewPost}
-      updatePost={updateExistingPost}
-      closeForm={closePostForm}
+      create={createNewPost}
+      update={updateExistingPost}
+      close={closePostForm}
+      fieldsNeeded={fieldsNeeded}
     />
   );
 
@@ -104,6 +138,10 @@ const NewPost = (props) => {
   );
 };
 
+const mapStateToProps = state => ({
+  categories: categoriesValuesSelector(state),
+});
+
 const mapDispatchToProps = dispatch => ({
   addPost: (post) => {
     dispatch(handleAddPost(post));
@@ -113,4 +151,12 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(NewPost);
+export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
+
+/**
+ *
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    path: PropTypes.string,
+  })).isRequired,
+ */

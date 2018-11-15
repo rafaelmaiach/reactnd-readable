@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import { handleVote } from 'Actions/comments';
 
-// import NewPost from 'Components/post/NewPost';
 import Vote from 'Components/vote/Vote';
+import EditComment from './EditComment';
 import CommentHeader from './CommentHeader';
 
 class Comment extends Component {
@@ -18,16 +18,15 @@ class Comment extends Component {
   };
 
   state = {
-    // isEdition: false,
+    isEdition: false,
   }
 
   toggleEdition = () => this.setState(({ isEdition }) => ({ isEdition: !isEdition }));
 
   render() {
-    // const { isEdition } = this.state;
+    const { isEdition } = this.state;
     const {
       id,
-      // author,
       body,
       voteScore,
       setUpVote,
@@ -35,41 +34,35 @@ class Comment extends Component {
     } = this.props;
 
     return (
-      // isEdition
-      //   ? (
-      //     {<NewPost
-      //       isBoxLayout={isBoxLayout}
-      //       isEdition={isEdition}
-      //       closeForm={this.toggleEdition}
-      //       postInfo={postInfo}
-      //     />}
-      //   )
-      //   : (
-      <div className="column is-12-mobile is-8 comment__container">
-        <div className="box card-box is-paddingless">
-          <article className="media">
-            <div className="media-content">
-              <CommentHeader
-                {...this.props}
-                toggleEdition={this.toggleEdition}
-                onConfirm={this.onConfirm}
-              />
-              <p className="comment-description is-size-7-mobile is-size-6">
-                {body}
-              </p>
-              <br />
-              <nav className="level is-mobile">
-                <Vote
-                  id={id}
-                  score={voteScore}
-                  setUpVote={setUpVote}
-                  setDownVote={setDownVote}
-                />
-              </nav>
+      isEdition
+        ? <EditComment isEdition={isEdition} />
+        : (
+          <div className="column is-12-mobile is-8 comment__container">
+            <div className="box card-box is-paddingless">
+              <article className="media">
+                <div className="media-content">
+                  <CommentHeader
+                    {...this.props}
+                    toggleEdition={this.toggleEdition}
+                    onConfirm={this.onConfirm}
+                  />
+                  <p className="comment-description is-size-7-mobile is-size-6">
+                    {body}
+                  </p>
+                  <br />
+                  <nav className="level is-mobile">
+                    <Vote
+                      id={id}
+                      score={voteScore}
+                      setUpVote={setUpVote}
+                      setDownVote={setDownVote}
+                    />
+                  </nav>
+                </div>
+              </article>
             </div>
-          </article>
-        </div>
-      </div>
+          </div>
+        )
     );
   }
 }
