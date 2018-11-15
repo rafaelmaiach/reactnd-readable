@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { handleVote } from 'Actions/comments';
 
 // import NewPost from 'Components/post/NewPost';
-// import Vote from 'Components/vote/Vote';
+import Vote from 'Components/vote/Vote';
 import CommentHeader from './CommentHeader';
 
 class Comment extends Component {
@@ -23,10 +26,12 @@ class Comment extends Component {
   render() {
     // const { isEdition } = this.state;
     const {
-      // id,
+      id,
       // author,
       body,
-      // voteScore,
+      voteScore,
+      setUpVote,
+      setDownVote,
     } = this.props;
 
     return (
@@ -44,21 +49,22 @@ class Comment extends Component {
         <div className="box post-box comment-box is-paddingless">
           <article className="media">
             <div className="media-content">
-              <div className="content">
-                <div className="media-content">
-                  <CommentHeader
-                    {...this.props}
-                    toggleEdition={this.toggleEdition}
-                    onConfirm={this.onConfirm}
-                  />
-                  <p className="post-description is-size-7-mobile is-size-6">
-                    {body}
-                  </p>
-                </div>
-              </div>
+              <CommentHeader
+                {...this.props}
+                toggleEdition={this.toggleEdition}
+                onConfirm={this.onConfirm}
+              />
+              <p className="post-description is-size-7-mobile is-size-6">
+                {body}
+              </p>
               <br />
               <nav className="level is-mobile">
-                {/* <Vote postId={id} score={voteScore} /> */}
+                <Vote
+                  id={id}
+                  score={voteScore}
+                  setUpVote={setUpVote}
+                  setDownVote={setDownVote}
+                />
               </nav>
             </div>
           </article>
@@ -68,4 +74,14 @@ class Comment extends Component {
   }
 }
 
-export default Comment;
+
+const mapDispatchToProps = dispatch => ({
+  setUpVote: (id) => {
+    dispatch(handleVote(id, { option: 'upVote' }));
+  },
+  setDownVote: (id) => {
+    dispatch(handleVote(id, { option: 'downVote' }));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(Comment);

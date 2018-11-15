@@ -87,18 +87,14 @@ class Post extends Component {
             <div className={`box post-box ${postStyle}`}>
               <article className="media">
                 <div className="media-content">
-                  <div className="content">
-                    <div className="media-content">
-                      <PostHeader
-                        {...this.props}
-                        toggleEdition={this.toggleEdition}
-                        onConfirm={this.onConfirm}
-                      />
-                      <p className="post-description is-size-7-mobile is-size-6">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
+                  <PostHeader
+                    {...this.props}
+                    toggleEdition={this.toggleEdition}
+                    onConfirm={this.onConfirm}
+                  />
+                  <p className="post-description is-size-7-mobile is-size-6">
+                    {description}
+                  </p>
                   <br />
                   <nav className="level is-mobile">
                     <Vote
