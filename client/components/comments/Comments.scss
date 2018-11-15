@@ -1,0 +1,25 @@
+.comments__container {
+  margin-top: 2rem;
+
+  .comment-box {
+    box-shadow: none;
+  }
+
+  .comments__header {
+    &--text {
+      width: 100%;
+      border-bottom: 2px solid $blue;
+      padding-bottom: 0.75rem;
+      letter-spacing: 0.1rem;
+    }
+
+    &--author {
+      display: flex;
+      align-items: center;
+
+      .anticon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

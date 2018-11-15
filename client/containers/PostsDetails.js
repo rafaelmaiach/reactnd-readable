@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { receiveDetails } from 'Actions/posts';
 
-import { postSelector } from 'Selectors/posts'; // eslint-disable-line
+import { postSelector } from 'Selectors/posts';
 
 import Header from 'Components/header/Header';
 import Post from 'Components/post/Post';
+import CommentsContainer from 'Components/comments/CommentsContainer';
 import PostNotFound from 'Components/posts/PostNotFound';
 
 class Details extends Component {
@@ -16,11 +16,14 @@ class Details extends Component {
       getPostDetails,
       match: { params: { id } },
     } = this.props;
+
     getPostDetails(id);
   }
 
   render() {
     const { post } = this.props;
+
+    const commentsCount = post && post.commentCount;
 
     return (
       <div className="container is-fluid">
@@ -31,6 +34,7 @@ class Details extends Component {
               <div className="columns is-centered">
                 <Post isPostDetailsPage {...post} />
               </div>
+              <CommentsContainer commentsCount={commentsCount} postId={post.id} />
             </section>
           ) : <PostNotFound isDetailsPage />
         }
