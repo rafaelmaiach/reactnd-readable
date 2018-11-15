@@ -33,9 +33,20 @@ class Comment extends Component {
       setDownVote,
     } = this.props;
 
+    const info = {
+      id,
+      message: body,
+    };
+
     return (
       isEdition
-        ? <EditComment isEdition={isEdition} />
+        ? (
+          <EditComment
+            isEdition
+            cancelEdition={this.toggleEdition}
+            info={info}
+          />
+        )
         : (
           <div className="column is-12-mobile is-8 comment__container">
             <div className="box card-box is-paddingless">

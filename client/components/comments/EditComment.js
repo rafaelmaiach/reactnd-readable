@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Modal } from 'antd';
-
 import { handleEditComment } from 'Actions/comments';
 import Form from 'Components/form/Form';
+import FormFieldData from 'Components/form/FormFieldData';
 
 /**
  * @constructor EditComment
@@ -13,65 +12,38 @@ import Form from 'Components/form/Form';
  */
 const EditComment = (props) => {
   const {
-    addPost,
-    postInfo,
-    updatePost,
+    info,
+    updateComment,
     cancelEdition,
-    isEdition,
-    isPostFormOpen,
   } = props;
 
-  const closePostForm = cancelEdition || closeForm;
-
   /**
-   * @function createEditComment
+   * @function updateExistingComment
    * @param {object} data - Form data
    */
-  const createEditComment = (data) => {
-    const {
-      title, author, message, category,
-    } = data;
-
-    // Create the data for a new post
-    const postData = {
-      id: uuid(),
-      timestamp: Date.now(),
-      title,
-      body: message,
-      author,
-      category,
-    };
-
-    addPost(postData);
-    closePostForm();
-  };
-
-  /**
-   * @function updateExistingPost
-   * @param {object} data - Form data
-   */
-  const updateExistingPost = (data) => {
-    const { title, message } = data;
+  const updateExistingComment = (data) => {
+    const { message } = data;
 
     // Create the data for update a post
     const postData = {
-      id: postInfo.id,
+      id: info.id,
       details: {
-        title,
         body: message,
       },
     };
 
-    updatePost(postData);
-    closePostForm();
+    updateComment(postData);
+    cancelEdition();
   };
+
+  const fieldsNeeded = [FormFieldData.message];
 
   const FormComponent = (
     <Form
       {...props}
-      createPost={createEditComment}
-      updatePost={updateExistingPost}
-      closeForm={closePostForm}
+      update={updateExistingComment}
+      close={cancelEdition}
+      fieldsNeeded={fieldsNeeded}
     />
   );
 

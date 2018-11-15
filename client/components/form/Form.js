@@ -80,13 +80,14 @@ Formulary.propTypes = {
     message: PropTypes.string,
   }),
   isEdition: PropTypes.bool,
-  create: PropTypes.func.isRequired,
+  create: PropTypes.func,
   update: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
   fieldsNeeded: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 Formulary.defaultProps = {
+  create: null,
   isEdition: false,
   info: null,
 };
