@@ -1,11 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { Icon } from 'antd';
 
-import Options from './options/Options';
+import { handleDeleteComment } from 'Actions/comments';
+
+import Options from 'Components/options/Options';
 
 const CommentHeader = (props) => {
-  const { author, timestamp } = props;
+  const {
+    deleteComment,
+    toggleEdition,
+    ...rest
+  } = props;
+
+  const { id, author, timestamp } = rest;
 
   const date = new Date(timestamp).toLocaleDateString();
 
@@ -21,10 +30,21 @@ const CommentHeader = (props) => {
         </p>
       </div>
       <div className="card-header-icon is-paddingless">
-        <Options {...props} />
+        <Options
+          id={id}
+          onDelete={deleteComment}
+          deleteModalTitle="Delete comment"
+          onEdit={toggleEdition}
+        />
       </div>
     </header>
   );
 };
 
-export default CommentHeader;
+const mapDispatchToProps = dispatch => ({
+  deleteComment: (commentId) => {
+    dispatch(handleDeleteComment(commentId));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(CommentHeader);

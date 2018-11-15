@@ -1,16 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import {
   Modal, Dropdown, Menu, Icon, message,
 } from 'antd';
 
-import { handleDeleteComment } from 'Actions/comments';
+import { copyToClipboard } from 'Utils/common.helpers';
 
 import optionsData from './OptionsData';
 
 const { confirm } = Modal;
-const { Item } = Menu;
+const { Item, SubMenu } = Menu;
 
 const createMenuItem = (params) => {
   const {
@@ -36,21 +35,58 @@ const createMenuItem = (params) => {
   );
 };
 
+const createShareMenu = (url) => {
+  const handleCopyToClipboard = () => {
+    copyToClipboard(url);
+
+    message.success(
+      <span className="notification is-success">
+          Link copied to clipboard
+      </span>
+    );
+  };
+
+  const ShareItem = createMenuItem(optionsData.menu.share);
+
+  const FacebookItem = createMenuItem({
+    ...optionsData.submenu.facebook,
+    customLabel: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+  });
+
+  const TwitterItem = createMenuItem({
+    ...optionsData.submenu.twitter,
+    customLabel: `https://twitter.com/home?status=${url}`,
+  });
+
+  const ClipboardItem = createMenuItem({
+    ...optionsData.submenu.clipboard,
+    onClick: handleCopyToClipboard,
+  });
+
+  return (
+    <SubMenu title={ShareItem}>
+      <Item>{FacebookItem}</Item>
+      <Item>{TwitterItem}</Item>
+      <Item>{ClipboardItem}</Item>
+    </SubMenu>
+  );
+};
+
 const Options = (props) => {
   const {
-    id, toggleEdition, deleteComment,
+    id, onEdit, onDelete, deleteModalTitle, url, shareOption,
   } = props;
 
   const showConfirm = () => {
     confirm({
-      title: 'Delete comment',
-      content: 'Are you sure to delete this comment?',
+      title: deleteModalTitle,
+      content: 'Are you sure to delete it?',
       onOk() {
-        deleteComment(id);
+        onDelete(id);
 
         message.success(
           <span className="notification is-success">
-            Comment deleted!
+            Deleted with success!
           </span>
         );
       },
@@ -59,7 +95,7 @@ const Options = (props) => {
 
   const EditItem = createMenuItem({
     ...optionsData.menu.edit,
-    onClick: toggleEdition,
+    onClick: onEdit,
   });
 
   const DeleteItem = createMenuItem({
@@ -67,9 +103,12 @@ const Options = (props) => {
     onClick: showConfirm,
   });
 
+  const shareMenu = shareOption && createShareMenu(url);
+
   const menu = (
     <Menu>
       <Item>{EditItem}</Item>
+      {shareMenu}
       <Item>{DeleteItem}</Item>
     </Menu>
   );
@@ -83,10 +122,4 @@ const Options = (props) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  deleteComment: (commentId) => {
-    dispatch(handleDeleteComment(commentId));
-  },
-});
-
-export default connect(null, mapDispatchToProps)(Options);
+export default Options;

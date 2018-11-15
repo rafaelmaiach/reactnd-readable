@@ -1,16 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { handleDeletePost } from 'Actions/posts';
 
 import { capitalize } from 'Utils/common.helpers';
 
-import Options from './options/Options';
+import Options from 'Components/options/Options';
 
 const PostHeader = (props) => {
   const {
-    id, author, title, category, timestamp,
+    deletePost,
+    toggleEdition,
+    ...rest
   } = props;
 
+  const {
+    id, author, title, category, timestamp,
+  } = rest;
+
   const date = new Date(timestamp).toLocaleDateString();
+
+  const { origin } = window.location;
+  const postUrl = `${origin}/${category}/${id}`;
 
   return (
     <header className="card-header">
@@ -31,10 +43,23 @@ const PostHeader = (props) => {
         </p>
       </div>
       <div className="card-header-icon is-paddingless">
-        <Options {...props} />
+        <Options
+          id={id}
+          onDelete={deletePost}
+          deleteModalTitle={title}
+          onEdit={toggleEdition}
+          shareOption
+          url={postUrl}
+        />
       </div>
     </header>
   );
 };
 
-export default PostHeader;
+const mapDispatchToProps = dispatch => ({
+  deletePost: (postId) => {
+    dispatch(handleDeletePost(postId));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(PostHeader);
