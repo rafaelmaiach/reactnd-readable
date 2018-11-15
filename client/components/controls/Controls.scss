@@ -9,28 +9,13 @@
   margin-bottom: 1rem;
 }
 
-@media only screen and (max-width: 767px) {
-  .control-new-post {
-    display: flex;
-    justify-content: flex-end;
-    position: fixed;
-    bottom: 0;
-    right: 0;
+.control-new-post {
+  display: flex;
+  width: 100%;
 
-    &-button {
-      border-radius: 100%;
-      width: 60px;
-      height: 60px;
-      font-size: 0;
-
-      &::after {
-        content: "+";
-        font-size: 2rem;
-        text-align: center;
-        position: absolute;
-        top: 2px;
-      }
-    }
+  &-button {
+    width: 100%;
+    font-size: 0.89rem !important;
   }
 }
 
