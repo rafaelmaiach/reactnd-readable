@@ -78,7 +78,7 @@ class Post extends Component {
           />
         )
         : (
-          <div className={`column ${isBoxLayout ? 'is-4' : 'is-8'}`}>
+          <div className={`column is-12-mobile ${isBoxLayout ? 'is-4' : 'is-8'}`}>
             <div className={`box post-box ${postStyle}`}>
               <article className="media">
                 <div className="media-content">
