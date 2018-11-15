@@ -19,7 +19,7 @@ const CommentHeader = (props) => {
   const date = new Date(timestamp).toLocaleDateString();
 
   return (
-    <header className="card-header">
+    <header className="card-header comments__header">
       <div className="post-header">
         <h1 className="is-size-6-mobile is-size-6 has-text-black comments__header--author">
           <Icon type="user" />

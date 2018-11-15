@@ -1,12 +1,4 @@
-.post-box {
-  transition: box-shadow 0.3s linear;
-
-  &--border {
-    &:hover {
-      box-shadow: 0 2px 3px rgba(6, 173, 219, 0.7), 0 0 0 1px rgba(6, 173, 219, 0.7);
-    }
-  }
-
+.card-box {
   .media-content {
     .card-header {
       overflow: hidden;
@@ -44,6 +36,16 @@
 
     .post-description {
       padding-top: 1rem;
+    }
+  }
+}
+
+.post-box {
+  transition: box-shadow 0.3s linear;
+
+  &--border {
+    &:hover {
+      box-shadow: 0 2px 3px rgba(6, 173, 219, 0.7), 0 0 0 1px rgba(6, 173, 219, 0.7);
     }
   }
 }

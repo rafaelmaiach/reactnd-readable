@@ -45,8 +45,8 @@ class Comment extends Component {
       //     />}
       //   )
       //   : (
-      <div className="column is-12-mobile is-8">
-        <div className="box post-box comment-box is-paddingless">
+      <div className="column is-12-mobile is-8 comment__container">
+        <div className="box card-box is-paddingless">
           <article className="media">
             <div className="media-content">
               <CommentHeader
@@ -54,7 +54,7 @@ class Comment extends Component {
                 toggleEdition={this.toggleEdition}
                 onConfirm={this.onConfirm}
               />
-              <p className="post-description is-size-7-mobile is-size-6">
+              <p className="comment-description is-size-7-mobile is-size-6">
                 {body}
               </p>
               <br />
