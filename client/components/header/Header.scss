@@ -5,13 +5,13 @@
 
   .navbar-brand {
     align-items: center;
-    padding-left: 2rem;
+    padding-left: 1rem;
     font-size: 1.5rem;
-    margin-left: -1.5rem !important;
 
     .navbar-item {
       padding: 1.3rem 1rem 0.3rem 1rem;
       font-weight: 300;
+      letter-spacing: 0.6rem;
     }
 
     svg {
@@ -25,10 +25,10 @@
 
   .navbar-menu {
     .navbar-start {
-      margin-left: -0.5rem;
+      padding-left: 1rem !important;
 
       .navbar-item {
-        border-left: 5px solid transparent;
+        border-left: 3px solid transparent;
         font-weight: 300;
         min-width: 5.7rem;
 
@@ -73,11 +73,13 @@
 
 @media screen and (min-width: 1024px) {
   .navbar {
-    justify-content: space-evenly;
+    justify-content: center;
 
     .navbar-brand {
       letter-spacing: 0.3rem;
       padding: 0;
+      margin-right: 5rem;
+      margin-left: -5rem;
 
       .navbar-item {
         padding-right: 0;
