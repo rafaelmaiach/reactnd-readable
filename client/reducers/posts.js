@@ -27,8 +27,11 @@ const posts = (state = {}, action) => {
       }
 
       return {
-        [details.id]: {
-          ...details,
+        ...state,
+        data: {
+          [details.id]: {
+            ...details,
+          },
         },
       };
     }

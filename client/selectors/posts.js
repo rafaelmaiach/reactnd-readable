@@ -36,7 +36,14 @@ const postsValuesSelector = createSelector(
   }
 );
 
-const postSelector = (state, postId) => state.posts.error ? null : state.posts[postId];
+const postSelector = (state, postId) => {
+  const { posts } = state;
+  if (!posts || posts.error || !posts.data) {
+    return null;
+  }
+
+  return posts.data[postId];
+};
 
 export {
   postsValuesSelector,
