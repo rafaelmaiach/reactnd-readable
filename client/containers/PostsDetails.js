@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { receiveDetails } from 'Actions/posts';
@@ -26,20 +26,21 @@ class Details extends Component {
     const commentsCount = post && post.commentCount;
 
     return (
-      <div className="container is-fluid">
+      <Fragment>
         <Header {...this.props} />
-        {
-          post ? (
-            <section className="section">
-              <div className="columns is-centered">
-                <Post isPostDetailsPage {...post} />
-              </div>
-              <CommentsContainer commentsCount={commentsCount} postId={post.id} />
-            </section>
-          ) : <PostNotFound isDetailsPage />
-        }
-      </div>
-
+        <div className="container is-fluid">
+          {
+            post ? (
+              <section className="section">
+                <div className="columns is-centered">
+                  <Post isPostDetailsPage {...post} />
+                </div>
+                <CommentsContainer commentsCount={commentsCount} postId={post.id} />
+              </section>
+            ) : <PostNotFound isDetailsPage />
+          }
+        </div>
+      </Fragment>
     );
   }
 }
