@@ -17,11 +17,13 @@ const CommentHeader = (props) => {
   } = props;
 
   const {
-    id, author, timestamp, edited,
+    id, author, timestamp, parentId, edited,
   } = rest;
 
   const date = timestampToDate(timestamp);
   const editedDate = edited ? timestampToDate(edited) : null;
+
+  const commentDelete = deleteComment(parentId);
 
   return (
     <header className="card-header comments__header">
@@ -38,7 +40,7 @@ const CommentHeader = (props) => {
       <div className="card-header-icon is-paddingless">
         <Options
           id={id}
-          onDelete={deleteComment}
+          onDelete={commentDelete}
           deleteModalTitle="Delete comment"
           onEdit={toggleEdition}
         />
@@ -48,8 +50,8 @@ const CommentHeader = (props) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  deleteComment: (commentId) => {
-    dispatch(handleDeleteComment(commentId));
+  deleteComment: parentId => (commentId) => {
+    dispatch(handleDeleteComment(commentId, parentId));
   },
 });
 

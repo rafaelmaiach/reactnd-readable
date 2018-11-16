@@ -12,10 +12,15 @@ import {
   updateVote,
 } from './comments.creator';
 
+import { receiveDetails } from './posts';
+
 const handleAddComment = commentInfo => dispatch =>
   addComment(commentInfo)
     .then((comment) => {
       dispatch(createComment(comment));
+    })
+    .then(() => {
+      dispatch(receiveDetails(commentInfo.parentId));
     });
 
 const handleEditComment = commentInfo => dispatch =>
@@ -24,10 +29,13 @@ const handleEditComment = commentInfo => dispatch =>
       dispatch(updateComment(comment));
     });
 
-const handleDeleteComment = commentId => dispatch =>
+const handleDeleteComment = (commentId, parentId) => dispatch =>
   deleteComment(commentId)
     .then((comment) => {
       dispatch(removeComment(comment));
+    })
+    .then(() => {
+      dispatch(receiveDetails(parentId));
     });
 
 const handleVote = (commentId, option) => dispatch =>
