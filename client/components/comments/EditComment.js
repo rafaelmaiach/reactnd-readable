@@ -55,7 +55,6 @@ const EditComment = (props) => {
         </div>
       </div>
     </div>
-
   );
 };
 

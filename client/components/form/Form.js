@@ -12,14 +12,19 @@ import { getCreateField } from 'Utils/form.helpers';
  */
 const Formulary = (props) => {
   const {
-    form: { validateFields, getFieldDecorator },
+    form: { validateFields, getFieldDecorator, resetFields },
     isEdition,
     info,
     close,
     create,
     update,
     fieldsNeeded,
+    fieldsToReset,
   } = props;
+
+  const resetForm = () => resetFields(fieldsToReset);
+
+  const closeForm = close || resetForm;
 
   /**
    * @function handleSubmit
@@ -38,6 +43,10 @@ const Formulary = (props) => {
 
       if (!err) {
         create(data);
+
+        if (fieldsToReset) {
+          resetForm();
+        }
       }
     });
   };
@@ -58,7 +67,7 @@ const Formulary = (props) => {
     <Form onSubmit={handleSubmit} className="columns is-multiline is-centered" autoComplete="off">
       {fields}
       <div className="column is-10 form-buttons-container">
-        <button className="button form-cancel-button" type="button" onClick={close}>
+        <button className="button form-cancel-button" type="button" onClick={closeForm}>
           Cancel
         </button>
         <button className="button is-link" type="submit">
@@ -81,15 +90,19 @@ Formulary.propTypes = {
   }),
   isEdition: PropTypes.bool,
   create: PropTypes.func,
-  update: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired,
+  update: PropTypes.func,
+  close: PropTypes.func,
   fieldsNeeded: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fieldsToReset: PropTypes.arrayOf(PropTypes.string),
 };
 
 Formulary.defaultProps = {
   create: null,
+  update: null,
+  close: null,
   isEdition: false,
   info: null,
+  fieldsToReset: null,
 };
 
 const WrappedFormulary = Form.create({})(Formulary);

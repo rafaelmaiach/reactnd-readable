@@ -7,8 +7,9 @@ import { postSelector } from 'Selectors/posts';
 
 import Header from 'Components/header/Header';
 import Post from 'Components/post/Post';
-import CommentsContainer from 'Components/comments/CommentsContainer';
 import PostNotFound from 'Components/posts/PostNotFound';
+import CommentsContainer from 'Components/comments/CommentsContainer';
+import NewComment from 'Components/comments/NewComment';
 
 class Details extends Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class Details extends Component {
                   <Post isPostDetailsPage {...post} />
                 </div>
                 <CommentsContainer commentsCount={commentsCount} postId={post.id} />
+                <NewComment parentId={post.id} />
               </section>
             ) : <PostNotFound isDetailsPage />
           }
