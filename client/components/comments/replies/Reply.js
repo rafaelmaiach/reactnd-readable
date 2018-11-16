@@ -4,18 +4,11 @@ import { connect } from 'react-redux';
 
 import { handleVote } from 'Actions/comments';
 
-import { commentReplies } from 'Selectors/comments';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faReply } from '@fortawesome/free-solid-svg-icons';
-
 import Vote from 'Components/vote/Vote';
-import EditComment from './EditComment';
-import CommentHeader from './CommentHeader';
-import NewComment from './NewComment';
-import RepliesWrapper from './replies/RepliesWrapper';
+import EditComment from '../EditComment';
+import CommentHeader from '../CommentHeader';
 
-class Comment extends Component {
+class Reply extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
@@ -26,23 +19,18 @@ class Comment extends Component {
 
   state = {
     isEdition: false,
-    isReply: false,
   }
 
   toggleEdition = () => this.setState(({ isEdition }) => ({ isEdition: !isEdition }));
 
-  toggleReply = () => this.setState(({ isReply }) => ({ isReply: !isReply }));
-
   render() {
-    const { isEdition, isReply } = this.state;
+    const { isEdition } = this.state;
     const {
       id,
       body,
       voteScore,
-      parentId,
       setUpVote,
       setDownVote,
-      replies,
     } = this.props;
 
     const info = {
@@ -60,8 +48,8 @@ class Comment extends Component {
           />
         )
         : (
-          <div className="column is-12-mobile is-8 comment__container">
-            <div className="box card-box is-paddingless">
+          <div className="column is-12-mobile is-8">
+            <div className="box is-paddingless">
               <article className="media">
                 <div className="media-content">
                   <CommentHeader
@@ -80,27 +68,7 @@ class Comment extends Component {
                       setUpVote={setUpVote}
                       setDownVote={setDownVote}
                     />
-                    <a
-                      role="button"
-                      className="comment-reply"
-                      onClick={this.toggleReply}
-                    >
-                      <FontAwesomeIcon icon={faReply} />
-                      Reply
-                    </a>
                   </nav>
-                  <RepliesWrapper replies={replies} />
-                  <div className="is-comment-reply">
-                    {isReply && (
-                      <NewComment
-                        replyingTo={id}
-                        parentId={parentId}
-                        close={this.toggleReply}
-                        fieldsNeeded={['author', 'message']}
-                      />
-                    )}
-                  </div>
-
                 </div>
               </article>
             </div>
@@ -109,10 +77,6 @@ class Comment extends Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({
-  replies: commentReplies(state, props.id),
-});
 
 const mapDispatchToProps = dispatch => ({
   setUpVote: (id) => {
@@ -123,4 +87,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comment);
+export default connect(null, mapDispatchToProps)(Reply);

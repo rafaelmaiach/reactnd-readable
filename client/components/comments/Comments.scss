@@ -5,8 +5,8 @@
   .comment__container {
     box-shadow: 0 1px 0 rgba(46, 61, 73, 0.1);
     margin-bottom: 0.5rem;
+    box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
 
-    &:last-child,
     .box {
       box-shadow: none;
     }
@@ -52,22 +52,6 @@
 
       & > svg > path {
         fill: $dark-blue;
-      }
-    }
-  }
-}
-
-.is-comment-reply {
-  .comments__container {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    padding: 0 0 0.75rem 0;
-
-    .comments__header {
-      width: 100%;
-
-      .comments__header--text {
-        display: none;
       }
     }
   }

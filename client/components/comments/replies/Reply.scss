@@ -1,0 +1,46 @@
+.is-comment-reply {
+  .comments__container {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding: 0 0 0.75rem 0;
+
+    .comments__header {
+      width: 100%;
+
+      .comments__header--text {
+        display: none;
+      }
+    }
+  }
+}
+
+.replies__container {
+  .column {
+    width: 100%;
+    padding-right: 0;
+    margin-left: 3rem;
+    width: calc(100% - 3rem);
+  }
+
+  .card,
+  .box {
+    box-shadow: none;
+  }
+
+  .card-content {
+    padding: 0;
+    .ant-form {
+      justify-content: flex-start;
+
+      .column {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+  }
+
+  .media {
+    border: none;
+    padding-top: 0;
+  }
+}

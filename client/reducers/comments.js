@@ -84,7 +84,13 @@ const comments = (state = {}, action) => {
     }
     case REMOVE_COMMENT: {
       const newState = { ...state };
-      delete newState[action.comment.id];
+      const { comment } = action;
+
+      if (comment.replyingTo) {
+        delete newState[comment.replyingTo].replies[comment.id];
+      }
+
+      delete newState[comment.id];
 
       const commentsWithReplies = setReplies(newState);
 

@@ -19,8 +19,8 @@ const commentsValuesSelector = createSelector(
 );
 
 const commentReplies = (state, id) => {
-  if (id && state[id]) {
-    return Object.values(state[id].replies);
+  if (id && state.comments[id]) {
+    return Object.values(state.comments[id].replies);
   }
 
   return null;

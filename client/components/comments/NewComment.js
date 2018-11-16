@@ -10,7 +10,7 @@ import FormFieldData from 'Components/form/FormFieldData';
 
 const NewComment = (props) => {
   const {
-    parentId, replyingTo, addComment,
+    parentId, replyingTo, addComment, close,
   } = props;
 
   const createNewComment = (data) => {
@@ -27,6 +27,10 @@ const NewComment = (props) => {
     };
 
     addComment(postData);
+
+    if (close) {
+      close();
+    }
   };
 
 
