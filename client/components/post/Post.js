@@ -47,6 +47,8 @@ class Post extends Component {
       const bodyString = reduceBodySize.join(' ').trim();
       return bodyHasMoreWords ? `${bodyString}...` : bodyString;
     }
+
+    return '';
   }
 
   render() {
