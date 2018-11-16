@@ -71,7 +71,7 @@ const Formulary = (props) => {
           Cancel
         </button>
         <button className="button is-link" type="submit">
-          {isEdition ? 'Save' : 'Create'}
+          Comment
         </button>
       </div>
     </Form>

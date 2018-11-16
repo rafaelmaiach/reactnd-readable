@@ -36,3 +36,39 @@
     }
   }
 }
+
+.level.is-comment {
+  justify-content: flex-start;
+
+  .comment-reply {
+    margin-left: 1rem;
+
+    svg {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      color: $dark-blue;
+
+      & > svg > path {
+        fill: $dark-blue;
+      }
+    }
+  }
+}
+
+.is-comment-reply {
+  .comments__container {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding: 0 0 0.75rem 0;
+
+    .comments__header {
+      width: 100%;
+
+      .comments__header--text {
+        display: none;
+      }
+    }
+  }
+}

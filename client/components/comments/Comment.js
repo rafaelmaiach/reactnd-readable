@@ -6,6 +6,9 @@ import { handleVote } from 'Actions/comments';
 
 import { commentReplies } from 'Selectors/comments';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faReply } from '@fortawesome/free-solid-svg-icons';
+
 import Vote from 'Components/vote/Vote';
 import EditComment from './EditComment';
 import CommentHeader from './CommentHeader';
@@ -35,12 +38,11 @@ class Comment extends Component {
       id,
       body,
       voteScore,
+      parentId,
       setUpVote,
       setDownVote,
       replies,
     } = this.props;
-
-    console.log(replies);
 
     const info = {
       id,
@@ -70,21 +72,31 @@ class Comment extends Component {
                     {body}
                   </p>
                   <br />
-                  <nav className="level is-mobile">
+                  <nav className="level is-mobile is-comment">
                     <Vote
                       id={id}
                       score={voteScore}
                       setUpVote={setUpVote}
                       setDownVote={setDownVote}
                     />
-                    <button type="button" onClick={this.toggleReply}>Reply</button>
+                    <a
+                      role="button"
+                      className="comment-reply"
+                      onClick={this.toggleReply}
+                    >
+                      <FontAwesomeIcon icon={faReply} />
+                      Reply
+                    </a>
                   </nav>
                   {isReply && (
-                    <NewComment
-                      replyingTo={this.props.id}
-                      parentId={this.props.parentId}
-                      fieldsNeeded={['author', 'message']}
-                    />
+                    <div className="is-comment-reply">
+                      <NewComment
+                        replyingTo={id}
+                        parentId={parentId}
+                        close={this.toggleReply}
+                        fieldsNeeded={['author', 'message']}
+                      />
+                    </div>
                   )}
                 </div>
               </article>

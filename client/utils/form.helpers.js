@@ -46,7 +46,7 @@ const createField = (params, fieldDecorator) => {
       field.component = decorator(<Input className="form-input" />);
       break;
     case 'textarea':
-      field.component = decorator(<Input.TextArea autosize={{ minRows: 3, maxRows: 7 }} className="form-input" />);
+      field.component = decorator(<Input.TextArea autosize={{ minRows: 2, maxRows: 5 }} className="form-input" />);
       break;
     case 'dropdown':
       const dropdownOptions = options.map(({ name }) => ( // eslint-disable-line
