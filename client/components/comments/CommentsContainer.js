@@ -22,6 +22,8 @@ class CommentsContainer extends Component {
       timestamp: PropTypes.number,
       voteScore: PropTypes.number,
       edited: PropTypes.number,
+      replyingTo: PropTypes.string,
+      replies: PropTypes.object,
     })).isRequired,
     commentsCount: PropTypes.number.isRequired,
   }

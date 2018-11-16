@@ -13,6 +13,8 @@ const defaultData = {
     voteScore: 6,
     deleted: false,
     parentDeleted: false,
+    isReplyingTo: '',
+    replies: {},
   },
   '8tu4bsun805n8un48ve89': {
     id: '8tu4bsun805n8un48ve89',
@@ -23,6 +25,8 @@ const defaultData = {
     voteScore: -5,
     deleted: false,
     parentDeleted: false,
+    isReplyingTo: '',
+    replies: {},
   },
 };
 
@@ -58,6 +62,8 @@ function add(token, comment) {
   return new Promise((res) => {
     const comments = getData(token);
 
+    const replyingTo = comment.replyingTo || '';
+
     comments[comment.id] = {
       id: comment.id,
       timestamp: comment.timestamp,
@@ -67,6 +73,8 @@ function add(token, comment) {
       voteScore: 1,
       deleted: false,
       parentDeleted: false,
+      replyingTo,
+      replies: {},
     };
 
     posts.incrementCommentCounter(token, comment.parentId, 1);

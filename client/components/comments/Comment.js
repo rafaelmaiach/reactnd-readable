@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 
 import { handleVote } from 'Actions/comments';
 
+import { commentReplies } from 'Selectors/comments';
+
 import Vote from 'Components/vote/Vote';
 import EditComment from './EditComment';
 import CommentHeader from './CommentHeader';
+import NewComment from './NewComment';
 
 class Comment extends Component {
   static propTypes = {
@@ -19,19 +22,25 @@ class Comment extends Component {
 
   state = {
     isEdition: false,
+    isReply: false,
   }
 
   toggleEdition = () => this.setState(({ isEdition }) => ({ isEdition: !isEdition }));
 
+  toggleReply = () => this.setState(({ isReply }) => ({ isReply: !isReply }));
+
   render() {
-    const { isEdition } = this.state;
+    const { isEdition, isReply } = this.state;
     const {
       id,
       body,
       voteScore,
       setUpVote,
       setDownVote,
+      replies,
     } = this.props;
+
+    console.log(replies);
 
     const info = {
       id,
@@ -68,7 +77,15 @@ class Comment extends Component {
                       setUpVote={setUpVote}
                       setDownVote={setDownVote}
                     />
+                    <button type="button" onClick={this.toggleReply}>Reply</button>
                   </nav>
+                  {isReply && (
+                    <NewComment
+                      replyingTo={this.props.id}
+                      parentId={this.props.parentId}
+                      fieldsNeeded={['author', 'message']}
+                    />
+                  )}
                 </div>
               </article>
             </div>
@@ -77,7 +94,6 @@ class Comment extends Component {
     );
   }
 }
-
 
 const mapDispatchToProps = dispatch => ({
   setUpVote: (id) => {
