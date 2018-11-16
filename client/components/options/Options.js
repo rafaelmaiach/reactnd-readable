@@ -87,7 +87,7 @@ const Options = (props) => {
         message.success(
           <span className="notification is-success">
             Deleted with success!
-          </span>
+          </span>, 3
         );
       },
     });
