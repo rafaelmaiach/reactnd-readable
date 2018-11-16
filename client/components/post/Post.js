@@ -39,13 +39,14 @@ class Post extends Component {
       return body;
     }
 
-
-    const maxBodyWords = 25;
-    const validBodyWords = body.split(' ').filter(word => word);
-    const bodyHasMoreWords = validBodyWords.length > maxBodyWords;
-    const reduceBodySize = bodyHasMoreWords ? validBodyWords.splice(0, 25) : validBodyWords;
-    const bodyString = reduceBodySize.join(' ').trim();
-    return bodyHasMoreWords ? `${bodyString}...` : bodyString;
+    if (body) {
+      const maxBodyWords = 25;
+      const validBodyWords = body.split(' ').filter(word => word);
+      const bodyHasMoreWords = validBodyWords.length > maxBodyWords;
+      const reduceBodySize = bodyHasMoreWords ? validBodyWords.splice(0, 25) : validBodyWords;
+      const bodyString = reduceBodySize.join(' ').trim();
+      return bodyHasMoreWords ? `${bodyString}...` : bodyString;
+    }
   }
 
   render() {

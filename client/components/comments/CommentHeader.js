@@ -13,6 +13,7 @@ const CommentHeader = (props) => {
   const {
     deleteComment,
     toggleEdition,
+    comments,
     ...rest
   } = props;
 
@@ -23,7 +24,7 @@ const CommentHeader = (props) => {
   const date = timestampToDate(timestamp);
   const editedDate = edited ? timestampToDate(edited) : null;
 
-  const commentDelete = deleteComment(parentId);
+  const commentDelete = deleteComment(comments, parentId);
 
   return (
     <header className="card-header comments__header">
@@ -49,10 +50,20 @@ const CommentHeader = (props) => {
   );
 };
 
+const mapStateToProps = ({ comments }) => ({
+  comments,
+});
+
 const mapDispatchToProps = dispatch => ({
-  deleteComment: parentId => (commentId) => {
+  deleteComment: (comments, parentId) => (commentId) => {
+    Object.keys(comments).forEach((key) => {
+      if (comments[key].replyingTo && comments[key].replyingTo === commentId) {
+        dispatch(handleDeleteComment(comments[key].id, parentId));
+      }
+    });
+
     dispatch(handleDeleteComment(commentId, parentId));
   },
 });
 
-export default connect(null, mapDispatchToProps)(CommentHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(CommentHeader);
