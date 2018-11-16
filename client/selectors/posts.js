@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { sortPosts } from 'Utils/posts.helpers';
+import { sortData } from 'Utils/common.helpers';
 
 // All posts selector
 const postsSelector = state => state.posts;
@@ -29,7 +29,7 @@ const postsValuesSelector = createSelector(
 
       const dataValues = Object.values(data);
 
-      return sortBy ? sortPosts(sortBy)(dataValues) : dataValues;
+      return sortBy ? sortData(sortBy)(dataValues) : dataValues;
     }
 
     return null;

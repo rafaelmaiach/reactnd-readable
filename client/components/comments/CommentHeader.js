@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { Icon } from 'antd';
 
+import { timestampToDate } from 'Utils/common.helpers';
+
 import { handleDeleteComment } from 'Actions/comments';
 
 import Options from 'Components/options/Options';
@@ -14,9 +16,12 @@ const CommentHeader = (props) => {
     ...rest
   } = props;
 
-  const { id, author, timestamp } = rest;
+  const {
+    id, author, timestamp, edited,
+  } = rest;
 
-  const date = new Date(timestamp).toLocaleDateString();
+  const date = timestampToDate(timestamp);
+  const editedDate = edited ? timestampToDate(edited) : null;
 
   return (
     <header className="card-header comments__header">
@@ -27,6 +32,7 @@ const CommentHeader = (props) => {
         </h1>
         <p className="subtitle is-size-7 post-subtitle">
           <span>{`Commented at ${date}`}</span>
+          {editedDate && <i>{` - edited at ${editedDate}`}</i>}
         </p>
       </div>
       <div className="card-header-icon is-paddingless">

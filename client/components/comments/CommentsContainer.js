@@ -21,6 +21,7 @@ class CommentsContainer extends Component {
       parentId: PropTypes.string,
       timestamp: PropTypes.number,
       voteScore: PropTypes.number,
+      edited: PropTypes.number,
     })).isRequired,
     commentsCount: PropTypes.number.isRequired,
   }

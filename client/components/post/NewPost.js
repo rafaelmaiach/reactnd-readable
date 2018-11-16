@@ -68,6 +68,7 @@ const NewPost = (props) => {
       details: {
         title,
         body: message,
+        edited: Date.now(),
       },
     };
 

@@ -28,6 +28,7 @@ const EditComment = (props) => {
     const postData = {
       id: info.id,
       details: {
+        edited: Date.now(),
         body: message,
       },
     };

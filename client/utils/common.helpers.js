@@ -1,7 +1,5 @@
-const normalizeObjectById = postsList => postsList.reduce((a, c) => {
-  a[c.id] = c; //eslint-disable-line
-  return a;
-}, {});
+import sortBy from 'sort-by';
+import moment from 'moment';
 
 // Make the first letter of string uppercase
 const capitalize = string => `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
@@ -22,9 +20,37 @@ const copyToClipboard = (str) => {
   document.body.removeChild(el);
 };
 
+const timestampToDate = timestamp => moment(timestamp).format('MM/DD/YYYY hh:mm');
+
+const normalizeObjectById = postsList => postsList.reduce((a, c) => {
+  a[c.id] = c; //eslint-disable-line
+  return a;
+}, {});
+
+const sortData = ({ type, order }) => (data) => {
+  let result = null;
+  switch (order) {
+    case 'decrescent': {
+      result = data.sort(sortBy(`-${type}`));
+      break;
+    }
+    case 'crescent': {
+      result = data.sort(sortBy(type));
+      break;
+    }
+    default:
+      result = data.sort(sortBy(type));
+      break;
+  }
+  return result;
+};
+
+
 export {
-  normalizeObjectById,
   capitalize,
   isCategoryActive,
   copyToClipboard,
+  timestampToDate,
+  normalizeObjectById,
+  sortData,
 };

@@ -2,6 +2,7 @@
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 
 const defaultConfig = {
   module: {
@@ -114,6 +115,7 @@ const defaultConfig = {
       Styles: path.resolve(__dirname, 'client', 'styles'),
       Utils: path.resolve(__dirname, 'client', 'utils'),
       Selectors: path.resolve(__dirname, 'client', 'selectors'),
+      moment$: 'moment/moment.js',
     },
   },
 };

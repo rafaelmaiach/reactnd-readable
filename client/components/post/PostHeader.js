@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { handleDeletePost } from 'Actions/posts';
 
-import { capitalize } from 'Utils/common.helpers';
+import { capitalize, timestampToDate } from 'Utils/common.helpers';
 
 import Options from 'Components/options/Options';
 
@@ -16,10 +16,11 @@ const PostHeader = (props) => {
   } = props;
 
   const {
-    id, author, title, category, timestamp,
+    id, author, title, category, timestamp, edited,
   } = rest;
 
-  const date = new Date(timestamp).toLocaleDateString();
+  const date = timestampToDate(timestamp);
+  const editedDate = edited ? timestampToDate(edited) : null;
 
   const { origin } = window.location;
   const postUrl = `${origin}/${category}/${id}`;
@@ -28,7 +29,7 @@ const PostHeader = (props) => {
     <header className="card-header">
       <div className="post-header">
         <Link to={`/${category}/${id}`}>
-          <p className="is-size-6-mobile is-size-4 has-text-link post-title">
+          <p className="is-size-5-mobile is-size-4 has-text-link post-title">
             {title}
           </p>
         </Link>
@@ -40,6 +41,7 @@ const PostHeader = (props) => {
           <Link to={`/${category}`}>
             <span className="is-link post-category">{capitalize(category)}</span>
           </Link>
+          {editedDate && <i>{` - edited at ${editedDate}`}</i>}
         </p>
       </div>
       <div className="card-header-icon is-paddingless">
