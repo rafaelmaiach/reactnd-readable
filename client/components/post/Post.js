@@ -103,7 +103,7 @@ class Post extends Component {
                       setUpVote={setUpVote}
                       setDownVote={setDownVote}
                     />
-                    {!isPostDetailsPage && <PostComments score={commentCount} />}
+                    <PostComments score={commentCount} />
                   </nav>
                 </div>
               </article>
