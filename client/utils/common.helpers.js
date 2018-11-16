@@ -20,7 +20,7 @@ const copyToClipboard = (str) => {
   document.body.removeChild(el);
 };
 
-const timestampToDate = timestamp => moment(timestamp).format('MM/DD/YYYY hh:mm');
+const timestampToDate = timestamp => moment(timestamp).format('MM/DD/YYYY HH:mm');
 
 const normalizeObjectById = postsList => postsList.reduce((a, c) => {
   a[c.id] = c; //eslint-disable-line
