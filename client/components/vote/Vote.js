@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 
-import { Icon } from 'antd';
+import VoteIcon from './VoteIcon';
 
+/**
+ * @constructor Vote
+ * @param {object} props - Vote props
+ * @description Creates the vote controls on post card
+ */
 const Vote = (props) => {
   const {
-    id,
-    score,
-    setUpVote,
-    setDownVote,
+    id, // post or comment id
+    score, // vote score
+    setUpVote, // function to increase vote count
+    setDownVote, // function to decrease vote count
   } = props;
 
   const upVote = () => setUpVote(id);
@@ -15,19 +21,23 @@ const Vote = (props) => {
 
   return (
     <div className="level-left">
-      <a onClick={upVote} className="level-item has-text-centered" aria-label="vote count up">
-        <Icon type="caret-up" />
-      </a>
+      <VoteIcon type="caret-up" handleVote={upVote} />
       <span className="level-item has-text-centered is-size-7" aria-label="vote score">
         {score}
       </span>
-      <a onClick={downVote} className="level-item has-text-centered" aria-label="vote count down">
-        <Icon type="caret-down" />
-      </a>
-
+      <VoteIcon type="caret-down" handleVote={downVote} />
     </div>
-
   );
 };
 
-export default Vote;
+Vote.propTypes = {
+  id: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  setUpVote: PropTypes.func.isRequired,
+  setDownVote: PropTypes.func.isRequired,
+};
+
+// Optimize performance to not re-render unecessary
+const areEqual = (prevProps, nextProps) => prevProps.score === nextProps.score;
+
+export default memo(Vote, areEqual);
