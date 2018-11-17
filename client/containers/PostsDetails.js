@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { receiveDetails } from 'Actions/posts';
@@ -16,6 +17,25 @@ import NewComment from 'Components/comments/NewComment';
  * @description Page to render the post details. If the url is invalid, renders post not found
  */
 class PostDetails extends Component {
+  static propTypes = {
+    getPostDetails: PropTypes.func.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string,
+      }),
+    }).isRequired,
+    post: PropTypes.shape({
+      id: PropTypes.string,
+      category: PropTypes.string,
+      title: PropTypes.string,
+      author: PropTypes.string,
+      body: PropTypes.string,
+      timestamp: PropTypes.number,
+      commentCount: PropTypes.number,
+      voteScore: PropTypes.number,
+    }).isRequired,
+  }
+
   componentDidMount() {
     const {
       getPostDetails,
