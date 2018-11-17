@@ -1,5 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 
+/**
+ * @constructor PostNotFound
+ * @param {boolean} isDetailsPage - To know if it will render the details page or posts page
+ * @description Renders the post not found gif
+ */
 const PostNotFound = ({ isDetailsPage }) => (
   <section className="section">
     <div className="container is-full has-text-centered">
@@ -25,4 +31,10 @@ const PostNotFound = ({ isDetailsPage }) => (
   </section>
 );
 
-export default PostNotFound;
+PostNotFound.propTypes = {
+  isDetailsPage: PropTypes.bool.isRequired,
+};
+
+const areEqual = (prevProps, nextProps) => prevProps.isDetailsPage === nextProps.isDetailsPage;
+
+export default memo(PostNotFound, areEqual);

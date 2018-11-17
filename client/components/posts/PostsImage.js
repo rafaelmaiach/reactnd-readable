@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * @constructor PostsImage
+ * @description Renders the application image logo (OMAIA BLOG)
+ */
 const PostsImage = () => (
   <div className="posts-image">
     <div className="overlay-image">
