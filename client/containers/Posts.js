@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { Spin } from 'antd';
+
 import { postsValuesSelector } from 'Selectors/posts';
 import { getLayoutValue } from 'Selectors/layout';
 
@@ -96,7 +98,9 @@ class Posts extends Component {
 
   render() {
     const { sortBy } = this.state;
-    const { posts, isBoxLayout, openPost } = this.props;
+    const {
+      posts, isBoxLayout, openPost, isLoading,
+    } = this.props;
 
     const invalidPosts = (!posts || posts.length === 0);
 
@@ -115,7 +119,7 @@ class Posts extends Component {
             />
             <div className="column is-12">
               <div className={`columns is-multiline is-centered ${postsLayout}`}>
-                {postList}
+                {isLoading ? <Spin size="large" /> : postList}
               </div>
             </div>
           </div>
@@ -128,6 +132,7 @@ class Posts extends Component {
 const mapStateToProps = state => ({
   posts: postsValuesSelector(state),
   isBoxLayout: getLayoutValue(state),
+  isLoading: state.loading,
 });
 
 const mapDispatchToProps = dispatch => ({

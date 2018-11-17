@@ -19,17 +19,27 @@ import {
   updateVote,
 } from './posts.creator';
 
-const receiveAllPosts = sortBy => dispatch =>
-  getAllPosts()
-    .then((posts) => {
-      dispatch(receivePosts(posts, sortBy));
-    });
+import {
+  showLoading, hideLoading,
+} from './loading.creator';
 
-const receivePostsByCategory = (category, sortBy) => dispatch =>
-  getPostsByCategory(category)
+const receiveAllPosts = sortBy => (dispatch) => {
+  dispatch(showLoading());
+  return getAllPosts()
     .then((posts) => {
       dispatch(receivePosts(posts, sortBy));
+      dispatch(hideLoading());
     });
+};
+
+const receivePostsByCategory = (category, sortBy) => (dispatch) => {
+  dispatch(showLoading());
+  return getPostsByCategory(category)
+    .then((posts) => {
+      dispatch(receivePosts(posts, sortBy));
+      dispatch(hideLoading());
+    });
+};
 
 const receiveDetails = postId => dispatch =>
   getPostDetails(postId)
