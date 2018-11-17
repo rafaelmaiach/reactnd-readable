@@ -33,7 +33,11 @@ class PostDetails extends Component {
       timestamp: PropTypes.number,
       commentCount: PropTypes.number,
       voteScore: PropTypes.number,
-    }).isRequired,
+    }),
+  }
+
+  static defaultProps = {
+    post: null,
   }
 
   componentDidMount() {
