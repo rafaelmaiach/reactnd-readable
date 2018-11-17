@@ -42,6 +42,7 @@ const NewComment = (props) => {
       create={createNewComment}
       fieldsNeeded={fieldsNeeded}
       fieldsToReset={['author', 'message']}
+      isComment
     />
   );
 

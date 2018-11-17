@@ -20,6 +20,7 @@ const Formulary = (props) => {
     update,
     fieldsNeeded,
     fieldsToReset,
+    isComment,
   } = props;
 
   const resetForm = () => resetFields(fieldsToReset);
@@ -63,6 +64,14 @@ const Formulary = (props) => {
 
   const fields = createFields();
 
+  let buttonText = '';
+
+  if (isComment) {
+    buttonText = isEdition ? 'Save' : 'Comment';
+  } else {
+    buttonText = isEdition ? 'Save' : 'Create';
+  }
+
   return (
     <Form onSubmit={handleSubmit} className="columns is-multiline is-centered" autoComplete="off">
       {fields}
@@ -71,7 +80,7 @@ const Formulary = (props) => {
           Cancel
         </button>
         <button className="button is-link" type="submit">
-          Comment
+          {buttonText}
         </button>
       </div>
     </Form>
