@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import {
   Modal, Dropdown, Menu, Icon, message,
@@ -75,5 +75,4 @@ const Options = (props) => {
   );
 };
 
-// Don't need to re-render the options button
-export default memo(Options, () => true);
+export default Options;

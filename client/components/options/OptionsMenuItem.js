@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { Icon } from 'antd';
 
@@ -35,6 +35,4 @@ const OptionsMenuItem = (props) => {
   );
 };
 
-const areEqual = (prev, next) => prev.label === next.label;
-
-export default memo(OptionsMenuItem, areEqual);
+export default OptionsMenuItem;
