@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { handleDeletePost } from 'Actions/posts';
 
-import { capitalize, timestampToDate } from 'Utils/common.helpers';
-
 import Options from 'Components/options/Options';
+import PostHeaderTitle from './PostHeaderTitle';
+import PostHeaderSubtitle from './PostHeaderSubtitle';
 
+/**
+ * @constructor PostHeader
+ * @param {object} props - Post header props
+ * @description Renders the post header on card
+ */
 const PostHeader = (props) => {
   const {
     deletePost,
@@ -19,30 +24,23 @@ const PostHeader = (props) => {
     id, author, title, category, timestamp, edited,
   } = rest;
 
-  const date = timestampToDate(timestamp);
-  const editedDate = edited ? timestampToDate(edited) : null;
-
   const { origin } = window.location;
   const postUrl = `${origin}/${category}/${id}`;
 
   return (
     <header className="card-header">
       <div className="post-header">
-        <Link to={`/${category}/${id}`}>
-          <p className="is-size-5-mobile is-size-4 has-text-link post-title">
-            {title}
-          </p>
-        </Link>
-        <p className="subtitle is-size-7 post-subtitle">
-          <span>Posted by: </span>
-          <b>{author}</b>
-          <span>{` at ${date}`}</span>
-          <span> on </span>
-          <Link to={`/${category}`}>
-            <span className="is-link post-category">{capitalize(category)}</span>
-          </Link>
-          {editedDate && <i>{` - edited at ${editedDate}`}</i>}
-        </p>
+        <PostHeaderTitle
+          id={id}
+          title={title}
+          category={category}
+        />
+        <PostHeaderSubtitle
+          author={author}
+          timestamp={timestamp}
+          category={category}
+          edited={edited}
+        />
       </div>
       <div className="card-header-icon is-paddingless">
         <Options
@@ -58,10 +56,32 @@ const PostHeader = (props) => {
   );
 };
 
+PostHeader.propTypes = {
+  deletePost: PropTypes.func.isRequired,
+  toggleEdition: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  timestamp: PropTypes.number.isRequired,
+  edited: PropTypes.number,
+};
+
+PostHeader.defaultProps = {
+  edited: null,
+};
+
 const mapDispatchToProps = dispatch => ({
   deletePost: (postId) => {
     dispatch(handleDeletePost(postId));
   },
 });
 
-export default connect(null, mapDispatchToProps)(PostHeader);
+const areEqual = (prev, next) => {
+  const titleEqual = prev.title === next.title;
+  const editedEqual = prev.edited === next.edited;
+
+  return titleEqual && editedEqual;
+};
+
+export default connect(null, mapDispatchToProps)(memo(PostHeader, areEqual));

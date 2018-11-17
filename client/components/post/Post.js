@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -8,7 +8,12 @@ import Vote from 'Components/vote/Vote';
 import NewPost from './NewPost';
 import PostHeader from './PostHeader';
 import PostComments from './PostComments';
+import PostDescription from './PostDescription';
 
+/**
+ * @class Post
+ * @description create the post card
+ */
 class Post extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
@@ -30,26 +35,11 @@ class Post extends Component {
     isEdition: false,
   }
 
+  /**
+   * @method Post#toggleEdition
+   * @description toggle the card to edit or not
+   */
   toggleEdition = () => this.setState(({ isEdition }) => ({ isEdition: !isEdition }));
-
-  getDescription = () => {
-    const { body, isPostDetailsPage } = this.props;
-
-    if (isPostDetailsPage) {
-      return body;
-    }
-
-    if (body) {
-      const maxBodyWords = 25;
-      const validBodyWords = body.split(' ').filter(word => word);
-      const bodyHasMoreWords = validBodyWords.length > maxBodyWords;
-      const reduceBodySize = bodyHasMoreWords ? validBodyWords.splice(0, 25) : validBodyWords;
-      const bodyString = reduceBodySize.join(' ').trim();
-      return bodyHasMoreWords ? `${bodyString}...` : bodyString;
-    }
-
-    return '';
-  }
 
   render() {
     const { isEdition } = this.state;
@@ -70,8 +60,6 @@ class Post extends Component {
       title,
       message: body,
     };
-
-    const description = this.getDescription();
 
     const postStyle = isPostDetailsPage ? '' : 'post-box--border';
 
@@ -95,9 +83,7 @@ class Post extends Component {
                     toggleEdition={this.toggleEdition}
                     onConfirm={this.onConfirm}
                   />
-                  <p className="post-description is-size-7-mobile is-size-6">
-                    {description}
-                  </p>
+                  <PostDescription body={body} isDetailsPage={isPostDetailsPage} />
                   <br />
                   <nav className="level is-mobile">
                     <Vote
@@ -126,4 +112,14 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(Post);
+const areEqual = (prev, next) => {
+  const titleEqual = prev.title === next.title;
+  const bodyEqual = prev.body === next.body;
+  const commentCountEqual = prev.commentCount === next.commentCount;
+  const voteScoreEqual = prev.voteScore === next.voteScore;
+  const layoutEqual = prev.isBoxLayout === next.isBoxLayout;
+
+  return titleEqual && bodyEqual && commentCountEqual && voteScoreEqual && layoutEqual;
+};
+
+export default connect(null, mapDispatchToProps)(memo(Post, areEqual));

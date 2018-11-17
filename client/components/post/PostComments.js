@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 
+/**
+ * @constructor PostComments
+ * @param {number} score - Post comment count
+ * @description Renders the post comments count information
+ */
 const PostComments = ({ score }) => (
   <div className="level-right">
     <span className="level-item">
@@ -12,4 +18,10 @@ const PostComments = ({ score }) => (
   </div>
 );
 
-export default PostComments;
+PostComments.propTypes = {
+  score: PropTypes.number.isRequired,
+};
+
+const areEqual = (prev, next) => prev.score === next.score;
+
+export default memo(PostComments, areEqual);
