@@ -61,9 +61,11 @@ ControlsFilter.propTypes = {
   handleSort: PropTypes.func.isRequired,
 };
 
-const areEqual = (prev, next) => (
-  (prev.sortBy.type === next.sortBy.type)
-  && (prev.sortBy.order === next.sortBy.order)
-);
+const areEqual = (prev, next) => {
+  const typeEqual = prev.sortBy.type === next.sortBy.type;
+  const orderEqual = prev.sortBy.order === next.sortBy.order;
+
+  return typeEqual && orderEqual;
+};
 
 export default memo(ControlsFilter, areEqual);

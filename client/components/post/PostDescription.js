@@ -39,7 +39,12 @@ PostDescription.defaultProps = {
   isDetailsPage: false,
 };
 
-const areEqual = (prev, next) =>
-  (prev.body === next.body) && (prev.isDetailsPage === next.isDetailsPage);
+const areEqual = (prev, next) => {
+  const bodyEqual = prev.body === next.body;
+  const isDetailsPageEqual = prev.isDetailsPage === next.isDetailsPage;
+
+  return bodyEqual && isDetailsPageEqual;
+};
+
 
 export default memo(PostDescription, areEqual);
