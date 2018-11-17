@@ -71,7 +71,8 @@ class Header extends Component {
 
     let isTabActive = '';
     if (pathname !== '/') {
-      isTabActive = isCategoryActive(pathname.slice(1), category.path);
+      const path = pathname.split('/')[1];
+      isTabActive = isCategoryActive(path, category.path);
     }
 
     return (
