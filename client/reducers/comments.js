@@ -11,9 +11,11 @@ import {
 
 import { normalizeObjectById } from 'Utils/common.helpers';
 
+// Reduce the array of comments to add replies information to
+// posts who have replies
 const reduceReplying = data => data.reduce((acc, curr) => {
   if (curr.replyingTo) {
-    acc = {
+    acc = { // eslint-disable-line
       ...acc,
       [curr.id]: {
         ...curr,
@@ -30,7 +32,7 @@ const reduceReplying = data => data.reduce((acc, curr) => {
 
     };
   } else {
-    acc = {
+    acc = { // eslint-disable-line
       ...acc,
       [curr.id]: {
         ...curr,
@@ -41,6 +43,7 @@ const reduceReplying = data => data.reduce((acc, curr) => {
   return acc;
 }, {});
 
+// Wrapper to call reduceReplying
 const setReplies = (state) => {
   const data = Object.values(state);
   const dataWithReplies = reduceReplying(data);
