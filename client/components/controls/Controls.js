@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import ControlsLeft from './ControlsLeft';
 
+/**
+ * @constructor Controls
+ * @param {object} props - Controls props
+ * @description Creates the controls menu to render filter, sort and new post button
+ */
 const Controls = (props) => {
   const { onClick, ...controlsLeftProps } = props;
 
@@ -32,4 +37,7 @@ Controls.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export default Controls;
+// Don't need to re-render the wrapper
+const areEqual = () => true;
+
+export default memo(Controls, areEqual);
