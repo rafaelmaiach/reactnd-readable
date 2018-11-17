@@ -30,6 +30,7 @@ const NewPost = (props) => {
     isBoxLayout,
   } = props;
 
+  // Get the correct cancel new post / cancel edition handler
   const closePostForm = cancelEdition || closeForm;
 
   /**
@@ -76,6 +77,10 @@ const NewPost = (props) => {
     closePostForm();
   };
 
+  /**
+   * @function getFieldsNeeded
+   * @description Get the fields needed to create the form
+   */
   const getFieldsNeeded = () => {
     const {
       title, message, author, category,
@@ -139,6 +144,31 @@ const NewPost = (props) => {
   );
 };
 
+NewPost.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    path: PropTypes.string,
+  })).isRequired,
+  addPost: PropTypes.func.isRequired,
+  info: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+  updatePost: PropTypes.func.isRequired,
+  cancelEdition: PropTypes.func,
+  isEdition: PropTypes.bool,
+  isPostFormOpen: PropTypes.bool,
+  closeForm: PropTypes.func.isRequired,
+  isBoxLayout: PropTypes.bool,
+};
+
+NewPost.defaultProps = {
+  info: null,
+  cancelEdition: null,
+  isEdition: false,
+  isBoxLayout: false,
+  isPostFormOpen: false,
+};
+
 const mapStateToProps = state => ({
   categories: categoriesValuesSelector(state),
 });
@@ -153,11 +183,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
-
-/**
- *
-  categories: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-    path: PropTypes.string,
-  })).isRequired,
- */
