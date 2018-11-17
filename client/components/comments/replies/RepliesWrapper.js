@@ -1,21 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Reply from './Reply';
 
-const createReply = reply => <Reply key={reply.id} {...reply} />;
-
+/**
+ * @constructor RepliesWrapper
+ * @param {replies} replies - Replies object
+ * @description Creates the replies wrapper
+ */
 const RepliesWrapper = ({ replies }) => {
   if (!replies) {
     return null;
   }
 
-  const allReplies = replies.map(createReply);
+  const allReplies = replies.map(reply => <Reply key={reply.id} {...reply} />);
 
   return (
     <div className="replies__container">
       {allReplies}
     </div>
   );
+};
+
+RepliesWrapper.propTypes = {
+  replies: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default RepliesWrapper;

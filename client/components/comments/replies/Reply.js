@@ -8,6 +8,10 @@ import Vote from 'Components/vote/Vote';
 import EditComment from '../EditComment';
 import CommentHeader from '../CommentHeader';
 
+/**
+ * @class Reply
+ * @description Renders the reply component
+ */
 class Reply extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
