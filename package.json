@@ -15,9 +15,11 @@
   "main": "server/index.js",
   "scripts": {
     "lint": "eslint client",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cross-env NODE_ENV=production webpack -p --config ./webpack.config.js",
+    "prod-start": "cross-env NODE_ENV=production node server",
+    "start": "concurrently \"npm run api-server\" \"npm run client\"",
     "client": "cross-env NODE_ENV=development node server",
-    "server": "node api-server/server.js"
+    "api-server": "node api-server/server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.8",
