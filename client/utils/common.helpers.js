@@ -20,18 +20,21 @@ const copyToClipboard = (str) => {
   document.body.removeChild(el);
 };
 
+// Convert timestamp to date and time
 const timestampToDate = timestamp => moment(timestamp).format('MM/DD/YYYY HH:mm');
 
-const normalizeObjectById = postsList => postsList.reduce((a, c) => {
-  a = {
-    ...a,
-    [c.id]: {
-      ...c,
+// Convert the posts list from array of objects to an object indexed by post id
+const normalizeObjectById = postsList => postsList.reduce((acc, curr) => {
+  acc = { // eslint-disable-line
+    ...acc,
+    [curr.id]: {
+      ...curr,
     },
   };
-  return a;
+  return acc;
 }, {});
 
+// Sort an array by a passed type and order
 const sortData = ({ type, order }) => (data) => {
   let result = null;
   switch (order) {

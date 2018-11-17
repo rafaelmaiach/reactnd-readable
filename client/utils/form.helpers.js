@@ -4,6 +4,7 @@ import { Input, Select } from 'antd';
 import FormField from 'Components/form/FormField';
 import { capitalize } from './common.helpers';
 
+// Get the field rules for decorator
 const getFieldRules = () => ({
   common: {
     required: true,
@@ -18,6 +19,7 @@ const createRules = () => {
   return common;
 };
 
+// Generate the form field decorator based on the id and postInfo initial value for edited fields
 const generateFieldDecorator = (fieldId, getFieldDecorator, postInfo) => {
   const rules = createRules();
   const options = { rules: [rules] };
@@ -29,9 +31,11 @@ const generateFieldDecorator = (fieldId, getFieldDecorator, postInfo) => {
   return getFieldDecorator(fieldId, options);
 };
 
+// Wrapper the form field on the ant design form decorator
 const wrapperFieldDecorator = (getFieldDecorator, postInfo) =>
   label => generateFieldDecorator(label, getFieldDecorator, postInfo);
 
+// Get the fields params and return the needed form field wrapped in the decorator
 const createField = (params, fieldDecorator) => {
   const {
     id, label, type, options = null,
@@ -62,6 +66,7 @@ const createField = (params, fieldDecorator) => {
   return <FormField key={id} {...field} />;
 };
 
+// Create the form field with validator already built-in from Ant design form
 const getCreateField = (getFieldDecorator, postInfo = null) => {
   const fieldDecorator = wrapperFieldDecorator(getFieldDecorator, postInfo);
 
