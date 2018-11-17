@@ -103,6 +103,7 @@ Formulary.propTypes = {
   close: PropTypes.func,
   fieldsNeeded: PropTypes.arrayOf(PropTypes.object).isRequired,
   fieldsToReset: PropTypes.arrayOf(PropTypes.string),
+  isComment: PropTypes.bool,
 };
 
 Formulary.defaultProps = {
@@ -112,6 +113,7 @@ Formulary.defaultProps = {
   isEdition: false,
   info: null,
   fieldsToReset: null,
+  isComment: false,
 };
 
 const WrappedFormulary = Form.create({})(Formulary);
