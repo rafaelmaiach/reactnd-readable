@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Select } from 'antd';
@@ -61,11 +61,4 @@ ControlsFilter.propTypes = {
   handleSort: PropTypes.func.isRequired,
 };
 
-const areEqual = (prev, next) => {
-  const typeEqual = prev.sortBy.type === next.sortBy.type;
-  const orderEqual = prev.sortBy.order === next.sortBy.order;
-
-  return typeEqual && orderEqual;
-};
-
-export default memo(ControlsFilter, areEqual);
+export default ControlsFilter;

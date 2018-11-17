@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import ControlsLeft from './ControlsLeft';
@@ -37,7 +37,4 @@ Controls.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-// Don't need to re-render the wrapper
-const areEqual = () => true;
-
-export default memo(Controls, areEqual);
+export default Controls;
