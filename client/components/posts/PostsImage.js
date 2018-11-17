@@ -8,7 +8,7 @@ const PostsImage = () => (
           OMAIA BLOG
         </span>
         <span className="title is-size-7-mobile is-size-4 posts-image--text">
-          Bringing information and knowledge for you
+          Bringing information and knowledge to you
         </span>
       </div>
     </div>
