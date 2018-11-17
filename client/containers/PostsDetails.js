@@ -11,7 +11,11 @@ import PostNotFound from 'Components/posts/PostNotFound';
 import CommentsContainer from 'Components/comments/CommentsContainer';
 import NewComment from 'Components/comments/NewComment';
 
-class Details extends Component {
+/**
+ * @class PostDetails
+ * @description Page to render the post details. If the url is invalid, renders post not found
+ */
+class PostDetails extends Component {
   componentDidMount() {
     const {
       getPostDetails,
@@ -24,6 +28,7 @@ class Details extends Component {
   render() {
     const { post } = this.props;
 
+    // If post exists, get the comments count
     const commentsCount = post && post.commentCount;
 
     return (
@@ -61,4 +66,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Details);
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);
