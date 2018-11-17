@@ -40,6 +40,14 @@ class Header extends Component {
     this.setupCategories();
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { location: { pathname }, categories } = this.props;
+    const urlChanged = pathname !== nextProps.location.pathname;
+    const categoriesChanged = categories.length !== nextProps.categories.length;
+
+    return urlChanged || categoriesChanged;
+  }
+
   /**
    * @method Header#setupCategories
    * @description Get all application's categories and set the current tab if a category is selected
@@ -70,6 +78,8 @@ class Header extends Component {
     const { location: { pathname } } = this.props;
 
     let isTabActive = '';
+
+    // Check the current tab based on url to set active class
     if (pathname !== '/') {
       const path = pathname.split('/')[1];
       isTabActive = isCategoryActive(path, category.path);
