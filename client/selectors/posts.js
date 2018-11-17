@@ -5,11 +5,13 @@ import { sortData } from 'Utils/common.helpers';
 // All posts selector
 const postsSelector = state => state.posts;
 
+// Validate if the state has being filled with posts
 const postsValidateContentSelector = createSelector(
   postsSelector,
   items => Object.keys(items).length === 0 ? null : items,
 );
 
+// Check if the result is valid
 const postsValidateErrorSelector = createSelector(
   postsValidateContentSelector,
   (items) => {
@@ -21,6 +23,7 @@ const postsValidateErrorSelector = createSelector(
   }
 );
 
+// Get the posts after validation and return them sorted by a key
 const postsValuesSelector = createSelector(
   postsValidateErrorSelector,
   (posts) => {
@@ -36,6 +39,7 @@ const postsValuesSelector = createSelector(
   }
 );
 
+// Get an specific post
 const postSelector = (state, postId) => {
   const { posts } = state;
   if (!posts || posts.error || !posts.data) {
