@@ -14,6 +14,7 @@ import {
 
 import { receiveDetails } from './posts';
 
+// Create the comment and update the parent details information
 const handleAddComment = commentInfo => dispatch =>
   addComment(commentInfo)
     .then((comment) => {
@@ -29,6 +30,7 @@ const handleEditComment = commentInfo => dispatch =>
       dispatch(updateComment(comment));
     });
 
+// Delete the comment and update the parent details information
 const handleDeleteComment = (commentId, parentId) => dispatch =>
   deleteComment(commentId)
     .then((comment) => {
