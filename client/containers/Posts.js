@@ -15,6 +15,10 @@ import Controls from 'Components/controls/Controls';
 import Post from 'Components/post/Post';
 import PostNotFound from 'Components/posts/PostNotFound';
 
+/**
+ * @class Posts
+ * @description Render posts
+ */
 class Posts extends Component {
   static propTypes = {
     posts: PropTypes.arrayOf(PropTypes.shape({
@@ -50,10 +54,15 @@ class Posts extends Component {
 
   componentDidMount() {
     const { handleAppLayout } = this.props;
+
+    // Get all the posts
     this.getPosts();
+
+    // Set the application layout to normal (list)
     handleAppLayout('normal');
   }
 
+  // When an update occurs check to see if the sortby changed or the category
   componentDidUpdate(prevProps, prevState) {
     const { params: { category: prevCategory } } = prevProps.match;
     const { sortBy: prevSortBy } = prevState;
@@ -69,6 +78,10 @@ class Posts extends Component {
     }
   }
 
+  /**
+   * @method Posts#getPosts
+   * @description Get all the posts or the posts filtered by category
+   */
   getPosts = () => {
     const { sortBy } = this.state;
     const {
@@ -85,6 +98,10 @@ class Posts extends Component {
     getAllPosts(sortBy);
   }
 
+  /**
+   * @method Posts#createPosts
+   * @description Create the post component for each post information
+   */
   createPosts = (posts) => {
     const { match: { params: { category } }, isBoxLayout } = this.props;
 
@@ -102,10 +119,13 @@ class Posts extends Component {
       posts, isBoxLayout, openPost, isLoading,
     } = this.props;
 
+    // Check if posts are invalid
     const invalidPosts = (!posts || posts.length === 0);
 
+    // If no post found, renders the post not found component
     const postList = invalidPosts ? <PostNotFound /> : this.createPosts(posts);
 
+    // Set the classname for layout
     const postsLayout = isBoxLayout ? 'posts-box-layout' : '';
 
     return (
