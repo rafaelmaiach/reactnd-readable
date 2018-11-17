@@ -23,7 +23,7 @@ const RepliesWrapper = ({ replies }) => {
 };
 
 RepliesWrapper.propTypes = {
-  replies: PropTypes.object.isRequired, // eslint-disable-line
+  replies: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default RepliesWrapper;

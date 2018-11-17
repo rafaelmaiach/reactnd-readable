@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { handleEditComment } from 'Actions/comments';
@@ -57,6 +58,14 @@ const EditComment = (props) => {
       </div>
     </div>
   );
+};
+
+EditComment.propTypes = {
+  info: PropTypes.shape({
+    id: PropTypes.string,
+  }).isRequired,
+  updateComment: PropTypes.func.isRequired,
+  cancelEdition: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
