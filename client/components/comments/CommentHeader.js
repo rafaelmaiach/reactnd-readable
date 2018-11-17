@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Icon } from 'antd';
@@ -9,6 +10,10 @@ import { handleDeleteComment } from 'Actions/comments';
 
 import Options from 'Components/options/Options';
 
+/**
+ * @constructor CommentHeader
+ * @param {object} props - CommentHeader props
+ */
 const CommentHeader = (props) => {
   const {
     deleteComment,
@@ -48,6 +53,21 @@ const CommentHeader = (props) => {
       </div>
     </header>
   );
+};
+
+CommentHeader.propTypes = {
+  deleteComment: PropTypes.func.isRequired,
+  toggleEdition: PropTypes.func.isRequired,
+  comments: PropTypes.object.isRequired, // eslint-disable-line
+  id: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  timestamp: PropTypes.number.isRequired,
+  parentId: PropTypes.string.isRequired,
+  edited: PropTypes.number,
+};
+
+CommentHeader.defaultProps = {
+  edited: null,
 };
 
 const mapStateToProps = ({ comments }) => ({

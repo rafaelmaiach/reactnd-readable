@@ -15,6 +15,10 @@ import CommentHeader from './CommentHeader';
 import NewComment from './NewComment';
 import RepliesWrapper from './replies/RepliesWrapper';
 
+/**
+ * @class Comment
+ * @description Renders comment
+ */
 class Comment extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,

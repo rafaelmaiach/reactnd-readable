@@ -8,6 +8,10 @@ import { commentsValuesSelector } from 'Selectors/comments';
 
 import Comment from 'Components/comments/Comment';
 
+/**
+ * @class CommentsContainer
+ * @description Renders comments container
+ */
 class CommentsContainer extends Component {
   static propTypes = {
     postId: PropTypes.string.isRequired,

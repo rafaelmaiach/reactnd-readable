@@ -8,6 +8,10 @@ import { handleAddComment } from 'Actions/comments';
 import Form from 'Components/form/Form';
 import FormFieldData from 'Components/form/FormFieldData';
 
+/**
+ * @constructor NewComment
+ * @param {object} props - NewComment props
+ */
 const NewComment = (props) => {
   const {
     parentId, replyingTo, addComment, close,
@@ -56,6 +60,18 @@ const NewComment = (props) => {
       </div>
     </div>
   );
+};
+
+NewComment.propTypes = {
+  parentId: PropTypes.string.isRequired,
+  replyingTo: PropTypes.string,
+  addComment: PropTypes.func.isRequired,
+  close: PropTypes.func,
+};
+
+NewComment.defaultProps = {
+  replyingTo: '',
+  close: null,
 };
 
 const mapDispatchToProps = dispatch => ({
