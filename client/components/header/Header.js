@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDesktop } from '@fortawesome/free-solid-svg-icons';
-
 import { isCategoryActive } from 'Utils/common.helpers';
 
 import { receiveAllCategories } from 'Actions/categories';
 
-import { categoriesNameSelector } from 'Selectors/categories'; // eslint-disable-line
+import { categoriesNameSelector } from 'Selectors/categories';
+
+import HeaderBrand from './HeaderBrand';
 
 /**
  * @class Header
@@ -28,11 +27,13 @@ class Header extends Component {
         category: PropTypes.string,
       }),
     }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }).isRequired,
   }
 
   state = {
     menuOpen: false,
-    currentTab: '',
   }
 
   componentDidMount() {
@@ -46,12 +47,7 @@ class Header extends Component {
   setupCategories = () => {
     const {
       getAllCategories,
-      match: { params: { category } },
     } = this.props;
-
-    if (category) {
-      this.changeCurrentTab(category);
-    }
 
     getAllCategories();
   }
@@ -66,28 +62,23 @@ class Header extends Component {
   }
 
   /**
-   * @method Header#changeCurrentTab
-   * @param {string} tabName - Get the tab name
-   * @description Change the current tab
-   */
-  changeCurrentTab = tabName => this.setState(() => ({ currentTab: tabName }));
-
-  /**
    * @method Header#createTab
    * @param {string} category - category name to be created
    * @description Create the tab component
    */
   createTab = (category) => {
-    const { currentTab } = this.state;
+    const { location: { pathname } } = this.props;
 
-    const isTabActive = isCategoryActive(category.path, currentTab);
+    let isTabActive = '';
+    if (pathname !== '/') {
+      isTabActive = isCategoryActive(pathname.slice(1), category.path);
+    }
 
     return (
       <Link
         key={category.path}
         className={`navbar-item ${isTabActive}`}
         to={`/${category.path}`}
-        onClick={() => this.changeCurrentTab(category.path)}
       >
         {category.name}
       </Link>
@@ -104,28 +95,7 @@ class Header extends Component {
 
     return (
       <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <Link className="navbar-item" to="/" onClick={() => this.changeCurrentTab('')}>
-            <FontAwesomeIcon icon={faDesktop} size="2x" />
-            OMAIA
-          </Link>
-
-          <span
-            role="button"
-            className={`navbar-burger burger ${isMenuOpen}`}
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarCategories"
-            onClick={this.toggleMenu}
-            tabIndex={0}
-            onKeyDown={() => ({})}
-          >
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-          </span>
-        </div>
-
+        <HeaderBrand isMenuOpen={isMenuOpen} toggleMenu={this.toggleMenu} />
         <div id="navbarCategories" className={`navbar-menu ${isMenuOpen}`}>
           <div className="navbar-start">
             {categoriesList}

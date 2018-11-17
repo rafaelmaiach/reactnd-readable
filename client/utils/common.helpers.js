@@ -5,7 +5,7 @@ import moment from 'moment';
 const capitalize = string => `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 
 // Check if the category is the current one and add "is-active" class to highlight it
-const isCategoryActive = (category, currentCategory) => category === currentCategory ? 'is-active' : '';
+const isCategoryActive = (pathname, category) => pathname === category ? 'is-active' : '';
 
 // https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
 const copyToClipboard = (str) => {
