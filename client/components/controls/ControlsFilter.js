@@ -35,7 +35,7 @@ const ControlsFilter = (props) => {
 
   return (
     <div className="column is-8-mobile is-8 control-filters__container">
-      <span className="control-filters--label">Filter by:</span>
+      <span className="control-filters--label">Sort by:</span>
       <div className="control-filters--buttons">
         <Select defaultValue={sortBy.type} onChange={filterByType}>
           <Option value="timestamp">Date</Option>
