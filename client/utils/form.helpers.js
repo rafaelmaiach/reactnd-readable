@@ -4,6 +4,9 @@ import { Input, Select } from 'antd';
 import FormField from 'Components/form/FormField';
 import { capitalize } from './common.helpers';
 
+const { TextArea } = Input;
+const { Option } = Select;
+
 // Get the field rules for decorator
 const getFieldRules = () => ({
   common: {
@@ -50,11 +53,11 @@ const createField = (params, fieldDecorator) => {
       field.component = decorator(<Input className="form-input" />);
       break;
     case 'textarea':
-      field.component = decorator(<Input.TextArea autosize={{ minRows: 2, maxRows: 5 }} className="form-input" />);
+      field.component = decorator(<TextArea autosize={{ minRows: 2, maxRows: 5 }} className="form-input" />);
       break;
     case 'dropdown':
       const dropdownOptions = options.map(({ name }) => ( // eslint-disable-line
-        <Select.Option key={name} value={name}>{capitalize(name)}</Select.Option>
+        <Option key={name} value={name}>{capitalize(name)}</Option>
       ));
 
       field.component = decorator(<Select className="form-dropdown">{dropdownOptions}</Select>);
