@@ -56,10 +56,11 @@ In this mode, the files are uglyfied, minified and compressed with _gzip_ by Web
 # Run npm script to build the project and generate bundle files
 npm run build
 
-# Run npm script for start the api-server
-npm run server
+# You may need to open two terminal tabs to run this
+# On one terminal, run npm script for start the api-server
+npm run api-server
 
-# Run npm script for start the production mode
+# One the other, run npm script for start the production mode
 npm run prod-start
 ```
 
