@@ -1,12 +1,12 @@
 ![ReadableScreen](https://raw.githubusercontent.com/rafaelmaiach/reactnd-readable/master/readme-images/omaia-blog.png)
-# Readable
+# **Readable**
 **Project Readable (OMAIA Blog)** is the second project from the **Udacity's React Developer Nanodegree** program. We build a web application for content and comments. The app will allow users to post content in pre-defined categories, comment on their own posts and those of other users, and vote on posts and comments. Users can edit and delete posts and comments. The project emphasizes the learn of **REDUX** to manage the application state.
 
 <!-- <a href="https://myreads-rafaelmaiach.herokuapp.com" target="_blank"> CHECK THE DEMO</a> -->
 
 ## **Table of contents**
 
-- [Readable](#readable)
+- [**Readable**](#readable)
   - [**Table of contents**](#table-of-contents)
   - [**How to install**](#how-to-install)
   - [**How to run**](#how-to-run)
@@ -17,8 +17,8 @@
     - [**Post Card**](#post-card)
     - [**Details Page**](#details-page)
   - [**Features**](#features)
-  - [Built with](#built-with)
-  - [Contact me](#contact-me)
+  - [**Built with**](#built-with)
+  - [**Contact me**](#contact-me)
  
 
 ## **How to install**
@@ -93,7 +93,7 @@ As the project has a lot of potencial to grow in features, I decided to add some
 
 [(Back to top)](#readable)
 
-## Built with
+## **Built with**
 - [Ant Design](https://github.com/ant-design/ant-design) - A set of React Components.
 - [Bulma](https://github.com/jgthms/bulma) - CSS Framework based on Flexbox.
 - [Eslint AirBnb](https://www.npmjs.com/package/eslint-config-airbnb) - The Airbnb JavaScript lint rules to follow their style guide
@@ -112,7 +112,7 @@ You can check the other dependencies on _package.json_ file.
 
 [(Back to top)](#readable)
 
-## Contact me
+## **Contact me**
 I'm always learning new things and I'm opened to feedbacks or just meet new people.  I'll be glad to talk to you about JavaScript, React, Web Development, Harry Potter or anything you want to. Find me on:
 - [LinkedIn](https://www.linkedin.com/in/rafaelmaiach)
 - [Facebook](https://www.facebook.com/rafaelmaiach)
