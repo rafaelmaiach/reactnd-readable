@@ -91,7 +91,7 @@ const comments = (state = {}, action) => {
       const newState = { ...state };
       const { comment } = action;
 
-      if (comment.replyingTo) {
+      if (comment.replyingTo && newState[comment.replyingTo]) {
         delete newState[comment.replyingTo].replies[comment.id];
       }
 
