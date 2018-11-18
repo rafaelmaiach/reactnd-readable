@@ -9,6 +9,8 @@
   - [**Table of contents**](#table-of-contents)
   - [**How to install**](#how-to-install)
   - [**How to run**](#how-to-run)
+    - [**Development mode**](#development-mode)
+    - [**Production mode**](#production-mode)
   - [**How it works**](#how-it-works)
     - [**Main Page**](#main-page)
     - [**Post Card**](#post-card)
@@ -36,10 +38,27 @@ $ npm install
 [(Back to top)](#readable)
 
 ## **How to run**
+You can run the project in both environments: **development** and **production**. It needs a Be sure to have the dependencies installed before. Check the terminal to see the URL the project was initialized.
+
+### **Development mode**
+In this mode, hot loader is configured to be triggered on files changes. Also, it will use [concurrently](https://github.com/kimmobrunfeldt/concurrently) package to start the api-server and the application.
 
 ```bash
 # Run npm script for development mode
 npm start
+```
+
+### **Production mode**
+In this mode, the files are uglyfied, minified and compressed with _gzip_ by Webpack and the server serves the **GZIP** files to reduce the project size for client.
+```bash
+# Run npm script to build the project and generate bundle files
+npm run build
+
+# Run npm script for start the api-server
+npm run server
+
+# Run npm script for start the production mode
+npm run prod-start
 ```
 
 [(Back to top)](#readable)
