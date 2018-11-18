@@ -44,6 +44,7 @@ You can run the project in both environments: **development** and **production**
 In this mode, hot loader is configured to be triggered on files changes. Also, it will use [concurrently](https://github.com/kimmobrunfeldt/concurrently) package to start the api-server and the application.
 
 ```bash
+# Go to project root
 # Run npm script for development mode
 npm start
 ```
@@ -51,6 +52,7 @@ npm start
 ### **Production mode**
 In this mode, the files are uglyfied, minified and compressed with _gzip_ by Webpack and the server serves the **GZIP** files to reduce the project size for client.
 ```bash
+# Go to project root
 # Run npm script to build the project and generate bundle files
 npm run build
 
