@@ -40,12 +40,14 @@ class Header extends Component {
     this.setupCategories();
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps, nextState) {
+    const { menuOpen } = this.state;
     const { location: { pathname }, categories } = this.props;
     const urlChanged = pathname !== nextProps.location.pathname;
     const categoriesChanged = categories.length !== nextProps.categories.length;
+    const menuOpenChanged = menuOpen !== nextState.menuOpen;
 
-    return urlChanged || categoriesChanged;
+    return urlChanged || categoriesChanged || menuOpenChanged;
   }
 
   /**
