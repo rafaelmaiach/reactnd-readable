@@ -2,7 +2,6 @@
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const merge = require('webpack-merge');
-const webpack = require('webpack');
 
 const defaultConfig = {
   module: {
